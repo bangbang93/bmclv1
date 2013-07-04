@@ -14,6 +14,7 @@ using System.Runtime.Serialization.Configuration;
 using System.Reflection;
 using System.Collections;
 using System.Net;
+using System.Diagnostics;
 
 using bmcl.versions;
 
@@ -562,6 +563,29 @@ namespace bmcl
         {
             frmCheckRes frmcheckres = new frmCheckRes();
             frmcheckres.ShowDialog();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            txtInsPath.Text = Environment.CurrentDirectory + "\\.minecraft";
+            Clipboard.SetText(txtInsPath.Text);
+            WebClient downer = new WebClient();
+            downer.DownloadFile("http://files.minecraftforge.net/minecraftforge/minecraftforge-installer-1.6.1-8.9.0.768.jar", "forge-ins.jar");
+            MessageBox.Show("接下来弹出来的窗口里请选择路径为启动器这里的.minecraft目录。程序已经将目录复制到了剪贴板，直接在窗口里选择浏览，粘贴路径，确定即可");
+            forge.writeprofile();
+            Process ForgeIns = new Process();
+            ForgeIns.StartInfo.FileName = cfg.javaw;
+            ForgeIns.StartInfo.Arguments = "-jar " + Environment.CurrentDirectory + "\\forge-ins.jar";
+            ForgeIns.Start();
+            ForgeIns.WaitForExit();
+            refreshLocalVersion();
+            File.Delete("forge-ins.jar");
+        }
+
+        private void buttonCopyInsPath_Click(object sender, EventArgs e)
+        {
+            txtInsPath.Text = Environment.CurrentDirectory + "\\.minecraft";
+            Clipboard.SetText(txtInsPath.Text);
         }
     }
 }

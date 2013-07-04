@@ -35,7 +35,7 @@ namespace bmcl
         long timestamp = DateTime.Now.Ticks;
         private string urlLib = FrmMain.URL_DOWNLOAD_BASE + "libraries/";
         public int downloading = 0;
-
+        WebClient downer = new WebClient();
         #endregion 
 
         #region 委托
@@ -100,24 +100,47 @@ namespace bmcl
                 changeEvent("处理依赖" + lib.name);
                 if (!File.Exists(buildLibPath(lib)))
                 {
-                    changeEvent("下载依赖" + lib.name);
-                    downloading++;
-                    /*
-                    DownLib downer = new DownLib(lib);
-                    downLibEvent(lib);
-                    downer.DownFinEvent += downfin;
-                    downer.startdownload();
-                     */
-                    WebClient downer = new WebClient();
-                    string libp = buildLibPath(lib);
-                    if (!Directory.Exists(Path.GetDirectoryName(libp)))
+                    if (lib.url == null)
                     {
-                        Directory.CreateDirectory(Path.GetDirectoryName(libp));
-                    }
+                        changeEvent("下载依赖" + lib.name);
+                        downloading++;
+                        /*
+                        DownLib downer = new DownLib(lib);
+                        downLibEvent(lib);
+                        downer.DownFinEvent += downfin;
+                        downer.startdownload();
+                         */
+                        string libp = buildLibPath(lib);
+                        if (!Directory.Exists(Path.GetDirectoryName(libp)))
+                        {
+                            Directory.CreateDirectory(Path.GetDirectoryName(libp));
+                        }
 #if DEBUG
-                    System.Windows.Forms.MessageBox.Show(urlLib + libp.Remove(0, Environment.CurrentDirectory.Length + 22).Replace("\\", "/"));
+                        System.Windows.Forms.MessageBox.Show(urlLib + libp.Remove(0, Environment.CurrentDirectory.Length + 22).Replace("\\", "/"));
 #endif
-                    downer.DownloadFile(urlLib + libp.Remove(0, Environment.CurrentDirectory.Length + 22).Replace("/","\\"), libp);
+                        downer.DownloadFile(urlLib + libp.Remove(0, Environment.CurrentDirectory.Length + 22).Replace("/", "\\"), libp);
+                    }
+                    else
+                    {
+                        string urlLib = lib.url;
+                        changeEvent("下载依赖" + lib.name);
+                        downloading++;
+                        /*
+                        DownLib downer = new DownLib(lib);
+                        downLibEvent(lib);
+                        downer.DownFinEvent += downfin;
+                        downer.startdownload();
+                         */
+                        string libp = buildLibPath(lib);
+                        if (!Directory.Exists(Path.GetDirectoryName(libp)))
+                        {
+                            Directory.CreateDirectory(Path.GetDirectoryName(libp));
+                        }
+#if DEBUG
+                        System.Windows.Forms.MessageBox.Show(urlLib + libp.Remove(0, Environment.CurrentDirectory.Length + 22).Replace("\\", "/"));
+#endif
+                        downer.DownloadFile(urlLib + libp.Remove(0, Environment.CurrentDirectory.Length + 22).Replace("/", "\\"), libp);
+                    }
                 }
                 arg.Append(buildLibPath(lib) + ";");
             }
@@ -188,22 +211,43 @@ namespace bmcl
                 string libp = buildNativePath(lib);
                 if (!File.Exists(libp))
                 {
-                    changeEvent("下载依赖" + lib.name);
-                    /*
-                    DownNative downer = new DownNative(lib);
-                    downNativeEvent(lib);
-                    downer.startdownload();
-                     */
-                    WebClient downer = new WebClient();
-                    string nativep = buildNativePath(lib);
-                    if (!Directory.Exists(Path.GetDirectoryName(nativep)))
+                    if (lib.url == null)
                     {
-                        Directory.CreateDirectory(Path.GetDirectoryName(nativep));
-                    }
+                        changeEvent("下载依赖" + lib.name);
+                        /*
+                        DownNative downer = new DownNative(lib);
+                        downNativeEvent(lib);
+                        downer.startdownload();
+                         */
+                        string nativep = buildNativePath(lib);
+                        if (!Directory.Exists(Path.GetDirectoryName(nativep)))
+                        {
+                            Directory.CreateDirectory(Path.GetDirectoryName(nativep));
+                        }
 #if DEBUG
-                    System.Windows.Forms.MessageBox.Show(urlLib + nativep.Remove(0, Environment.CurrentDirectory.Length + 22).Replace("\\", "/"));
+                        System.Windows.Forms.MessageBox.Show(urlLib + nativep.Remove(0, Environment.CurrentDirectory.Length + 22).Replace("\\", "/"));
 #endif
-                    downer.DownloadFile(urlLib + nativep.Remove(0, Environment.CurrentDirectory.Length + 22).Replace("/", "\\"), nativep);
+                        downer.DownloadFile(urlLib + nativep.Remove(0, Environment.CurrentDirectory.Length + 22).Replace("/", "\\"), nativep);
+                    }
+                    else
+                    {
+                        string urlLib = lib.url;
+                        changeEvent("下载依赖" + lib.name);
+                        /*
+                        DownNative downer = new DownNative(lib);
+                        downNativeEvent(lib);
+                        downer.startdownload();
+                         */
+                        string nativep = buildNativePath(lib);
+                        if (!Directory.Exists(Path.GetDirectoryName(nativep)))
+                        {
+                            Directory.CreateDirectory(Path.GetDirectoryName(nativep));
+                        }
+#if DEBUG
+                        System.Windows.Forms.MessageBox.Show(urlLib.Replace("\\", "/"));
+#endif
+                        downer.DownloadFile(urlLib + nativep.Replace("/", "\\"), nativep);
+                    }
                 }
                 ZipInputStream zipfile = new ZipInputStream(System.IO.File.OpenRead(libp.ToString()));
                 ZipEntry theEntry;

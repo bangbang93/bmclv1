@@ -63,7 +63,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.buttonSync);
             this.splitContainer1.Panel2.Controls.Add(this.buttonCheck);
-            this.splitContainer1.Size = new System.Drawing.Size(725, 210);
+            this.splitContainer1.Size = new System.Drawing.Size(725, 188);
             this.splitContainer1.SplitterDistance = 543;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -78,7 +78,7 @@
             this.listRes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listRes.Location = new System.Drawing.Point(0, 0);
             this.listRes.Name = "listRes";
-            this.listRes.Size = new System.Drawing.Size(543, 210);
+            this.listRes.Size = new System.Drawing.Size(543, 188);
             this.listRes.TabIndex = 0;
             this.listRes.UseCompatibleStateImageBehavior = false;
             this.listRes.View = System.Windows.Forms.View.Details;
@@ -144,7 +144,7 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.prs);
             this.splitContainer2.Size = new System.Drawing.Size(725, 248);
-            this.splitContainer2.SplitterDistance = 210;
+            this.splitContainer2.SplitterDistance = 188;
             this.splitContainer2.TabIndex = 1;
             // 
             // prs
@@ -152,7 +152,7 @@
             this.prs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.prs.Location = new System.Drawing.Point(0, 0);
             this.prs.Name = "prs";
-            this.prs.Size = new System.Drawing.Size(725, 34);
+            this.prs.Size = new System.Drawing.Size(725, 56);
             this.prs.TabIndex = 0;
             // 
             // frmCheckRes

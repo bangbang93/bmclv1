@@ -65,12 +65,16 @@
             this.buttonFlush = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.icoBmcl = new System.Windows.Forms.NotifyIcon(this.components);
             this.menuIco = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolShow = new System.Windows.Forms.ToolStripMenuItem();
             this.ofdlgJavaw = new System.Windows.Forms.OpenFileDialog();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.buttonStart = new System.Windows.Forms.Button();
+            this.txtInsPath = new System.Windows.Forms.TextBox();
+            this.buttonCopyInsPath = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -85,6 +89,7 @@
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             this.menuIco.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -98,6 +103,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -447,6 +453,29 @@
             this.webBrowser1.TabIndex = 0;
             this.webBrowser1.Url = new System.Uri("http://mcupdate.tumblr.com", System.UriKind.Absolute);
             // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.buttonCopyInsPath);
+            this.tabPage5.Controls.Add(this.txtInsPath);
+            this.tabPage5.Controls.Add(this.button1);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(923, 298);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "安装Forge";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(8, 6);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(108, 52);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "一键安装";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // icoBmcl
             // 
             this.icoBmcl.ContextMenuStrip = this.menuIco;
@@ -503,6 +532,24 @@
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
+            // txtInsPath
+            // 
+            this.txtInsPath.Location = new System.Drawing.Point(8, 64);
+            this.txtInsPath.Name = "txtInsPath";
+            this.txtInsPath.ReadOnly = true;
+            this.txtInsPath.Size = new System.Drawing.Size(266, 21);
+            this.txtInsPath.TabIndex = 1;
+            // 
+            // buttonCopyInsPath
+            // 
+            this.buttonCopyInsPath.Location = new System.Drawing.Point(9, 92);
+            this.buttonCopyInsPath.Name = "buttonCopyInsPath";
+            this.buttonCopyInsPath.Size = new System.Drawing.Size(107, 28);
+            this.buttonCopyInsPath.TabIndex = 2;
+            this.buttonCopyInsPath.Text = "复制安装路径";
+            this.buttonCopyInsPath.UseVisualStyleBackColor = true;
+            this.buttonCopyInsPath.Click += new System.EventHandler(this.buttonCopyInsPath_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -532,6 +579,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
             this.menuIco.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
@@ -584,6 +633,10 @@
         private System.Windows.Forms.WebBrowser webBrowser1;
         private System.Windows.Forms.Button buttonDownload;
         private System.Windows.Forms.Button buttonCheckRes;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonCopyInsPath;
+        private System.Windows.Forms.TextBox txtInsPath;
     }
 }
 

@@ -15,6 +15,7 @@ using System.Runtime.Serialization.Diagnostics;
 using System.Runtime.Serialization.Json;
 using System.Xml;
 using System.Xml.Serialization;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 using bmcl.ResSer;
 
@@ -28,6 +29,7 @@ namespace bmcl
         }
 
         delegate string getmd5(string path);
+        TaskDialogProgressBar tskprs;
 
         public static string GetMD5HashFromFile(string fileName)
         {
@@ -55,6 +57,7 @@ namespace bmcl
         private void frmCheckRes_Load(object sender, EventArgs e)
         {
             this.splitContainer1.SplitterDistance = this.Width - 150;
+
         }
 
         private void frmCheckRes_Shown(object sender, EventArgs e)
@@ -101,10 +104,13 @@ namespace bmcl
         private void buttonCheck_Click(object sender, EventArgs e)
         {
             prs.Maximum = listRes.Items.Count;
+            tskprs.Maximum = listRes.Items.Count;
             prs.Value = 0;
+            tskprs.Value = 0;
             foreach (ListViewItem item in listRes.Items)
             {
                 prs.Value++;
+                tskprs.Value++;
                 getmd5 GetMd5 = new getmd5(GetMD5HashFromFile);
                 IAsyncResult res = GetMd5.BeginInvoke(@".minecraft/assets/" + item.Text, null, null);
                 while (!res.IsCompleted)
@@ -128,10 +134,13 @@ namespace bmcl
         {
             WebClient downer = new WebClient();
             prs.Maximum = listRes.Items.Count;
+            tskprs.Maximum = listRes.Items.Count;
             prs.Value = 0;
+            tskprs.Value = 0;
             foreach (ListViewItem item in listRes.Items)
             {
                 prs.Value++;
+                tskprs.Value++;
                 if (item.SubItems[3].Text == "待同步")
                 {
                     StringBuilder rpath = new StringBuilder(FrmMain.URL_RESOURCE_BASE);
