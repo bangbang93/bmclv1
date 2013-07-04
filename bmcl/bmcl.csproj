@@ -56,7 +56,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="config.cs" />
+    <Compile Include="download\DownLib.cs" />
     <Compile Include="download\downloader.cs" />
+    <Compile Include="download\DownNative.cs" />
     <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>

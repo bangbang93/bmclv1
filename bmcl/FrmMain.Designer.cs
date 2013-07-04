@@ -69,6 +69,7 @@
             this.ofdlgJavaw = new System.Windows.Forms.OpenFileDialog();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.buttonStart = new System.Windows.Forms.Button();
+            this.buttonDownload = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -357,6 +358,7 @@
             // 
             // splitContainer3.Panel2
             // 
+            this.splitContainer3.Panel2.Controls.Add(this.buttonDownload);
             this.splitContainer3.Panel2.Controls.Add(this.buttonFlush);
             this.splitContainer3.Size = new System.Drawing.Size(917, 292);
             this.splitContainer3.SplitterDistance = 769;
@@ -479,6 +481,16 @@
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
+            // buttonDownload
+            // 
+            this.buttonDownload.Location = new System.Drawing.Point(24, 75);
+            this.buttonDownload.Name = "buttonDownload";
+            this.buttonDownload.Size = new System.Drawing.Size(101, 37);
+            this.buttonDownload.TabIndex = 1;
+            this.buttonDownload.Text = "下载";
+            this.buttonDownload.UseVisualStyleBackColor = true;
+            this.buttonDownload.Click += new System.EventHandler(this.buttonDownload_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -557,6 +569,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolShow;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.Button buttonDownload;
     }
 }
 

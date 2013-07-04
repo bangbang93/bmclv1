@@ -28,7 +28,7 @@ namespace bmcl.versions
         public RawVersionList()
         {
             versions = null;
-            latest = null;
+            latest = new latest();
         }
     }
     [DataContract]
@@ -38,5 +38,12 @@ namespace bmcl.versions
         string snapshot;
         [DataMember(Order = 1, IsRequired = true)]
         string release;
+
+        public latest()
+        {
+            snapshot = "";
+
+            release = "";
+        }
     }
 }

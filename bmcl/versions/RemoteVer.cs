@@ -18,6 +18,12 @@ namespace bmcl.versions
         [DataMember(Order = 3, IsRequired = true)]
         public string type;
 
-        
+        public RemoteVer()
+        {
+            id = "";
+            time = "";
+            releaseTime = "";
+            type = "";
+        }
     }
 }

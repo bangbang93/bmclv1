@@ -13,7 +13,6 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Configuration;
 using System.Reflection;
 using System.Collections;
-using System.Runtime.Serialization.Json;
 using System.Net;
 
 using bmcl.versions;
@@ -31,8 +30,9 @@ namespace bmcl
         #region 属性
 
         static int LauncherVer = 3;
-        private string AuthUrl = "https://login.minecraft.net";
         static private string cfgfile = "bmcl.xml";
+        public static String URL_DOWNLOAD_BASE = "https://s3.amazonaws.com/Minecraft.Download/";
+	    public static String URL_RESOURCE_BASE = "https://s3.amazonaws.com/Minecraft.Resources/";
         private ArrayList Auths=new ArrayList();
         static config cfg;
         static DataContractSerializer Cfg = new DataContractSerializer(typeof(config));
@@ -318,6 +318,7 @@ namespace bmcl
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
+            
             startGame starter = new startGame();
             starter.Show();
             if (changeEvent!=null)
@@ -405,7 +406,7 @@ namespace bmcl
             }
         }
 
-        void launcher_gameexit()
+        private void launcher_gameexit()
         {
             if (!inscreen)
                 Application.Exit();
@@ -474,6 +475,87 @@ namespace bmcl
             {
                 inscreen = false;
             }
+        }
+
+        private void buttonDownload_Click(object sender, EventArgs e)
+        {
+            if (listRemoteVer.SelectedItems == null)
+            {
+                MessageBox.Show("请先选择一个版本");
+                return;
+            }
+            StringBuilder downpath = new StringBuilder(Environment.CurrentDirectory + @"\.minecraft\versions\");
+            ListView.SelectedListViewItemCollection selectVer = listRemoteVer.SelectedItems;
+            string selectver = selectVer[0].Text;
+            downpath.Append(selectver).Append("\\");
+            downpath.Append(selectver).Append(".jar");
+            WebClient downer = new WebClient();
+            StringBuilder downurl = new StringBuilder(URL_DOWNLOAD_BASE);
+            downurl.Append(@"versions\");
+            downurl.Append(selectver).Append("\\");
+            downurl.Append(selectver).Append(".jar");
+#if DEBUG
+            MessageBox.Show(downpath.ToString()+"\n"+downurl.ToString());
+#endif
+            buttonDownload.Text = "下载中请稍候";
+            buttonDownload.Refresh();
+            if (!Directory.Exists(Path.GetDirectoryName(downpath.ToString())))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(downpath.ToString()));
+            }
+            string downjsonfile = downurl.ToString().Substring(0, downurl.Length - 4) + ".json";
+            string downjsonpath = downpath.ToString().Substring(0, downpath.Length - 4) + ".json";
+            try
+            {
+                downer.DownloadFile(downurl.ToString(), downpath.ToString());
+                downer.DownloadFile(downjsonfile, downjsonpath);
+                MessageBox.Show("下载成功");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message+"\n"+ex.InnerException.Message);
+            }
+            finally
+            {
+                buttonDownload.Text = "下载";
+                refreshLocalVersion();
+            }
+
+        }
+
+        private void refreshLocalVersion()
+        {
+            VerList.Items.Clear();
+            if (!Directory.Exists(".minecraft"))
+            {
+                if (Directory.Exists(@".minecraft\versions\"))
+                {
+                    MessageBox.Show("无法找到版本文件夹，本启动器只支持1.6以后的目录结构");
+                    buttonStart.Enabled = false;
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("无法找到游戏文件夹");
+                    buttonStart.Enabled = false;
+                    return;
+                }
+            }
+            DirectoryInfo mcdirinfo = new DirectoryInfo(".minecraft");
+            DirectoryInfo[] versions = new DirectoryInfo(@".minecraft\versions").GetDirectories();
+            foreach (DirectoryInfo version in versions)
+            {
+                VerList.Items.Add(version.Name);
+            }
+            VerList.Sorted = true;
+            if (VerList.Items.Count != 0)
+            {
+                VerList.SelectedIndex = 0;
+                buttonStart.Enabled = true;
+            }
+            else
+                buttonStart.Enabled = false;
+            listAuth.SelectedIndex = 0;
         }
     }
 }

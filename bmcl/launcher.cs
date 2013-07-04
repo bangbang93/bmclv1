@@ -6,7 +6,10 @@ using System.Diagnostics;
 using System.IO;
 using ICSharpCode.SharpZipLib.Zip;
 using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
-using download;
+using bmcl.download;
+using bmcl.libraries;
+using System.Threading;
+using System.Net;
 
 namespace bmcl
 {
@@ -30,13 +33,15 @@ namespace bmcl
         private string version;
         private gameinfo Info;
         long timestamp = DateTime.Now.Ticks;
-        downloader downloadJob;
-
+        private string urlLib = FrmMain.URL_DOWNLOAD_BASE + "libraries/";
+        public int downloading = 0;
 
         #endregion 
 
         #region 委托
         delegate void downThread();
+        public delegate void downLibEventHandler(libraryies lib);
+        public delegate void downNativeEventHalder(libraryies lib);
         public delegate void changeHandel(string status);
         public delegate void gameExitDel();
         #endregion
@@ -45,6 +50,8 @@ namespace bmcl
         #region 事件
         public static event changeHandel changeEvent;
         public static event gameExitDel gameexit;
+        public static event downLibEventHandler downLibEvent;
+        public static event downNativeEventHalder downNativeEvent;
         #endregion
 
 
@@ -86,52 +93,33 @@ namespace bmcl
             arg.Append(" -cp ");
             foreach (libraries.libraryies lib in info.libraries)
             {
+                if (lib.natives != null)
+                {
+                    continue;
+                }
                 changeEvent("处理依赖" + lib.name);
-                StringBuilder libp = new StringBuilder(Environment.CurrentDirectory + @"\.minecraft\libraries\");
-                string[] split = lib.name.Split(':');//0 包;1 名字；2 版本
-                if (split.Count() != 3)
+                if (!File.Exists(buildLibPath(lib)))
                 {
-                    throw UnSupportVer;
-                }
-                libp.Append(split[0].Replace('.','\\'));
-                libp.Append("\\");
-                libp.Append(split[1]).Append("\\");
-                libp.Append(split[2]).Append("\\");
-                libp.Append(split[1]).Append("-");
-                libp.Append(split[2]).Append(".jar;");
-                if (!File.Exists(libp.ToString().Substring(0,libp.Length-1))&&lib.natives==null)
-                {
-                    if (lib.url != null)
+                    changeEvent("下载依赖" + lib.name);
+                    downloading++;
+                    /*
+                    DownLib downer = new DownLib(lib);
+                    downLibEvent(lib);
+                    downer.DownFinEvent += downfin;
+                    downer.startdownload();
+                     */
+                    WebClient downer = new WebClient();
+                    string libp = buildLibPath(lib);
+                    if (!Directory.Exists(Path.GetDirectoryName(libp)))
                     {
-                        changeEvent("下载依赖" + lib.name);
-                        StringBuilder downfile = new StringBuilder(lib.url);
-                        string[] split1 = lib.name.Split(':');//0 包;1 名字；2 版本
-                        downfile.Append(split1[0].Replace('.', '\\'));
-                        downfile.Append("\\");
-                        downfile.Append(split1[1]).Append("\\");
-                        downfile.Append(split1[2]).Append("\\");
-                        downfile.Append(split1[1]).Append("-");
-                        downfile.Append(split1[2]).Append(".jar;");
-                        downloadJob = new downloader(downfile.ToString());
-                        downloadJob.Filename=libp.ToString();
-                        downThread downJob = new downThread(startdownload);
-                        try
-                        {
-                            IAsyncResult downResult = downJob.BeginInvoke(null, null);
-                        }
-                        catch
-                        {
-                            throw new Exception("依赖下载失败" + lib.name, FailInLib);
-                        }
-                        
-
+                        Directory.CreateDirectory(Path.GetDirectoryName(libp));
                     }
-                    else
-                    {
-                        throw new Exception("无法获取所需依赖" + lib.name, FailInLib);
-                    }
+#if DEBUG
+                    System.Windows.Forms.MessageBox.Show(urlLib + libp.Remove(0, Environment.CurrentDirectory.Length + 22).Replace("\\", "/"));
+#endif
+                    downer.DownloadFile(urlLib + libp.Remove(0, Environment.CurrentDirectory.Length + 22).Replace("/","\\"), libp);
                 }
-                arg.Append(libp);
+                arg.Append(buildLibPath(lib) + ";");
             }
             changeEvent("传递MC参数");
             StringBuilder mcpath = new StringBuilder(Environment.CurrentDirectory +  @"\.minecraft\versions\");
@@ -152,6 +140,13 @@ namespace bmcl
 #if DEBUG
             System.Windows.Forms.MessageBox.Show(game.StartInfo.Arguments);
 #endif
+            downLibEvent += launcher_downLibEvent;
+        }
+
+        void launcher_downLibEvent(libraryies lib)
+        {
+            DownLib downer = new DownLib(lib);
+            downloading++;
         }
 
         /// <summary>
@@ -168,7 +163,11 @@ namespace bmcl
             {
                 if (dir.FullName.Contains("-natives-"))
                 {
-                    Directory.Delete(dir.FullName, true);
+                    try
+                    {
+                        Directory.Delete(dir.FullName, true);
+                    }
+                    catch { }
                 }
             }
             NativePath.Append(version).Append("-natives-").Append(timestamp);
@@ -176,25 +175,36 @@ namespace bmcl
             {
                 Directory.CreateDirectory(NativePath.ToString());
             }
-            
-            StringBuilder file = new StringBuilder(NativePath.ToString());
             foreach (libraries.libraryies lib in Info.libraries)
             {
-                changeEvent("解压" + lib.name);
                 if (lib.natives == null)
                     continue;
-                StringBuilder libp = new StringBuilder(Environment.CurrentDirectory + @"\.minecraft\libraries\");
+                changeEvent("解压" + lib.name);
                 string[] split = lib.name.Split(':');//0 包;1 名字；2 版本
                 if (split.Count() != 3)
                 {
                     throw UnSupportVer;
                 }
-                libp.Append(split[0].Replace('.', '\\'));
-                libp.Append("\\");
-                libp.Append(split[1]).Append("\\");
-                libp.Append(split[2]).Append("\\");
-                libp.Append(split[1]).Append("-").Append(split[2]).Append("-natives-windows");
-                libp.Append(".jar");
+                string libp = buildNativePath(lib);
+                if (!File.Exists(libp))
+                {
+                    changeEvent("下载依赖" + lib.name);
+                    /*
+                    DownNative downer = new DownNative(lib);
+                    downNativeEvent(lib);
+                    downer.startdownload();
+                     */
+                    WebClient downer = new WebClient();
+                    string nativep = buildNativePath(lib);
+                    if (!Directory.Exists(Path.GetDirectoryName(nativep)))
+                    {
+                        Directory.CreateDirectory(Path.GetDirectoryName(nativep));
+                    }
+#if DEBUG
+                    System.Windows.Forms.MessageBox.Show(urlLib + nativep.Remove(0, Environment.CurrentDirectory.Length + 22).Replace("\\", "/"));
+#endif
+                    downer.DownloadFile(urlLib + nativep.Remove(0, Environment.CurrentDirectory.Length + 22).Replace("/", "\\"), nativep);
+                }
                 ZipInputStream zipfile = new ZipInputStream(System.IO.File.OpenRead(libp.ToString()));
                 ZipEntry theEntry;
                 while ((theEntry = zipfile.GetNextEntry()) != null)
@@ -240,6 +250,10 @@ namespace bmcl
             game.EnableRaisingEvents = true;
             game.Exited += game_Exited;
             //System.Windows.Forms.MessageBox.Show(System.IO.File.Exists(game.StartInfo.FileName).ToString());
+            //while (downloading > 0)
+            {
+                //Thread.Sleep(0);
+            }
             try
             {
                 return game.Start();
@@ -259,9 +273,49 @@ namespace bmcl
             gameexit();
         }
 
-        private void startdownload()
+        /// <summary>
+        /// 获取lib文件的绝对路径
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <returns></returns>
+        public static  string buildLibPath(libraryies lib)
         {
-            downloadJob.Start();
+            StringBuilder libp = new StringBuilder(Environment.CurrentDirectory + @"\.minecraft\libraries\");
+            string[] split = lib.name.Split(':');//0 包;1 名字；2 版本
+            if (split.Count() != 3)
+            {
+                throw UnSupportVer;
+            }
+            libp.Append(split[0].Replace('.', '\\'));
+            libp.Append("\\");
+            libp.Append(split[1]).Append("\\");
+            libp.Append(split[2]).Append("\\");
+            libp.Append(split[1]).Append("-");
+            libp.Append(split[2]).Append(".jar");
+            return libp.ToString();
+        }
+
+        /// <summary>
+        /// 获取native文件的绝对路径
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <returns></returns>
+        public static string buildNativePath(libraryies lib)
+        {
+            StringBuilder libp = new StringBuilder(Environment.CurrentDirectory + @"\.minecraft\libraries\");
+            string[] split = lib.name.Split(':');//0 包;1 名字；2 版本
+            libp.Append(split[0].Replace('.', '\\'));
+            libp.Append("\\");
+            libp.Append(split[1]).Append("\\");
+            libp.Append(split[2]).Append("\\");
+            libp.Append(split[1]).Append("-").Append(split[2]).Append("-natives-windows");
+            libp.Append(".jar");
+            return libp.ToString();
+        }
+
+        private void downfin()
+        {
+            downloading--;
         }
         #endregion
         

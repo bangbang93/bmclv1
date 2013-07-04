@@ -9,7 +9,7 @@ using System.IO;
 using System.Collections;
 
 
-namespace download
+namespace bmcl.download
 {
     class downloader
     {

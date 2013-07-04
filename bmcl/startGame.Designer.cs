@@ -51,6 +51,7 @@
             this.labStatus.Size = new System.Drawing.Size(53, 12);
             this.labStatus.TabIndex = 1;
             this.labStatus.Text = "当前状态";
+            this.labStatus.TextChanged += new System.EventHandler(this.labStatus_TextChanged);
             // 
             // startGame
             // 

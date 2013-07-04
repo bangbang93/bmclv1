@@ -35,12 +35,22 @@ namespace bmcl
 
         void launcher_changeEvent(string status)
         {
-            this.label1.Text = status;
+            this.labStatus.Text = status;
+            this.Refresh();
+            this.labStatus.Refresh();
         }
 
         void frmmain_changeEvent(string status)
         {
             this.labStatus.Text = status;
+            this.Refresh();
+            this.labStatus.Refresh();
+        }
+
+        private void labStatus_TextChanged(object sender, EventArgs e)
+        {
+            this.labStatus.Left = (this.Width - this.labStatus.Width) / 2;
+            this.labStatus.Refresh();
         }
     }
 }
