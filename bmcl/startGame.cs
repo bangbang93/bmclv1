@@ -16,7 +16,6 @@ namespace bmcl
             InitializeComponent();
         }
 
-        FrmMain frmmain = new FrmMain();
 
         private void changestatus(string status)
         {
@@ -29,7 +28,7 @@ namespace bmcl
 
         private void startGame_Load(object sender, EventArgs e)
         {
-            frmmain.changeEvent += frmmain_changeEvent;
+            FrmMain.changeEvent += frmmain_changeEvent;
             launcher.changeEvent += launcher_changeEvent;
         }
 

@@ -25,84 +25,6 @@ namespace bmcl
         public FrmMain()
         {
             InitializeComponent();
-        }
-
-
-        #region 属性
-
-        static int LauncherVer = 3;
-        static private string cfgfile = "bmcl.xml";
-        public static String URL_DOWNLOAD_BASE = "https://s3.amazonaws.com/Minecraft.Download/";
-	    public static String URL_RESOURCE_BASE = "https://s3.amazonaws.com/Minecraft.Resources/";
-        private ArrayList Auths=new ArrayList();
-        static config cfg;
-        static DataContractSerializer Cfg = new DataContractSerializer(typeof(config));
-        static public gameinfo info;
-        string session;
-        bool startup = true;
-        launcher game;
-        bool inscreen;
-
-        #endregion 
-
-
-        #region 事件
-        public event statuschange changeEvent;
-        #endregion
-
-
-        #region 委托
-        public delegate void statuschange(string status);
-        #endregion
-
-        #region 公共方法
-        static public void saveconfig()
-        {
-            StreamWriter wCfg = new StreamWriter(cfgfile);
-            Cfg.WriteObject(wCfg.BaseStream, cfg);
-            wCfg.Close();
-        }
-        #endregion
-        
-
-
-        private void FrmMain_Load(object sender, EventArgs e)
-        {
-            #region 加载插件
-            listAuth.Items.Add("啥都没有");
-            if (Directory.Exists("auths"))
-            {
-                string[] authplugins = Directory.GetFiles(Application.StartupPath + @"\auths");
-                foreach (string auth in authplugins)
-                {
-                    if (auth.ToLower().EndsWith(".dll"))
-                    {
-                        try
-                        {
-                            Assembly AuthMothed = Assembly.LoadFrom(auth);
-                            Type[] types = AuthMothed.GetTypes();
-                            foreach (Type t in types)
-                            {
-                                if (t.GetInterface("auth") != null)
-                                {
-                                    Auths.Add(AuthMothed.CreateInstance(t.FullName));
-                                    object Auth = Auths[Auths.Count-1];
-                                    Type T = Auth.GetType();
-                                    MethodInfo AuthName = T.GetMethod("getname");
-                                    listAuth.Items.Add(AuthName.Invoke(Auth, null).ToString());
-
-                                }
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message);
-                        }
-                    }
-
-                }
-            }
-            #endregion
             #region 加载配置
             if (!File.Exists(cfgfile))
             {
@@ -130,10 +52,88 @@ namespace bmcl
             }
             txtJavaw.Text = cfg.javaw;
             txtUserName.Text = cfg.username;
-            if (cfg.passwd!=null)
+            if (cfg.passwd != null)
                 txtPwd.Text = Encoding.UTF8.GetString(cfg.passwd);
             txtJavaXmx.Text = cfg.javaxmx;
             #endregion
+            #region 加载插件
+            listAuth.Items.Add("啥都没有");
+            if (Directory.Exists("auths"))
+            {
+                string[] authplugins = Directory.GetFiles(Application.StartupPath + @"\auths");
+                foreach (string auth in authplugins)
+                {
+                    if (auth.ToLower().EndsWith(".dll"))
+                    {
+                        try
+                        {
+                            Assembly AuthMothed = Assembly.LoadFrom(auth);
+                            Type[] types = AuthMothed.GetTypes();
+                            foreach (Type t in types)
+                            {
+                                if (t.GetInterface("auth") != null)
+                                {
+                                    Auths.Add(AuthMothed.CreateInstance(t.FullName));
+                                    object Auth = Auths[Auths.Count - 1];
+                                    Type T = Auth.GetType();
+                                    MethodInfo AuthName = T.GetMethod("getname");
+                                    listAuth.Items.Add(AuthName.Invoke(Auth, null).ToString());
+
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+
+                }
+            }
+            #endregion
+        }
+
+
+        #region 属性
+
+        static int LauncherVer = 3;
+        static private string cfgfile = "bmcl.xml";
+        public static String URL_DOWNLOAD_BASE = "https://s3.amazonaws.com/Minecraft.Download/";
+	    public static String URL_RESOURCE_BASE = "https://s3.amazonaws.com/Minecraft.Resources/";
+        private ArrayList Auths=new ArrayList();
+        static config cfg;
+        static DataContractSerializer Cfg = new DataContractSerializer(typeof(config));
+        static public gameinfo info;
+        string session;
+        bool startup = true;
+        launcher game;
+        bool inscreen;
+
+        #endregion 
+
+
+        #region 事件
+        public static event statuschange changeEvent;
+        #endregion
+
+
+        #region 委托
+        public delegate void statuschange(string status);
+        #endregion
+
+        #region 公共方法
+        static public void saveconfig()
+        {
+            StreamWriter wCfg = new StreamWriter(cfgfile);
+            Cfg.WriteObject(wCfg.BaseStream, cfg);
+            wCfg.Close();
+        }
+        #endregion
+        
+
+
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
             #region 列出版本
             if (!Directory.Exists(".minecraft"))
             {
@@ -403,6 +403,11 @@ namespace bmcl
             }
             finally
             {
+                if (cfg.autostart)
+                {
+                    icoBmcl.Visible = true;
+                    icoBmcl.ShowBalloonTip(5000, "BMCL", "启动" + cfg.lastPlayVer + "成功", ToolTipIcon.Info);
+                }
                 starter.Close();
             }
         }
@@ -463,7 +468,7 @@ namespace bmcl
 
         private void icoBmcl_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            toolShow.PerformClick();
+            this.Show();
         }
 
         private void FrmMain_VisibleChanged(object sender, EventArgs e)
@@ -471,10 +476,12 @@ namespace bmcl
             if (this.Visible == true)
             {
                 inscreen = true;
+                icoBmcl.Visible = false;
             }
             else
             {
                 inscreen = false;
+                icoBmcl.Visible = true;
             }
         }
 
