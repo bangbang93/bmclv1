@@ -557,5 +557,11 @@ namespace bmcl
                 buttonStart.Enabled = false;
             listAuth.SelectedIndex = 0;
         }
+
+        private void buttonCheckRes_Click(object sender, EventArgs e)
+        {
+            frmCheckRes frmcheckres = new frmCheckRes();
+            frmcheckres.ShowDialog();
+        }
     }
 }
