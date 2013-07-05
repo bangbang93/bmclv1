@@ -7,7 +7,7 @@ using System.Net;
 using System.IO;
 using System.Collections;
 
-namespace loginauthmothed
+namespace loginauthmethod
 
 {
     public class offical:auth
