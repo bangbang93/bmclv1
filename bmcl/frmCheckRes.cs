@@ -15,7 +15,7 @@ using System.Runtime.Serialization.Diagnostics;
 using System.Runtime.Serialization.Json;
 using System.Xml;
 using System.Xml.Serialization;
-using Microsoft.WindowsAPICodePack.Taskbar;
+//using Microsoft.WindowsAPICodePack.Taskbar;
 
 using bmcl.ResSer;
 
@@ -57,13 +57,12 @@ namespace bmcl
         private void frmCheckRes_Load(object sender, EventArgs e)
         {
             this.splitContainer1.SplitterDistance = this.Width - 150;
-
         }
 
         private void frmCheckRes_Shown(object sender, EventArgs e)
         {
             this.Refresh();
-            TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Normal);
+//            TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Normal);
             try
             {
                 HttpWebRequest req = (HttpWebRequest)WebRequest.Create(FrmMain.URL_RESOURCE_BASE);
@@ -107,11 +106,11 @@ namespace bmcl
         {
             prs.Maximum = listRes.Items.Count;
             prs.Value = 0;
-            TaskbarManager.Instance.SetProgressValue(prs.Value, prs.Maximum);
+//            TaskbarManager.Instance.SetProgressValue(prs.Value, prs.Maximum);
             foreach (ListViewItem item in listRes.Items)
             {
                 prs.Value++;
-                TaskbarManager.Instance.SetProgressValue(prs.Value, prs.Maximum);
+//                TaskbarManager.Instance.SetProgressValue(prs.Value, prs.Maximum);
                 getmd5 GetMd5 = new getmd5(GetMD5HashFromFile);
                 IAsyncResult res = GetMd5.BeginInvoke(@".minecraft/assets/" + item.Text, null, null);
                 while (!res.IsCompleted)
@@ -129,7 +128,7 @@ namespace bmcl
                     item.SubItems[3].Text = "待同步";
                 }
             }
-            TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress);
+//            TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress);
         }
 
         private void buttonSync_Click(object sender, EventArgs e)
@@ -137,11 +136,11 @@ namespace bmcl
             WebClient downer = new WebClient();
             prs.Maximum = listRes.Items.Count;
             prs.Value = 0;
-            TaskbarManager.Instance.SetProgressValue(prs.Value, prs.Maximum);
+//            TaskbarManager.Instance.SetProgressValue(prs.Value, prs.Maximum);
             foreach (ListViewItem item in listRes.Items)
             {
                 prs.Value++;
-                TaskbarManager.Instance.SetProgressValue(prs.Value, prs.Maximum);
+//                TaskbarManager.Instance.SetProgressValue(prs.Value, prs.Maximum);
                 if (item.SubItems[3].Text == "待同步")
                 {
                     StringBuilder rpath = new StringBuilder(FrmMain.URL_RESOURCE_BASE);
@@ -156,7 +155,7 @@ namespace bmcl
                     item.SubItems[3].Text = "已同步";
                 }
             }
-            TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress);
+//            TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress);
         }
 
     }

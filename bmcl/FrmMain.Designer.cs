@@ -66,15 +66,22 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonCopyInsPath = new System.Windows.Forms.Button();
+            this.txtInsPath = new System.Windows.Forms.TextBox();
+            this.buttonLastForge = new System.Windows.Forms.Button();
             this.icoBmcl = new System.Windows.Forms.NotifyIcon(this.components);
             this.menuIco = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolShow = new System.Windows.Forms.ToolStripMenuItem();
             this.ofdlgJavaw = new System.Windows.Forms.OpenFileDialog();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.buttonStart = new System.Windows.Forms.Button();
-            this.txtInsPath = new System.Windows.Forms.TextBox();
-            this.buttonCopyInsPath = new System.Windows.Forms.Button();
+            this.btnReForge = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.treeForgeVer = new System.Windows.Forms.TreeView();
+            this.panelDownload = new System.Windows.Forms.Panel();
+            this.labDownInfo = new System.Windows.Forms.Label();
+            this.prsDown = new System.Windows.Forms.ProgressBar();
+            this.btmDelete = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -95,6 +102,7 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.panelDownload.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -134,6 +142,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.btmDelete);
             this.splitContainer1.Panel2.Controls.Add(this.labReltime);
             this.splitContainer1.Panel2.Controls.Add(this.labTime);
             this.splitContainer1.Panel2.Controls.Add(this.labVer);
@@ -455,9 +464,12 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.treeForgeVer);
+            this.tabPage5.Controls.Add(this.label6);
+            this.tabPage5.Controls.Add(this.btnReForge);
             this.tabPage5.Controls.Add(this.buttonCopyInsPath);
             this.tabPage5.Controls.Add(this.txtInsPath);
-            this.tabPage5.Controls.Add(this.button1);
+            this.tabPage5.Controls.Add(this.buttonLastForge);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
@@ -466,15 +478,33 @@
             this.tabPage5.Text = "安装Forge";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // buttonCopyInsPath
             // 
-            this.button1.Location = new System.Drawing.Point(8, 6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(108, 52);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "一键安装";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.buttonCopyInsPath.Location = new System.Drawing.Point(9, 92);
+            this.buttonCopyInsPath.Name = "buttonCopyInsPath";
+            this.buttonCopyInsPath.Size = new System.Drawing.Size(120, 28);
+            this.buttonCopyInsPath.TabIndex = 2;
+            this.buttonCopyInsPath.Text = "复制安装路径";
+            this.buttonCopyInsPath.UseVisualStyleBackColor = true;
+            this.buttonCopyInsPath.Click += new System.EventHandler(this.buttonCopyInsPath_Click);
+            // 
+            // txtInsPath
+            // 
+            this.txtInsPath.Location = new System.Drawing.Point(8, 64);
+            this.txtInsPath.Name = "txtInsPath";
+            this.txtInsPath.ReadOnly = true;
+            this.txtInsPath.Size = new System.Drawing.Size(266, 21);
+            this.txtInsPath.TabIndex = 1;
+            // 
+            // buttonLastForge
+            // 
+            this.buttonLastForge.Location = new System.Drawing.Point(8, 6);
+            this.buttonLastForge.Name = "buttonLastForge";
+            this.buttonLastForge.Size = new System.Drawing.Size(108, 52);
+            this.buttonLastForge.TabIndex = 0;
+            this.buttonLastForge.Text = "一键安装最新版Forge";
+            this.buttonLastForge.UseVisualStyleBackColor = true;
+            this.buttonLastForge.Click += new System.EventHandler(this.buttonLastForge_Click);
             // 
             // icoBmcl
             // 
@@ -516,6 +546,7 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.panelDownload);
             this.splitContainer2.Panel2.Controls.Add(this.buttonStart);
             this.splitContainer2.Size = new System.Drawing.Size(931, 394);
             this.splitContainer2.SplitterDistance = 324;
@@ -532,23 +563,71 @@
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
-            // txtInsPath
+            // btnReForge
             // 
-            this.txtInsPath.Location = new System.Drawing.Point(8, 64);
-            this.txtInsPath.Name = "txtInsPath";
-            this.txtInsPath.ReadOnly = true;
-            this.txtInsPath.Size = new System.Drawing.Size(266, 21);
-            this.txtInsPath.TabIndex = 1;
+            this.btnReForge.Location = new System.Drawing.Point(9, 136);
+            this.btnReForge.Name = "btnReForge";
+            this.btnReForge.Size = new System.Drawing.Size(120, 30);
+            this.btnReForge.TabIndex = 4;
+            this.btnReForge.Text = "获取Forge版本列表";
+            this.btnReForge.UseVisualStyleBackColor = true;
+            this.btnReForge.Click += new System.EventHandler(this.btnReForge_Click);
             // 
-            // buttonCopyInsPath
+            // label6
             // 
-            this.buttonCopyInsPath.Location = new System.Drawing.Point(9, 92);
-            this.buttonCopyInsPath.Name = "buttonCopyInsPath";
-            this.buttonCopyInsPath.Size = new System.Drawing.Size(107, 28);
-            this.buttonCopyInsPath.TabIndex = 2;
-            this.buttonCopyInsPath.Text = "复制安装路径";
-            this.buttonCopyInsPath.UseVisualStyleBackColor = true;
-            this.buttonCopyInsPath.Click += new System.EventHandler(this.buttonCopyInsPath_Click);
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(9, 173);
+            this.label6.MaximumSize = new System.Drawing.Size(200, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(197, 60);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "Forge的服务器经常抽风，所以如果获取失败就过一段时间重试\r\n获取后右边会出现所有Forge的版本，选择一个下载就行，暂不支持早于1.6.1的Forge自动下载" +
+    "";
+            // 
+            // treeForgeVer
+            // 
+            this.treeForgeVer.Location = new System.Drawing.Point(280, 6);
+            this.treeForgeVer.Name = "treeForgeVer";
+            this.treeForgeVer.Size = new System.Drawing.Size(204, 286);
+            this.treeForgeVer.TabIndex = 6;
+            this.treeForgeVer.DoubleClick += new System.EventHandler(this.treeForgeVer_DoubleClick);
+            // 
+            // panelDownload
+            // 
+            this.panelDownload.Controls.Add(this.prsDown);
+            this.panelDownload.Controls.Add(this.labDownInfo);
+            this.panelDownload.Location = new System.Drawing.Point(15, 2);
+            this.panelDownload.Name = "panelDownload";
+            this.panelDownload.Size = new System.Drawing.Size(237, 63);
+            this.panelDownload.TabIndex = 7;
+            this.panelDownload.Visible = false;
+            // 
+            // labDownInfo
+            // 
+            this.labDownInfo.AutoSize = true;
+            this.labDownInfo.Location = new System.Drawing.Point(3, 9);
+            this.labDownInfo.Name = "labDownInfo";
+            this.labDownInfo.Size = new System.Drawing.Size(29, 12);
+            this.labDownInfo.TabIndex = 0;
+            this.labDownInfo.Text = "    ";
+            // 
+            // prsDown
+            // 
+            this.prsDown.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.prsDown.Location = new System.Drawing.Point(0, 40);
+            this.prsDown.Name = "prsDown";
+            this.prsDown.Size = new System.Drawing.Size(237, 23);
+            this.prsDown.TabIndex = 1;
+            // 
+            // btmDelete
+            // 
+            this.btmDelete.Location = new System.Drawing.Point(102, 143);
+            this.btmDelete.Name = "btmDelete";
+            this.btmDelete.Size = new System.Drawing.Size(101, 36);
+            this.btmDelete.TabIndex = 6;
+            this.btmDelete.Text = "删除(&D)";
+            this.btmDelete.UseVisualStyleBackColor = true;
+            this.btmDelete.Click += new System.EventHandler(this.btmDelete_Click);
             // 
             // FrmMain
             // 
@@ -586,6 +665,8 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.panelDownload.ResumeLayout(false);
+            this.panelDownload.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -634,9 +715,16 @@
         private System.Windows.Forms.Button buttonDownload;
         private System.Windows.Forms.Button buttonCheckRes;
         private System.Windows.Forms.TabPage tabPage5;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonLastForge;
         private System.Windows.Forms.Button buttonCopyInsPath;
         private System.Windows.Forms.TextBox txtInsPath;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnReForge;
+        private System.Windows.Forms.TreeView treeForgeVer;
+        private System.Windows.Forms.Panel panelDownload;
+        private System.Windows.Forms.ProgressBar prsDown;
+        private System.Windows.Forms.Label labDownInfo;
+        private System.Windows.Forms.Button btmDelete;
     }
 }
 

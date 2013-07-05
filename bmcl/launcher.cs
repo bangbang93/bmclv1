@@ -361,6 +361,21 @@ namespace bmcl
         {
             downloading--;
         }
+
+        public bool IsRunning()
+        {
+            try
+            {
+                if (game.Id != -1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (InvalidOperationException)
+            {
+                return false;
+            }
+        }
         #endregion
         
     }

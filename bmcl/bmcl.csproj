@@ -173,6 +173,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="resource\bmcl.ico" />
     <Content Include="tofu.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

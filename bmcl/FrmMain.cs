@@ -15,6 +15,7 @@ using System.Reflection;
 using System.Collections;
 using System.Net;
 using System.Diagnostics;
+//using Microsoft.WindowsAPICodePack.Taskbar;
 
 using bmcl.versions;
 
@@ -141,12 +142,14 @@ namespace bmcl
                 {
                     MessageBox.Show("无法找到版本文件夹，本启动器只支持1.6以后的目录结构");
                     buttonStart.Enabled = false;
+                    btmDelete.Enabled = false;
                     return;
                 }
                 else
                 {
                     MessageBox.Show("无法找到游戏文件夹");
                     buttonStart.Enabled = false;
+                    btmDelete.Enabled = false;
                     return;
                 }
             }
@@ -163,7 +166,10 @@ namespace bmcl
                 listAuth.SelectedIndex = listAuth.Items.IndexOf(cfg.login);
             }
             else
+            {
                 buttonStart.Enabled = false;
+                btmDelete.Enabled = false;
+            }
             checkAutoStart.Checked = cfg.autostart;
             listAuth.SelectedIndex = 0;
             #endregion 
@@ -276,11 +282,15 @@ namespace bmcl
 
         private void VerList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (VerList.SelectedIndex == -1)
+            {
+                VerList.SelectedIndex = 0;
+            }
             StringBuilder JsonFilePath=new StringBuilder();
             JsonFilePath.Append(@".minecraft\versions\");
-            JsonFilePath.Append(VerList.SelectedItem.ToString());
+            JsonFilePath.Append(VerList.Items[VerList.SelectedIndex]);
             JsonFilePath.Append(@"\");
-            JsonFilePath.Append(VerList.SelectedItem.ToString());
+            JsonFilePath.Append(VerList.Items[VerList.SelectedIndex]);
             JsonFilePath.Append(".json");
             if (!File.Exists(JsonFilePath.ToString()))
             {
@@ -515,20 +525,30 @@ namespace bmcl
             string downjsonpath = downpath.ToString().Substring(0, downpath.Length - 4) + ".json";
             try
             {
-                downer.DownloadFile(downurl.ToString(), downpath.ToString());
-                downer.DownloadFile(downjsonfile, downjsonpath);
-                MessageBox.Show("下载成功");
+                downer.DownloadFileCompleted+= downer_DownloadClientFileCompleted;
+                downer.DownloadProgressChanged += downer_DownloadProgressChanged;
+                downer.DownloadFile(new Uri(downjsonfile), downjsonpath);
+                downer.DownloadFileAsync(new Uri(downurl.ToString()), downpath.ToString());
+                downedtime = Environment.TickCount - 1;
+//                TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Normal);
+                downed = 0;
+                panelDownload.Visible = true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message+"\n"+ex.InnerException.Message);
             }
-            finally
-            {
-                buttonDownload.Text = "下载";
-                refreshLocalVersion();
-            }
 
+        }
+
+        private void downer_DownloadClientFileCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            MessageBox.Show("下载成功");
+            buttonDownload.Text = "下载";
+            refreshLocalVersion();
+//            TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress);
+            panelDownload.Visible = false;
+            tabControl1.SelectTab(0);
         }
 
         private void refreshLocalVersion()
@@ -540,12 +560,14 @@ namespace bmcl
                 {
                     MessageBox.Show("无法找到版本文件夹，本启动器只支持1.6以后的目录结构");
                     buttonStart.Enabled = false;
+                    btmDelete.Enabled = false;
                     return;
                 }
                 else
                 {
                     MessageBox.Show("无法找到游戏文件夹");
                     buttonStart.Enabled = false;
+                    btmDelete.Enabled = false;
                     return;
                 }
             }
@@ -560,24 +582,198 @@ namespace bmcl
             {
                 VerList.SelectedIndex = 0;
                 buttonStart.Enabled = true;
+                btmDelete.Enabled = true;
             }
             else
+            {
                 buttonStart.Enabled = false;
+                btmDelete.Enabled = false;
+            }
             listAuth.SelectedIndex = 0;
         }
 
+       
         private void buttonCheckRes_Click(object sender, EventArgs e)
         {
             frmCheckRes frmcheckres = new frmCheckRes();
             frmcheckres.ShowDialog();
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+
+
+        #region Forge
+        string lastforge;
+
+        Hashtable DownloadUrl = new Hashtable();
+        long downed = 0;
+        long downedtime;
+
+        private void buttonCopyInsPath_Click(object sender, EventArgs e)
         {
             txtInsPath.Text = Environment.CurrentDirectory + "\\.minecraft";
-            Clipboard.SetText(txtInsPath.Text);
+            Clipboard.SetText(Environment.CurrentDirectory + "\\.minecraft");
+        }
+        private void btnReForge_Click(object sender, EventArgs e)
+        {
+            txtInsPath.Text = Environment.CurrentDirectory + "\\.minecraft";
+            WebBrowser ForgePageGet = new WebBrowser();
+            ForgePageGet.Navigate("http://files.minecraftforge.net/");
+            while (ForgePageGet.ReadyState!=WebBrowserReadyState.Complete)
+            {
+                Application.DoEvents();
+            }
+            HtmlDocument ForgePage = ForgePageGet.Document;
+            HtmlElement ForgePageBody = ForgePage.Body;
+            HtmlElementCollection AllDiv = ForgePageBody.GetElementsByTagName("div");
+            #region lastforge
+            foreach (HtmlElement promotions in AllDiv)
+            {
+                if (promotions.GetElementsByTagName("h2").Count == 0)
+                    continue;
+                if (promotions.GetElementsByTagName("h2")[0].InnerText == "Promotions")
+                {
+                    HtmlElementCollection shortcuts = promotions.GetElementsByTagName("tr");
+                    foreach (HtmlElement shortcut in shortcuts)
+                    {
+                        if (shortcut.GetElementsByTagName("td").Count == 0)
+                        {
+                            continue;
+                        }
+                        HtmlElementCollection geturl = shortcut.GetElementsByTagName("td")[4].GetElementsByTagName("a");
+                        foreach (HtmlElement url in geturl)
+                        {
+                            if (url.InnerText == "*" && url.GetAttribute("href").IndexOf("installer") != -1)
+                            {
+                                TreeNode vernode = treeForgeVer.Nodes.Add(shortcut.GetElementsByTagName("td")[0].InnerText);
+                                vernode.Nodes.Add(shortcut.GetElementsByTagName("td")[1].InnerText);
+                                DownloadUrl.Add(shortcut.GetElementsByTagName("td")[0].InnerText, url.GetAttribute("href"));
+                                if ("Latest" == shortcut.GetElementsByTagName("td")[0].InnerText)
+                                {
+                                    lastforge = url.GetAttribute("href");
+                                    DownloadUrl.Add("lastest", url.GetAttribute("href"));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            #endregion
+            foreach (HtmlElement Build in AllDiv)
+            {
+                HtmlElementCollection title = Build.GetElementsByTagName("h2");
+                foreach (HtmlElement t in title)
+                {
+                    if (t.InnerText == "All Downloads")
+                    {
+                        HtmlElementCollection ForgeVer = Build.GetElementsByTagName("tr");
+                        for (int i = 1; i < ForgeVer.Count; i++)
+                        {
+                            TreeNode VerNode;
+                            if (ForgeVer[i].GetElementsByTagName("th").Count != 0)
+                            {
+                                continue;
+                            }
+                            if (treeForgeVer.Nodes.Find(ForgeVer[i].GetElementsByTagName("td")[1].InnerText.Trim(), false).Length == 0)
+                            {
+                                VerNode = treeForgeVer.Nodes.Add(ForgeVer[i].GetElementsByTagName("td")[1].InnerText.Trim());
+                                VerNode.Name = ForgeVer[i].GetElementsByTagName("td")[1].InnerText.Trim();
+                                VerNode.Nodes.Add(ForgeVer[i].GetElementsByTagName("td")[0].InnerText.Trim());
+                                HtmlElementCollection geturl = ForgeVer[i].GetElementsByTagName("td")[3].GetElementsByTagName("a");
+                                foreach (HtmlElement url in geturl)
+                                {
+                                    if (url.InnerText == "*" && url.GetAttribute("href").IndexOf("installer") != -1)
+                                    {
+                                        DownloadUrl.Add(ForgeVer[i].GetElementsByTagName("td")[0].InnerHtml, url.GetAttribute("href"));
+                                        break;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                VerNode = treeForgeVer.Nodes.Find(ForgeVer[i].GetElementsByTagName("td")[1].InnerText, false)[0];
+                                VerNode.Nodes.Add(ForgeVer[i].GetElementsByTagName("td")[0].InnerHtml);
+                                HtmlElementCollection geturl = ForgeVer[i].GetElementsByTagName("td")[3].GetElementsByTagName("a");
+                                foreach (HtmlElement url in geturl)
+                                {
+                                    if (url.InnerText == "*" && url.GetAttribute("href").IndexOf("installer") != -1)
+                                    {
+                                        DownloadUrl.Add(ForgeVer[i].GetElementsByTagName("td")[0].InnerHtml, url.GetAttribute("href"));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void treeForgeVer_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.treeForgeVer.SelectedNode == null)
+                return;
+            try
+            {
+#if DEBUG
+            if (this.treeForgeVer.SelectedNode.Level == 0)
+                return;
+            MessageBox.Show(DownloadUrl[this.treeForgeVer.SelectedNode.Text].ToString());
+#endif  
+            
+                if (this.treeForgeVer.SelectedNode.Level == 0)
+                    return;
+                string downurl = DownloadUrl[this.treeForgeVer.SelectedNode.Text].ToString();
+                WebClient downer = new WebClient();
+                downer.DownloadFileCompleted += downer_DownloadFileCompleted;
+                downer.DownloadProgressChanged += downer_DownloadProgressChanged;
+                downer.DownloadFileAsync(new Uri(downurl), "forge-ins.jar");
+                downedtime = Environment.TickCount - 1;
+                downed = 0;
+                panelDownload.Visible = true;
+//                TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Normal);
+
+            }
+            catch (NullReferenceException )
+            {
+                MessageBox.Show("目前仅支持带installer的Forge安装。早于1.6.1的Forge没有installer，1.6.1最早的两个版本没有installer。如果你选择的是这两者之外，请报告给我");
+            }
+        }
+
+        private void buttonLastForge_Click(object sender, EventArgs e)
+        {
+            txtInsPath.Text = Environment.CurrentDirectory + "\\.minecraft";
+            btnReForge.PerformClick();
+            string downurl = DownloadUrl["lastest"].ToString();
             WebClient downer = new WebClient();
-            downer.DownloadFile("http://files.minecraftforge.net/minecraftforge/minecraftforge-installer-1.6.1-8.9.0.768.jar", "forge-ins.jar");
+            downer.DownloadFileCompleted += downer_DownloadFileCompleted;
+            downer.DownloadProgressChanged += downer_DownloadProgressChanged;
+            downer.DownloadFileAsync(new Uri(downurl), "forge-ins.jar");
+            downedtime = Environment.TickCount - 1;
+//            TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Normal);
+            downed = 0;
+            panelDownload.Visible = true;
+            //downer.DownloadFile(downurl, "forge-ins.jar");
+        }
+
+        void downer_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            prsDown.Maximum = (int)e.TotalBytesToReceive;
+            prsDown.Value = (int)e.BytesReceived;
+//            TaskbarManager.Instance.SetProgressValue((int)e.BytesReceived, (int)e.TotalBytesToReceive);
+            StringBuilder info = new StringBuilder("速度：");
+            try
+            {
+                info.Append(((double)(e.BytesReceived - downed) / (double)((Environment.TickCount - downedtime) / 1000)/1024.0).ToString("F2")).AppendLine("KB/s");
+            }
+            catch (DivideByZeroException) { info.AppendLine("0B/s"); }
+            info.Append(e.ProgressPercentage.ToString()).AppendLine("%");
+            labDownInfo.Text = info.ToString();
+            
+        }
+
+        void downer_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+//            TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Paused);
+            Clipboard.SetText(txtInsPath.Text);
             MessageBox.Show("接下来弹出来的窗口里请选择路径为启动器这里的.minecraft目录。程序已经将目录复制到了剪贴板，直接在窗口里选择浏览，粘贴路径，确定即可");
             forge.writeprofile();
             Process ForgeIns = new Process();
@@ -586,13 +782,61 @@ namespace bmcl
             ForgeIns.Start();
             ForgeIns.WaitForExit();
             refreshLocalVersion();
-            File.Delete("forge-ins.jar");
+            tabControl1.SelectTab(0);
+            try
+            {
+                File.Delete("forge-ins.jar");
+            }
+            catch { }
+//            TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress);
+            
         }
 
-        private void buttonCopyInsPath_Click(object sender, EventArgs e)
+        #endregion
+
+        private void btmDelete_Click(object sender, EventArgs e)
         {
-            txtInsPath.Text = Environment.CurrentDirectory + "\\.minecraft";
-            Clipboard.SetText(txtInsPath.Text);
+            if (MessageBox.Show("你确定要删除当前版本？这个操作不能恢复，1.5.1之后的版本可去版本管理里重新下载", "删除确认", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK) 
+            {
+                try
+                {
+                    FileStream Isused = File.OpenWrite(".minecraft\\versions\\" + VerList.Items[VerList.SelectedIndex] + "\\" + VerList.Items[VerList.SelectedIndex] + ".jar");
+                    Isused.Close();
+                    Directory.Delete(".minecraft\\versions\\" + VerList.Items[VerList.SelectedIndex], true);
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    MessageBox.Show("删除失败，请检查该客户端是否正处于运行状态");
+                }
+                catch (IOException)
+                {
+                    MessageBox.Show("删除失败，请检查该客户端是否正处于运行状态");
+                }
+                finally
+                {
+                    refreshLocalVersion();
+                }
+            }
         }
+        
+        #region   拦截Windows消息
+        protected override void WndProc(ref   Message m)
+        {
+            const int WM_SYSCOMMAND = 0x0112;
+            const int SC_CLOSE = 0xF060;
+            if (m.Msg == WM_SYSCOMMAND && (int)m.WParam == SC_CLOSE )
+            {
+                //捕捉关闭窗体消息      
+                //   User   clicked   close   button    
+                if (game == null)
+                    this.Close();
+                if (!game.IsRunning())
+                    this.Close();
+                this.Hide();
+                return;
+            }
+            base.WndProc(ref   m);
+        }
+        #endregion  
     }
 }
