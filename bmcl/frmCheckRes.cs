@@ -15,7 +15,7 @@ using System.Runtime.Serialization.Diagnostics;
 using System.Runtime.Serialization.Json;
 using System.Xml;
 using System.Xml.Serialization;
-using Microsoft.WindowsAPICodePack.Dialogs;
+using Microsoft.WindowsAPICodePack.Taskbar;
 
 using bmcl.ResSer;
 
@@ -29,7 +29,7 @@ namespace bmcl
         }
 
         delegate string getmd5(string path);
-        TaskDialogProgressBar tskprs;
+        
 
         public static string GetMD5HashFromFile(string fileName)
         {
@@ -62,6 +62,8 @@ namespace bmcl
 
         private void frmCheckRes_Shown(object sender, EventArgs e)
         {
+            this.Refresh();
+            TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Normal);
             try
             {
                 HttpWebRequest req = (HttpWebRequest)WebRequest.Create(FrmMain.URL_RESOURCE_BASE);
@@ -104,13 +106,12 @@ namespace bmcl
         private void buttonCheck_Click(object sender, EventArgs e)
         {
             prs.Maximum = listRes.Items.Count;
-            tskprs.Maximum = listRes.Items.Count;
             prs.Value = 0;
-            tskprs.Value = 0;
+            TaskbarManager.Instance.SetProgressValue(prs.Value, prs.Maximum);
             foreach (ListViewItem item in listRes.Items)
             {
                 prs.Value++;
-                tskprs.Value++;
+                TaskbarManager.Instance.SetProgressValue(prs.Value, prs.Maximum);
                 getmd5 GetMd5 = new getmd5(GetMD5HashFromFile);
                 IAsyncResult res = GetMd5.BeginInvoke(@".minecraft/assets/" + item.Text, null, null);
                 while (!res.IsCompleted)
@@ -128,19 +129,19 @@ namespace bmcl
                     item.SubItems[3].Text = "待同步";
                 }
             }
+            TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress);
         }
 
         private void buttonSync_Click(object sender, EventArgs e)
         {
             WebClient downer = new WebClient();
             prs.Maximum = listRes.Items.Count;
-            tskprs.Maximum = listRes.Items.Count;
             prs.Value = 0;
-            tskprs.Value = 0;
+            TaskbarManager.Instance.SetProgressValue(prs.Value, prs.Maximum);
             foreach (ListViewItem item in listRes.Items)
             {
                 prs.Value++;
-                tskprs.Value++;
+                TaskbarManager.Instance.SetProgressValue(prs.Value, prs.Maximum);
                 if (item.SubItems[3].Text == "待同步")
                 {
                     StringBuilder rpath = new StringBuilder(FrmMain.URL_RESOURCE_BASE);
@@ -155,6 +156,7 @@ namespace bmcl
                     item.SubItems[3].Text = "已同步";
                 }
             }
+            TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress);
         }
 
     }
