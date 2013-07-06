@@ -34,6 +34,10 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.VerList = new System.Windows.Forms.ListBox();
+            this.btnPackUp = new System.Windows.Forms.Button();
+            this.btmExportOfficial = new System.Windows.Forms.Button();
+            this.btnImportOldVer = new System.Windows.Forms.Button();
+            this.btmDelete = new System.Windows.Forms.Button();
             this.labReltime = new System.Windows.Forms.Label();
             this.labTime = new System.Windows.Forms.Label();
             this.labVer = new System.Windows.Forms.Label();
@@ -66,6 +70,9 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.treeForgeVer = new System.Windows.Forms.TreeView();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btnReForge = new System.Windows.Forms.Button();
             this.buttonCopyInsPath = new System.Windows.Forms.Button();
             this.txtInsPath = new System.Windows.Forms.TextBox();
             this.buttonLastForge = new System.Windows.Forms.Button();
@@ -74,14 +81,12 @@
             this.toolShow = new System.Windows.Forms.ToolStripMenuItem();
             this.ofdlgJavaw = new System.Windows.Forms.OpenFileDialog();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.buttonStart = new System.Windows.Forms.Button();
-            this.btnReForge = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.treeForgeVer = new System.Windows.Forms.TreeView();
             this.panelDownload = new System.Windows.Forms.Panel();
-            this.labDownInfo = new System.Windows.Forms.Label();
             this.prsDown = new System.Windows.Forms.ProgressBar();
-            this.btmDelete = new System.Windows.Forms.Button();
+            this.labDownInfo = new System.Windows.Forms.Label();
+            this.buttonStart = new System.Windows.Forms.Button();
+            this.folderImportOldVer = new System.Windows.Forms.FolderBrowserDialog();
+            this.savePackUp = new System.Windows.Forms.SaveFileDialog();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -142,6 +147,9 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.btnPackUp);
+            this.splitContainer1.Panel2.Controls.Add(this.btmExportOfficial);
+            this.splitContainer1.Panel2.Controls.Add(this.btnImportOldVer);
             this.splitContainer1.Panel2.Controls.Add(this.btmDelete);
             this.splitContainer1.Panel2.Controls.Add(this.labReltime);
             this.splitContainer1.Panel2.Controls.Add(this.labTime);
@@ -163,6 +171,47 @@
             this.VerList.Size = new System.Drawing.Size(178, 292);
             this.VerList.TabIndex = 1;
             this.VerList.SelectedIndexChanged += new System.EventHandler(this.VerList_SelectedIndexChanged);
+            // 
+            // btnPackUp
+            // 
+            this.btnPackUp.Location = new System.Drawing.Point(218, 185);
+            this.btnPackUp.Name = "btnPackUp";
+            this.btnPackUp.Size = new System.Drawing.Size(110, 36);
+            this.btnPackUp.TabIndex = 9;
+            this.btnPackUp.Tag = ".";
+            this.btnPackUp.Text = "打包当前版本";
+            this.btnPackUp.UseVisualStyleBackColor = true;
+            this.btnPackUp.Click += new System.EventHandler(this.btnPackUp_Click);
+            // 
+            // btmExportOfficial
+            // 
+            this.btmExportOfficial.Location = new System.Drawing.Point(218, 143);
+            this.btmExportOfficial.Name = "btmExportOfficial";
+            this.btmExportOfficial.Size = new System.Drawing.Size(110, 36);
+            this.btmExportOfficial.TabIndex = 8;
+            this.btmExportOfficial.Text = "导出到正版启动器";
+            this.btmExportOfficial.UseVisualStyleBackColor = true;
+            this.btmExportOfficial.Click += new System.EventHandler(this.btmExportOfficial_Click);
+            // 
+            // btnImportOldVer
+            // 
+            this.btnImportOldVer.Location = new System.Drawing.Point(103, 185);
+            this.btnImportOldVer.Name = "btnImportOldVer";
+            this.btnImportOldVer.Size = new System.Drawing.Size(110, 36);
+            this.btnImportOldVer.TabIndex = 7;
+            this.btnImportOldVer.Text = "导入旧版MC";
+            this.btnImportOldVer.UseVisualStyleBackColor = true;
+            this.btnImportOldVer.Click += new System.EventHandler(this.btnImportOldVer_Click);
+            // 
+            // btmDelete
+            // 
+            this.btmDelete.Location = new System.Drawing.Point(102, 143);
+            this.btmDelete.Name = "btmDelete";
+            this.btmDelete.Size = new System.Drawing.Size(110, 36);
+            this.btmDelete.TabIndex = 6;
+            this.btmDelete.Text = "删除(&D)";
+            this.btmDelete.UseVisualStyleBackColor = true;
+            this.btmDelete.Click += new System.EventHandler(this.btmDelete_Click);
             // 
             // labReltime
             // 
@@ -478,6 +527,35 @@
             this.tabPage5.Text = "安装Forge";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // treeForgeVer
+            // 
+            this.treeForgeVer.Location = new System.Drawing.Point(280, 6);
+            this.treeForgeVer.Name = "treeForgeVer";
+            this.treeForgeVer.Size = new System.Drawing.Size(204, 286);
+            this.treeForgeVer.TabIndex = 6;
+            this.treeForgeVer.DoubleClick += new System.EventHandler(this.treeForgeVer_DoubleClick);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(9, 173);
+            this.label6.MaximumSize = new System.Drawing.Size(200, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(197, 60);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "Forge的服务器经常抽风，所以如果获取失败就过一段时间重试\r\n获取后右边会出现所有Forge的版本，选择一个下载就行，暂不支持早于1.6.1的Forge自动下载" +
+    "";
+            // 
+            // btnReForge
+            // 
+            this.btnReForge.Location = new System.Drawing.Point(9, 136);
+            this.btnReForge.Name = "btnReForge";
+            this.btnReForge.Size = new System.Drawing.Size(120, 30);
+            this.btnReForge.TabIndex = 4;
+            this.btnReForge.Text = "获取Forge版本列表";
+            this.btnReForge.UseVisualStyleBackColor = true;
+            this.btnReForge.Click += new System.EventHandler(this.btnReForge_Click);
+            // 
             // buttonCopyInsPath
             // 
             this.buttonCopyInsPath.Location = new System.Drawing.Point(9, 92);
@@ -552,6 +630,33 @@
             this.splitContainer2.SplitterDistance = 324;
             this.splitContainer2.TabIndex = 1;
             // 
+            // panelDownload
+            // 
+            this.panelDownload.Controls.Add(this.prsDown);
+            this.panelDownload.Controls.Add(this.labDownInfo);
+            this.panelDownload.Location = new System.Drawing.Point(15, 2);
+            this.panelDownload.Name = "panelDownload";
+            this.panelDownload.Size = new System.Drawing.Size(237, 63);
+            this.panelDownload.TabIndex = 7;
+            this.panelDownload.Visible = false;
+            // 
+            // prsDown
+            // 
+            this.prsDown.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.prsDown.Location = new System.Drawing.Point(0, 40);
+            this.prsDown.Name = "prsDown";
+            this.prsDown.Size = new System.Drawing.Size(237, 23);
+            this.prsDown.TabIndex = 1;
+            // 
+            // labDownInfo
+            // 
+            this.labDownInfo.AutoSize = true;
+            this.labDownInfo.Location = new System.Drawing.Point(3, 9);
+            this.labDownInfo.Name = "labDownInfo";
+            this.labDownInfo.Size = new System.Drawing.Size(29, 12);
+            this.labDownInfo.TabIndex = 0;
+            this.labDownInfo.Text = "    ";
+            // 
             // buttonStart
             // 
             this.buttonStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -563,71 +668,15 @@
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
-            // btnReForge
+            // folderImportOldVer
             // 
-            this.btnReForge.Location = new System.Drawing.Point(9, 136);
-            this.btnReForge.Name = "btnReForge";
-            this.btnReForge.Size = new System.Drawing.Size(120, 30);
-            this.btnReForge.TabIndex = 4;
-            this.btnReForge.Text = "获取Forge版本列表";
-            this.btnReForge.UseVisualStyleBackColor = true;
-            this.btnReForge.Click += new System.EventHandler(this.btnReForge_Click);
+            this.folderImportOldVer.Description = "请选择.minecraft目录";
+            this.folderImportOldVer.RootFolder = System.Environment.SpecialFolder.MyComputer;
             // 
-            // label6
+            // savePackUp
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(9, 173);
-            this.label6.MaximumSize = new System.Drawing.Size(200, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(197, 60);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Forge的服务器经常抽风，所以如果获取失败就过一段时间重试\r\n获取后右边会出现所有Forge的版本，选择一个下载就行，暂不支持早于1.6.1的Forge自动下载" +
-    "";
-            // 
-            // treeForgeVer
-            // 
-            this.treeForgeVer.Location = new System.Drawing.Point(280, 6);
-            this.treeForgeVer.Name = "treeForgeVer";
-            this.treeForgeVer.Size = new System.Drawing.Size(204, 286);
-            this.treeForgeVer.TabIndex = 6;
-            this.treeForgeVer.DoubleClick += new System.EventHandler(this.treeForgeVer_DoubleClick);
-            // 
-            // panelDownload
-            // 
-            this.panelDownload.Controls.Add(this.prsDown);
-            this.panelDownload.Controls.Add(this.labDownInfo);
-            this.panelDownload.Location = new System.Drawing.Point(15, 2);
-            this.panelDownload.Name = "panelDownload";
-            this.panelDownload.Size = new System.Drawing.Size(237, 63);
-            this.panelDownload.TabIndex = 7;
-            this.panelDownload.Visible = false;
-            // 
-            // labDownInfo
-            // 
-            this.labDownInfo.AutoSize = true;
-            this.labDownInfo.Location = new System.Drawing.Point(3, 9);
-            this.labDownInfo.Name = "labDownInfo";
-            this.labDownInfo.Size = new System.Drawing.Size(29, 12);
-            this.labDownInfo.TabIndex = 0;
-            this.labDownInfo.Text = "    ";
-            // 
-            // prsDown
-            // 
-            this.prsDown.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.prsDown.Location = new System.Drawing.Point(0, 40);
-            this.prsDown.Name = "prsDown";
-            this.prsDown.Size = new System.Drawing.Size(237, 23);
-            this.prsDown.TabIndex = 1;
-            // 
-            // btmDelete
-            // 
-            this.btmDelete.Location = new System.Drawing.Point(102, 143);
-            this.btmDelete.Name = "btmDelete";
-            this.btmDelete.Size = new System.Drawing.Size(101, 36);
-            this.btmDelete.TabIndex = 6;
-            this.btmDelete.Text = "删除(&D)";
-            this.btmDelete.UseVisualStyleBackColor = true;
-            this.btmDelete.Click += new System.EventHandler(this.btmDelete_Click);
+            this.savePackUp.DefaultExt = "zip";
+            this.savePackUp.Filter = "zip|*.zip";
             // 
             // FrmMain
             // 
@@ -725,6 +774,11 @@
         private System.Windows.Forms.ProgressBar prsDown;
         private System.Windows.Forms.Label labDownInfo;
         private System.Windows.Forms.Button btmDelete;
+        private System.Windows.Forms.Button btnImportOldVer;
+        private System.Windows.Forms.FolderBrowserDialog folderImportOldVer;
+        private System.Windows.Forms.Button btnPackUp;
+        private System.Windows.Forms.Button btmExportOfficial;
+        private System.Windows.Forms.SaveFileDialog savePackUp;
     }
 }
 
