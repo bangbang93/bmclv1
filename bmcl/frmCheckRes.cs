@@ -158,5 +158,6 @@ namespace bmcl
 //            TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress);
         }
 
+
     }
 }

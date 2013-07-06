@@ -123,11 +123,66 @@ namespace bmcl
         #endregion
 
         #region 公共方法
+        /// <summary>
+        /// 保存设置
+        /// </summary>
         static public void saveconfig()
         {
             StreamWriter wCfg = new StreamWriter(cfgfile);
             Cfg.WriteObject(wCfg.BaseStream, cfg);
             wCfg.Close();
+        }
+        /// <summary>
+        /// 文件夹递归复制
+        /// </summary>
+        /// <param name="from">源</param>
+        /// <param name="to">目标</param>
+        static public void dircopy(string from,string to)
+        {
+            DirectoryInfo dir = new DirectoryInfo(from);
+            if (!Directory.Exists(to))
+            {
+                Directory.CreateDirectory(to);
+            }
+            foreach (DirectoryInfo sondir in dir.GetDirectories())
+            {
+                dircopy(sondir.FullName, to + "\\" + sondir.Name);
+            }
+            foreach (FileInfo file in dir.GetFiles())
+            {
+                File.Delete(to + "\\" + file.Name);
+                File.Copy(file.FullName, to + "\\" + file.Name);
+            }
+        }
+        /// <summary>
+        /// 读取lib信息
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns>所有lib文件的路径</returns>
+        static public string[] readlibpaths(gameinfo info)
+        {
+            ArrayList libpaths = new ArrayList();
+            foreach (libraries.libraryies lib in info.libraries)
+            {
+                if (lib.natives==null)
+                    libpaths.Add(launcher.buildLibPath(lib));
+            }
+            return (string[])libpaths.ToArray(typeof(string));
+        }
+        /// <summary>
+        /// 读取native信息
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns>所有navite文件的路径</returns>
+        static public string[] readnativepaths(gameinfo info)
+        {
+            ArrayList nativepaths = new ArrayList();
+            foreach (libraries.libraryies lib in info.libraries)
+            {
+                if (lib.natives!=null)
+                    nativepaths.Add(launcher.buildNativePath(lib));
+            }
+            return (string[])nativepaths.ToArray(typeof(string));
         }
         #endregion
         
@@ -803,6 +858,10 @@ namespace bmcl
                     FileStream Isused = File.OpenWrite(".minecraft\\versions\\" + VerList.Items[VerList.SelectedIndex] + "\\" + VerList.Items[VerList.SelectedIndex] + ".jar");
                     Isused.Close();
                     Directory.Delete(".minecraft\\versions\\" + VerList.Items[VerList.SelectedIndex], true);
+                    if (Directory.Exists(".minecraft\\libraries\\"+VerList.Items[VerList.SelectedIndex]))
+                    {
+                        Directory.Delete(".minecraft\\libraries\\" + VerList.Items[VerList.SelectedIndex], true);
+                    }
                 }
                 catch (UnauthorizedAccessException)
                 {
@@ -829,7 +888,7 @@ namespace bmcl
                 //捕捉关闭窗体消息      
                 //   User   clicked   close   button    
                 if (game == null)
-                    this.Close();
+                    Application.Exit();
                 if (!game.IsRunning())
                     this.Close();
                 this.Hide();
@@ -838,5 +897,189 @@ namespace bmcl
             base.WndProc(ref   m);
         }
         #endregion  
+
+
+        #region 导入导出
+        private void btnImportOldVer_Click(object sender, EventArgs e)
+        {
+            if (folderImportOldVer.ShowDialog() == DialogResult.OK)
+            {
+                string ImportFrom = folderImportOldVer.SelectedPath;
+                if (!File.Exists(ImportFrom + "\\bin\\minecraft.jar"))
+                {
+                    MessageBox.Show("未在该目录内发现有效的旧版Minecraft");
+                    return;
+                }
+                string ImportName;
+                bool F1 = false, F2 = false;
+                ImportName = Microsoft.VisualBasic.Interaction.InputBox("输入导入后的名称", "导入旧版MC", "OldMinecraft");
+                do
+                {
+                    F1 = false;
+                    F2 = false;
+                    if (ImportName.Length <= 0 || ImportName.IndexOf('.')!=-1)
+                        ImportName = Microsoft.VisualBasic.Interaction.InputBox("输入导入后的名称", "输入无效，请不要带\".\"符号", "OldMinecraft");
+                    else
+                        F1 = true;
+                    if (Directory.Exists(".minecraft\\versions\\" + ImportName))
+                        ImportName = Microsoft.VisualBasic.Interaction.InputBox("输入导入后的名称", "版本已存在", "OldMinecraft");
+                    else 
+                        F2 = true;
+
+                } while (!(F1 && F2));
+                Directory.CreateDirectory(".minecraft\\versions\\" + ImportName);
+                File.Copy(ImportFrom + "\\bin\\minecraft.jar", ".minecraft\\versions\\" + ImportName + "\\" + ImportName + ".jar");
+                gameinfo info = new gameinfo();
+                info.id = ImportName;
+                string timezone = DateTimeOffset.Now.Offset.ToString();
+                if (timezone[0] != '-')
+                {
+                    timezone = "+" + timezone;
+                }
+                info.time = DateTime.Now.GetDateTimeFormats('s')[0].ToString() + timezone;
+                info.releaseTime = DateTime.Now.GetDateTimeFormats('s')[0].ToString() + timezone;
+                info.type = "Port By BMCL";
+                info.minecraftArguments = "${auth_player_name}";
+                info.mainClass = "net.minecraft.client.Minecraft";
+                ArrayList libs = new ArrayList();
+                DirectoryInfo bin = new DirectoryInfo(ImportFrom + "\\bin");
+                foreach (FileInfo file in bin.GetFiles("*.jar"))
+                {
+                    libraries.libraryies libfile = new libraries.libraryies();
+                    if (file.Name == "minecraft.jar")
+                        continue;
+                    if (!Directory.Exists(".minecraft\\libraries\\" + ImportName + "\\" + file.Name.Substring(0, file.Name.Length - 4) + "\\BMCL\\"))
+                    {
+                        Directory.CreateDirectory(".minecraft\\libraries\\" + ImportName + "\\" + file.Name.Substring(0, file.Name.Length - 4) + "\\BMCL\\");
+                    }
+                    File.Copy(file.FullName, ".minecraft\\libraries\\" + ImportName + "\\" + file.Name.Substring(0,file.Name.Length-4) +"\\BMCL\\" + file.Name.Substring(0,file.Name.Length-4) +"-BMCL.jar");
+                    libfile.name = ImportName + ":" + file.Name.Substring(0, file.Name.Length - 4) + ":BMCL";
+                    libs.Add(libfile);
+                }
+                ICSharpCode.SharpZipLib.Zip.FastZip nativejar = new ICSharpCode.SharpZipLib.Zip.FastZip();
+                if (!Directory.Exists(".minecraft\\libraries\\" + ImportName + "\\BMCL\\"))
+                {
+                    Directory.CreateDirectory(".minecraft\\libraries\\" + ImportName + "\\native\\BMCL\\");
+                }
+                nativejar.CreateZip(".minecraft\\libraries\\" + ImportName + "\\native\\BMCL\\native-BMCL-natives-windows.jar", ImportFrom + "\\bin\\natives", false, @"\.dll");
+                libraries.libraryies nativefile = new libraries.libraryies();
+                nativefile.name = ImportName + ":native:BMCL";
+                libraries.OS nativeos = new libraries.OS();
+                nativeos.windows = "natives-windows";
+                nativefile.natives = nativeos;
+                nativefile.extract = new libraries.extract();
+                libs.Add(nativefile);
+                info.libraries = (libraries.libraryies[])libs.ToArray(typeof(libraries.libraryies));
+                FileStream wcfg = new FileStream(".minecraft\\versions\\" + ImportName + "\\" + ImportName + ".json", FileMode.Create);
+                DataContractJsonSerializer infojson = new DataContractJsonSerializer(typeof(gameinfo));
+                infojson.WriteObject(wcfg, info);
+                wcfg.Close();
+                if (Directory.Exists(ImportFrom + "\\lib"))
+                {
+                    if (!Directory.Exists(".minecraft\\lib"))
+                    {
+                        Directory.CreateDirectory(".minecraft\\lib");
+                    }
+                    foreach (string libfile in Directory.GetFiles(ImportFrom + "\\lib", "*", SearchOption.AllDirectories))
+                    {
+                        if (!File.Exists(".minecraft\\lib\\"+ Path.GetFileName(libfile)))
+                        {
+                            File.Copy(libfile, ".minecraft\\lib\\" + Path.GetFileName(libfile));
+                        }
+                    }
+                }
+                refreshLocalVersion();
+            }
+        }
+
+        private void btmExportOfficial_Click(object sender, EventArgs e)
+        {
+            string dest = Environment.GetEnvironmentVariable("appdata") + @"\.minecraft\";
+            if (Directory.Exists(dest + @"versions\" + VerList.Text))
+            {
+                if (MessageBox.Show("已存在同名版本，你确定要覆盖吗？","覆盖",MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+                {
+                    return;
+                }
+            }
+            if (info.type == "Port By BMCL")
+            {
+                dircopy(@".minecraft\versions\" + VerList.Text, dest + @"versions\" + VerList.Text);
+                dircopy(@".minecraft\libraries\" + VerList.Text, dest + @"libraries\" + VerList.Text);
+                dircopy(@".minecraft\lib", dest + @"libs\");
+                File.Delete(dest + @"versions\" + VerList.Text + "\\" + VerList.Text + ".json");
+                gameinfo oinfo = info;
+                oinfo.type = "release";
+                FileStream wcfg = new FileStream(dest + @"versions\" + VerList.Text + "\\" + VerList.Text + ".json", FileMode.Create);
+                DataContractJsonSerializer json = new DataContractJsonSerializer(typeof(gameinfo));
+                json.WriteObject(wcfg, oinfo);
+                wcfg.Close();
+            }
+            else
+            {
+                dircopy(@".minecraft\versions\" + VerList.Text, dest + @"versions\" + VerList.Text);
+                dircopy(@".minecraft\libraries\", dest + @"libraries\");
+            }
+            MessageBox.Show("导出成功");
+
+        }
+        #endregion
+
+        private void btnPackUp_Click(object sender, EventArgs e)
+        {
+            DateTime start = DateTime.Now;
+            string PackUpFile;
+            savePackUp.InitialDirectory = Environment.CurrentDirectory;
+            savePackUp.FileName = VerList.Text;
+            if (savePackUp.ShowDialog()==DialogResult.Cancel)
+            {
+                return;
+            }
+            else
+            {
+                PackUpFile=savePackUp.FileName;
+            }
+            string time = DateTime.Now.Ticks.ToString();
+            Directory.CreateDirectory("packup" + time + @"\.minecraft\versions\" + VerList.Text);
+            dircopy(@".minecraft\versions\" + VerList.Text, "packup" + time + @"\.minecraft\versions\" + VerList.Text);
+            Directory.CreateDirectory("packup" + time + @"\.minecraft\libraries\");
+            string[] libpaths = readlibpaths(info);
+            foreach (string filename in libpaths)
+            {
+                if (!Directory.Exists(Path.GetDirectoryName(filename.Replace(".minecraft", "packup" + time + @"\.minecraft"))))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(filename.Replace(".minecraft", "packup" + time + @"\.minecraft")));
+                }
+                File.Copy(filename, filename.Replace(".minecraft", "packup" + time + @"\.minecraft"));
+            }
+            string[] nativepaths = readnativepaths(info);
+            foreach (string filename in nativepaths)
+            {
+                if (!Directory.Exists(Path.GetDirectoryName(filename.Replace(".minecraft", "packup" + time + @"\.minecraft"))))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(filename.Replace(".minecraft", "packup" + time + @"\.minecraft")));
+                }
+                File.Copy(filename, filename.Replace(".minecraft", "packup" + time + @"\.minecraft"));
+            }
+            File.Copy(Application.ExecutablePath.ToLower(), "packup" + time + "\\" + Path.GetFileName(Application.ExecutablePath).ToLower());
+            FileStream wcfg = new FileStream("packup" + time + "\\bmcl.xml",FileMode.Create);
+            DataContractSerializer Cfg = new DataContractSerializer(typeof(config));
+            config tempcfg = cfg;
+            tempcfg.autostart = true;
+            tempcfg.lastPlayVer = info.id;
+            Cfg.WriteObject(wcfg, tempcfg);
+            wcfg.Close();
+            ICSharpCode.SharpZipLib.Zip.FastZip output = new ICSharpCode.SharpZipLib.Zip.FastZip();
+            output.CreateZip(PackUpFile, "packup" + time, true, "");
+            Directory.Delete("packup" + time, true);
+            DateTime end = DateTime.Now;
+            StringBuilder mbox = new StringBuilder();
+            mbox.AppendLine("打包成功");
+            mbox.Append("文件大小：").Append(((new FileInfo(PackUpFile)).Length / 1024.0 / 1024.0).ToString("f2")).AppendLine("MB");
+            mbox.Append("耗时").Append((end - start).TotalSeconds.ToString("f2")).AppendLine("秒");
+            MessageBox.Show(mbox.ToString());
+        }
+
+
     }
 }
