@@ -312,23 +312,7 @@ namespace bmcl
         {
             if (game.ExitCode != 0)
             {
-#if DEBUG
                 System.Windows.Forms.MessageBox.Show(game.ExitCode.ToString());
-#endif
-            }
-            StringBuilder NativePath = new StringBuilder(Environment.CurrentDirectory + @"\.minecraft\versions\");
-            NativePath.Append(version).Append("\\");
-            DirectoryInfo oldnative = new DirectoryInfo(NativePath.ToString());
-            foreach (DirectoryInfo dir in oldnative.GetDirectories())
-            {
-                if (dir.FullName.Contains("-natives-"))
-                {
-                    try
-                    {
-                        Directory.Delete(dir.FullName, true);
-                    }
-                    catch { }
-                }
             }
             gameexit();
         }
@@ -338,7 +322,7 @@ namespace bmcl
         /// </summary>
         /// <param name="lib"></param>
         /// <returns></returns>
-        public static string buildLibPath(libraryies lib)
+        public static  string buildLibPath(libraryies lib)
         {
             StringBuilder libp = new StringBuilder(Environment.CurrentDirectory + @"\.minecraft\libraries\");
             string[] split = lib.name.Split(':');//0 包;1 名字；2 版本
