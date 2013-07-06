@@ -91,24 +91,26 @@ namespace bmcl
 
                 }
             }
+            AuthList = listAuth;
             #endregion
         }
 
 
         #region 属性
-
         static int LauncherVer = 3;
         static private string cfgfile = "bmcl.xml";
         public static String URL_DOWNLOAD_BASE = "https://s3.amazonaws.com/Minecraft.Download/";
 	    public static String URL_RESOURCE_BASE = "https://s3.amazonaws.com/Minecraft.Resources/";
         private ArrayList Auths=new ArrayList();
-        static config cfg;
+        public static config cfg;
         static DataContractSerializer Cfg = new DataContractSerializer(typeof(config));
         static public gameinfo info;
         string session;
         bool startup = true;
         launcher game;
         bool inscreen;
+        static public ListBox AuthList;
+        static public string portinfo = "Port By BMCL";
 
         #endregion 
 
@@ -154,35 +156,9 @@ namespace bmcl
                 File.Copy(file.FullName, to + "\\" + file.Name);
             }
         }
-        /// <summary>
-        /// 读取lib信息
-        /// </summary>
-        /// <param name="info"></param>
-        /// <returns>所有lib文件的路径</returns>
-        static public string[] readlibpaths(gameinfo info)
+        static public ListBox GetlistAuth()
         {
-            ArrayList libpaths = new ArrayList();
-            foreach (libraries.libraryies lib in info.libraries)
-            {
-                if (lib.natives==null)
-                    libpaths.Add(launcher.buildLibPath(lib));
-            }
-            return (string[])libpaths.ToArray(typeof(string));
-        }
-        /// <summary>
-        /// 读取native信息
-        /// </summary>
-        /// <param name="info"></param>
-        /// <returns>所有navite文件的路径</returns>
-        static public string[] readnativepaths(gameinfo info)
-        {
-            ArrayList nativepaths = new ArrayList();
-            foreach (libraries.libraryies lib in info.libraries)
-            {
-                if (lib.natives!=null)
-                    nativepaths.Add(launcher.buildNativePath(lib));
-            }
-            return (string[])nativepaths.ToArray(typeof(string));
+            return AuthList;
         }
         #endregion
         
@@ -260,6 +236,19 @@ namespace bmcl
                 DataContractJsonSerializer InfoReader = new DataContractJsonSerializer(typeof(gameinfo));
                 info = InfoReader.ReadObject(JsonFile.BaseStream) as gameinfo;
                 JsonFile.Close();
+                if (cfg.javaw == "自动寻找")
+                {
+                    cfg.javaw = config.getjavadir();
+                    if (cfg.javaw == null)
+                    {
+                        MessageBox.Show("自动寻找java失败，请手动寻找");
+                        if (ofdlgJavaw.ShowDialog() == DialogResult.OK)
+                        {
+                            cfg.javaw = ofdlgJavaw.FileName;
+                        }
+                    }
+                }
+
                 startGame starter = new startGame();
                 starter.Show();
                 if (changeEvent != null)
@@ -343,9 +332,9 @@ namespace bmcl
             }
             StringBuilder JsonFilePath=new StringBuilder();
             JsonFilePath.Append(@".minecraft\versions\");
-            JsonFilePath.Append(VerList.Items[VerList.SelectedIndex]);
+            JsonFilePath.Append(VerList.Text);
             JsonFilePath.Append(@"\");
-            JsonFilePath.Append(VerList.Items[VerList.SelectedIndex]);
+            JsonFilePath.Append(VerList.Text);
             JsonFilePath.Append(".json");
             if (!File.Exists(JsonFilePath.ToString()))
             {
@@ -372,6 +361,7 @@ namespace bmcl
             labVer.Text = info.id;
             labTime.Text = info.time;
             labReltime.Text = info.releaseTime;
+            labType.Text = info.type;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -413,7 +403,7 @@ namespace bmcl
                         cfg.javaxmx = txtJavaXmx.Text;
                         cfg.javaw = txtJavaw.Text;
                         cfg.login = listAuth.SelectedItem.ToString();
-                        cfg.lastPlayVer = VerList.Items[VerList.SelectedIndex].ToString();
+                        cfg.lastPlayVer = info.id;
                         cfg.autostart = checkAutoStart.Checked;
                         MethodInfo getSession = T.GetMethod("getsession");
                         session = getSession.Invoke(Auth, null).ToString();
@@ -422,7 +412,7 @@ namespace bmcl
                         string username = getPname.Invoke(Auth, null).ToString();
                         try
                         {
-                            game = new launcher(txtJavaw.Text, txtJavaXmx.Text, username, VerList.Items[VerList.SelectedIndex].ToString(), info, session);
+                            game = new launcher(txtJavaw.Text, txtJavaXmx.Text, username, VerList.Text, info, session);
                         }
                         catch (Exception ex)
                         {
@@ -444,10 +434,10 @@ namespace bmcl
                         cfg.javaxmx = txtJavaXmx.Text;
                         cfg.javaw = txtJavaw.Text;
                         cfg.login = listAuth.SelectedItem.ToString();
-                        cfg.lastPlayVer = VerList.Items[VerList.SelectedIndex].ToString();
+                        cfg.lastPlayVer = info.id.ToString();
                         cfg.autostart = checkAutoStart.Checked;
                         saveconfig();
-                        game = new launcher(txtJavaw.Text, txtJavaXmx.Text, txtUserName.Text, VerList.Items[VerList.SelectedIndex].ToString(), info);
+                        game = new launcher(txtJavaw.Text, txtJavaXmx.Text, txtUserName.Text, VerList.Text.ToString(), info);
                     }
                     catch (Exception ex)
                     {
@@ -855,12 +845,12 @@ namespace bmcl
             {
                 try
                 {
-                    FileStream Isused = File.OpenWrite(".minecraft\\versions\\" + VerList.Items[VerList.SelectedIndex] + "\\" + VerList.Items[VerList.SelectedIndex] + ".jar");
+                    FileStream Isused = File.OpenWrite(".minecraft\\versions\\" + info.id + "\\" + info.id + ".jar");
                     Isused.Close();
-                    Directory.Delete(".minecraft\\versions\\" + VerList.Items[VerList.SelectedIndex], true);
-                    if (Directory.Exists(".minecraft\\libraries\\"+VerList.Items[VerList.SelectedIndex]))
+                    Directory.Delete(".minecraft\\versions\\" + info.id, true);
+                    if (Directory.Exists(".minecraft\\libraries\\"+info.id))
                     {
-                        Directory.Delete(".minecraft\\libraries\\" + VerList.Items[VerList.SelectedIndex], true);
+                        Directory.Delete(".minecraft\\libraries\\" + info.id, true);
                     }
                 }
                 catch (UnauthorizedAccessException)
@@ -878,6 +868,7 @@ namespace bmcl
             }
         }
         
+#if RELEASE
         #region   拦截Windows消息
         protected override void WndProc(ref   Message m)
         {
@@ -897,7 +888,7 @@ namespace bmcl
             base.WndProc(ref   m);
         }
         #endregion  
-
+#endif
 
         #region 导入导出
         private void btnImportOldVer_Click(object sender, EventArgs e)
@@ -938,7 +929,7 @@ namespace bmcl
                 }
                 info.time = DateTime.Now.GetDateTimeFormats('s')[0].ToString() + timezone;
                 info.releaseTime = DateTime.Now.GetDateTimeFormats('s')[0].ToString() + timezone;
-                info.type = "Port By BMCL";
+                info.type = portinfo;
                 info.minecraftArguments = "${auth_player_name}";
                 info.mainClass = "net.minecraft.client.Minecraft";
                 ArrayList libs = new ArrayList();
@@ -995,7 +986,7 @@ namespace bmcl
         private void btmExportOfficial_Click(object sender, EventArgs e)
         {
             string dest = Environment.GetEnvironmentVariable("appdata") + @"\.minecraft\";
-            if (Directory.Exists(dest + @"versions\" + VerList.Text))
+            if (Directory.Exists(dest + @"versions\" + info.id))
             {
                 if (MessageBox.Show("已存在同名版本，你确定要覆盖吗？","覆盖",MessageBoxButtons.OKCancel) == DialogResult.Cancel)
                 {
@@ -1004,20 +995,20 @@ namespace bmcl
             }
             if (info.type == "Port By BMCL")
             {
-                dircopy(@".minecraft\versions\" + VerList.Text, dest + @"versions\" + VerList.Text);
-                dircopy(@".minecraft\libraries\" + VerList.Text, dest + @"libraries\" + VerList.Text);
+                dircopy(@".minecraft\versions\" + info.id, dest + @"versions\" + info.id);
+                dircopy(@".minecraft\libraries\" + info.id, dest + @"libraries\" + info.id);
                 dircopy(@".minecraft\lib", dest + @"libs\");
-                File.Delete(dest + @"versions\" + VerList.Text + "\\" + VerList.Text + ".json");
+                File.Delete(dest + @"versions\" + info.id + "\\" + info.id + ".json");
                 gameinfo oinfo = info;
                 oinfo.type = "release";
-                FileStream wcfg = new FileStream(dest + @"versions\" + VerList.Text + "\\" + VerList.Text + ".json", FileMode.Create);
+                FileStream wcfg = new FileStream(dest + @"versions\" + info.id + "\\" + info.id + ".json", FileMode.Create);
                 DataContractJsonSerializer json = new DataContractJsonSerializer(typeof(gameinfo));
                 json.WriteObject(wcfg, oinfo);
                 wcfg.Close();
             }
             else
             {
-                dircopy(@".minecraft\versions\" + VerList.Text, dest + @"versions\" + VerList.Text);
+                dircopy(@".minecraft\versions\" + info.id, dest + @"versions\" + info.id);
                 dircopy(@".minecraft\libraries\", dest + @"libraries\");
             }
             MessageBox.Show("导出成功");
@@ -1027,57 +1018,32 @@ namespace bmcl
 
         private void btnPackUp_Click(object sender, EventArgs e)
         {
-            DateTime start = DateTime.Now;
-            string PackUpFile;
-            savePackUp.InitialDirectory = Environment.CurrentDirectory;
-            savePackUp.FileName = VerList.Text;
-            if (savePackUp.ShowDialog()==DialogResult.Cancel)
+            frmPackUp frmpackup = new frmPackUp();
+            frmpackup.ShowDialog();
+        }
+
+        private void btnChangeName_Click(object sender, EventArgs e)
+        {
+            try
             {
-                return;
+                string rname = Microsoft.VisualBasic.Interaction.InputBox("新名字", "重命名", VerList.Text);
+                if (rname == "") return;
+                if (rname == VerList.Text) return;
+                if (VerList.Items.IndexOf(rname) != -1) throw new Exception("这个版本已经存在");
+                Directory.Move(".minecraft\\versions\\" + VerList.Text, ".minecraft\\versions\\" + rname);
             }
-            else
+            catch (UnauthorizedAccessException)
             {
-                PackUpFile=savePackUp.FileName;
+                MessageBox.Show("重命名失败，请检查客户端是否开启");
             }
-            string time = DateTime.Now.Ticks.ToString();
-            Directory.CreateDirectory("packup" + time + @"\.minecraft\versions\" + VerList.Text);
-            dircopy(@".minecraft\versions\" + VerList.Text, "packup" + time + @"\.minecraft\versions\" + VerList.Text);
-            Directory.CreateDirectory("packup" + time + @"\.minecraft\libraries\");
-            string[] libpaths = readlibpaths(info);
-            foreach (string filename in libpaths)
+            catch (Exception ex)
             {
-                if (!Directory.Exists(Path.GetDirectoryName(filename.Replace(".minecraft", "packup" + time + @"\.minecraft"))))
-                {
-                    Directory.CreateDirectory(Path.GetDirectoryName(filename.Replace(".minecraft", "packup" + time + @"\.minecraft")));
-                }
-                File.Copy(filename, filename.Replace(".minecraft", "packup" + time + @"\.minecraft"));
+                MessageBox.Show(ex.Message);
             }
-            string[] nativepaths = readnativepaths(info);
-            foreach (string filename in nativepaths)
+            finally
             {
-                if (!Directory.Exists(Path.GetDirectoryName(filename.Replace(".minecraft", "packup" + time + @"\.minecraft"))))
-                {
-                    Directory.CreateDirectory(Path.GetDirectoryName(filename.Replace(".minecraft", "packup" + time + @"\.minecraft")));
-                }
-                File.Copy(filename, filename.Replace(".minecraft", "packup" + time + @"\.minecraft"));
+                refreshLocalVersion();
             }
-            File.Copy(Application.ExecutablePath.ToLower(), "packup" + time + "\\" + Path.GetFileName(Application.ExecutablePath).ToLower());
-            FileStream wcfg = new FileStream("packup" + time + "\\bmcl.xml",FileMode.Create);
-            DataContractSerializer Cfg = new DataContractSerializer(typeof(config));
-            config tempcfg = cfg;
-            tempcfg.autostart = true;
-            tempcfg.lastPlayVer = info.id;
-            Cfg.WriteObject(wcfg, tempcfg);
-            wcfg.Close();
-            ICSharpCode.SharpZipLib.Zip.FastZip output = new ICSharpCode.SharpZipLib.Zip.FastZip();
-            output.CreateZip(PackUpFile, "packup" + time, true, "");
-            Directory.Delete("packup" + time, true);
-            DateTime end = DateTime.Now;
-            StringBuilder mbox = new StringBuilder();
-            mbox.AppendLine("打包成功");
-            mbox.Append("文件大小：").Append(((new FileInfo(PackUpFile)).Length / 1024.0 / 1024.0).ToString("f2")).AppendLine("MB");
-            mbox.Append("耗时").Append((end - start).TotalSeconds.ToString("f2")).AppendLine("秒");
-            MessageBox.Show(mbox.ToString());
         }
 
 

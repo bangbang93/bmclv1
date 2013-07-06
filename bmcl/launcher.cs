@@ -31,6 +31,7 @@ namespace bmcl
         private string javaxmx = "";
         private string username = "";
         private string version;
+        private string name;
         private gameinfo Info;
         long timestamp = DateTime.Now.Ticks;
         private string urlLib = FrmMain.URL_DOWNLOAD_BASE + "libraries/";
@@ -65,7 +66,7 @@ namespace bmcl
         /// <param name="ver"></param>
         /// <param name="info"></param>
         /// <param name="session"></param>
-        public launcher(string JavaPath, string JavaXmx, string UserName,string ver,gameinfo info,string session="no")
+        public launcher(string JavaPath, string JavaXmx, string UserName,string name,gameinfo info,string session="no")
         {
             changeEvent("检查Java");
             if (!File.Exists(JavaPath))
@@ -80,17 +81,18 @@ namespace bmcl
             java = JavaPath;
             javaxmx = JavaXmx;
             username = UserName;
-            version = ver;
+            version = info.id;
+            this.name = name;
             game.StartInfo.FileName = java;
             Info = info;
             changeEvent("设置环境变量");
             StringBuilder arg = new StringBuilder("-Xincgc -Xmx");
             arg.Append(javaxmx);
             arg.Append("M ");
-            arg.Append(@"-Djava.library.path=");
+            arg.Append("-Djava.library.path=\"");
             arg.Append(Environment.CurrentDirectory).Append(@"\.minecraft\versions\");
-            arg.Append(ver).Append("\\").Append(ver).Append("-natives-").Append(timestamp.ToString());
-            arg.Append(" -cp ");
+            arg.Append(name).Append("\\").Append(version).Append("-natives-").Append(timestamp.ToString());
+            arg.Append("\" -cp \"");
             foreach (libraries.libraryies lib in info.libraries)
             {
                 if (lib.natives != null)
@@ -146,7 +148,7 @@ namespace bmcl
             }
             changeEvent("传递MC参数");
             StringBuilder mcpath = new StringBuilder(Environment.CurrentDirectory +  @"\.minecraft\versions\");
-            mcpath.Append(ver).Append("\\").Append(ver).Append(".jar ");
+            mcpath.Append(name).Append("\\").Append(version).Append(".jar\" ");
             mcpath.Append(info.mainClass);
             arg.Append(mcpath);
             StringBuilder mcarg;
@@ -154,7 +156,7 @@ namespace bmcl
             mcarg = new StringBuilder(info.minecraftArguments);
             mcarg.Replace("${auth_player_name}", username);
             mcarg.Replace("${auth_session}", session);
-            mcarg.Replace("${version_name}", ver);
+            mcarg.Replace("${version_name}", version);
             mcarg.Replace("${game_directory}", ".minecraft");
             mcarg.Replace("${game_assets}", @".minecraft\assets");
             arg.Append(" ");
@@ -180,7 +182,7 @@ namespace bmcl
         {
             changeEvent("创建依赖文件夹");
             StringBuilder NativePath = new StringBuilder(Environment.CurrentDirectory +  @"\.minecraft\versions\");
-            NativePath.Append(version).Append("\\");
+            NativePath.Append(name).Append("\\");
             DirectoryInfo oldnative = new DirectoryInfo(NativePath.ToString());
             foreach (DirectoryInfo dir in oldnative.GetDirectories())
             {
@@ -312,7 +314,23 @@ namespace bmcl
         {
             if (game.ExitCode != 0)
             {
+#if DEBUG
                 System.Windows.Forms.MessageBox.Show(game.ExitCode.ToString());
+#endif
+            }
+            StringBuilder NativePath = new StringBuilder(Environment.CurrentDirectory + @"\.minecraft\versions\");
+            NativePath.Append(name).Append("\\");
+            DirectoryInfo oldnative = new DirectoryInfo(NativePath.ToString());
+            foreach (DirectoryInfo dir in oldnative.GetDirectories())
+            {
+                if (dir.FullName.Contains("-natives-"))
+                {
+                    try
+                    {
+                        Directory.Delete(dir.FullName, true);
+                    }
+                    catch { }
+                }
             }
             gameexit();
         }
@@ -322,7 +340,7 @@ namespace bmcl
         /// </summary>
         /// <param name="lib"></param>
         /// <returns></returns>
-        public static  string buildLibPath(libraryies lib)
+        public static string buildLibPath(libraryies lib)
         {
             StringBuilder libp = new StringBuilder(Environment.CurrentDirectory + @"\.minecraft\libraries\");
             string[] split = lib.name.Split(':');//0 包;1 名字；2 版本

@@ -76,6 +76,12 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPackUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPackUp.Designer.cs">
+      <DependentUpon>frmPackUp.cs</DependentUpon>
+    </Compile>
     <Compile Include="gameinfo.cs" />
     <Compile Include="auth.cs" />
     <Compile Include="launcher.cs" />
@@ -146,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPackUp.resx">
+      <DependentUpon>frmPackUp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

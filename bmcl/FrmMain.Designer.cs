@@ -34,6 +34,8 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.VerList = new System.Windows.Forms.ListBox();
+            this.labType = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.btnPackUp = new System.Windows.Forms.Button();
             this.btmExportOfficial = new System.Windows.Forms.Button();
             this.btnImportOldVer = new System.Windows.Forms.Button();
@@ -86,7 +88,7 @@
             this.labDownInfo = new System.Windows.Forms.Label();
             this.buttonStart = new System.Windows.Forms.Button();
             this.folderImportOldVer = new System.Windows.Forms.FolderBrowserDialog();
-            this.savePackUp = new System.Windows.Forms.SaveFileDialog();
+            this.btnChangeName = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -147,6 +149,9 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.btnChangeName);
+            this.splitContainer1.Panel2.Controls.Add(this.labType);
+            this.splitContainer1.Panel2.Controls.Add(this.label7);
             this.splitContainer1.Panel2.Controls.Add(this.btnPackUp);
             this.splitContainer1.Panel2.Controls.Add(this.btmExportOfficial);
             this.splitContainer1.Panel2.Controls.Add(this.btnImportOldVer);
@@ -157,6 +162,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.llabRelTime);
             this.splitContainer1.Panel2.Controls.Add(this.llabTime);
             this.splitContainer1.Panel2.Controls.Add(this.llabVer);
+            this.splitContainer1.Panel2.Tag = "";
             this.splitContainer1.Size = new System.Drawing.Size(917, 292);
             this.splitContainer1.SplitterDistance = 178;
             this.splitContainer1.TabIndex = 0;
@@ -172,9 +178,26 @@
             this.VerList.TabIndex = 1;
             this.VerList.SelectedIndexChanged += new System.EventHandler(this.VerList_SelectedIndexChanged);
             // 
+            // labType
+            // 
+            this.labType.AutoSize = true;
+            this.labType.Location = new System.Drawing.Point(203, 136);
+            this.labType.Name = "labType";
+            this.labType.Size = new System.Drawing.Size(0, 12);
+            this.labType.TabIndex = 11;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(100, 136);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(53, 12);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "发布类型";
+            // 
             // btnPackUp
             // 
-            this.btnPackUp.Location = new System.Drawing.Point(218, 185);
+            this.btnPackUp.Location = new System.Drawing.Point(546, 84);
             this.btnPackUp.Name = "btnPackUp";
             this.btnPackUp.Size = new System.Drawing.Size(110, 36);
             this.btnPackUp.TabIndex = 9;
@@ -185,7 +208,7 @@
             // 
             // btmExportOfficial
             // 
-            this.btmExportOfficial.Location = new System.Drawing.Point(218, 143);
+            this.btmExportOfficial.Location = new System.Drawing.Point(546, 42);
             this.btmExportOfficial.Name = "btmExportOfficial";
             this.btmExportOfficial.Size = new System.Drawing.Size(110, 36);
             this.btmExportOfficial.TabIndex = 8;
@@ -195,7 +218,7 @@
             // 
             // btnImportOldVer
             // 
-            this.btnImportOldVer.Location = new System.Drawing.Point(103, 185);
+            this.btnImportOldVer.Location = new System.Drawing.Point(431, 84);
             this.btnImportOldVer.Name = "btnImportOldVer";
             this.btnImportOldVer.Size = new System.Drawing.Size(110, 36);
             this.btnImportOldVer.TabIndex = 7;
@@ -205,7 +228,7 @@
             // 
             // btmDelete
             // 
-            this.btmDelete.Location = new System.Drawing.Point(102, 143);
+            this.btmDelete.Location = new System.Drawing.Point(430, 42);
             this.btmDelete.Name = "btmDelete";
             this.btmDelete.Size = new System.Drawing.Size(110, 36);
             this.btmDelete.TabIndex = 6;
@@ -673,10 +696,15 @@
             this.folderImportOldVer.Description = "请选择.minecraft目录";
             this.folderImportOldVer.RootFolder = System.Environment.SpecialFolder.MyComputer;
             // 
-            // savePackUp
+            // btnChangeName
             // 
-            this.savePackUp.DefaultExt = "zip";
-            this.savePackUp.Filter = "zip|*.zip";
+            this.btnChangeName.Location = new System.Drawing.Point(431, 129);
+            this.btnChangeName.Name = "btnChangeName";
+            this.btnChangeName.Size = new System.Drawing.Size(110, 36);
+            this.btnChangeName.TabIndex = 12;
+            this.btnChangeName.Text = "重命名";
+            this.btnChangeName.UseVisualStyleBackColor = true;
+            this.btnChangeName.Click += new System.EventHandler(this.btnChangeName_Click);
             // 
             // FrmMain
             // 
@@ -746,7 +774,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtJavaXmx;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ListBox listAuth;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.CheckBox checkAutoStart;
@@ -778,7 +805,10 @@
         private System.Windows.Forms.FolderBrowserDialog folderImportOldVer;
         private System.Windows.Forms.Button btnPackUp;
         private System.Windows.Forms.Button btmExportOfficial;
-        private System.Windows.Forms.SaveFileDialog savePackUp;
+        private System.Windows.Forms.Label labType;
+        private System.Windows.Forms.Label label7;
+        internal System.Windows.Forms.ListBox listAuth;
+        private System.Windows.Forms.Button btnChangeName;
     }
 }
 

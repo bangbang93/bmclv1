@@ -8,7 +8,7 @@ using Microsoft.Win32;
 namespace bmcl
 {
     [Serializable]
-    class config
+    public class config:ICloneable
     {
         public string javaw;
         public string username;
@@ -27,12 +27,19 @@ namespace bmcl
             login = "啥都没有";
             autostart = false;
         }
-
+        object ICloneable.Clone()
+        {
+            return this.clone();
+        }
+        public config clone()
+        {
+            return (config)this.MemberwiseClone();
+        }
         /// <summary>
         /// 读取注册表，寻找安装的java路径
         /// </summary>
         /// <returns>javaw.exe路径</returns>
-        private string getjavadir()
+        public static string getjavadir()
         {
             try
             {

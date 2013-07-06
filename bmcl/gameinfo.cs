@@ -10,7 +10,7 @@ using bmcl.libraries;
 namespace bmcl
 {
     [DataContract]
-    public class gameinfo 
+    public class gameinfo :ICloneable
     {
         [DataMember(Order = 0, IsRequired = true)] 
         public string id="";
@@ -28,5 +28,13 @@ namespace bmcl
         public libraryies[] libraries=null;
         [DataMember(Order = 7, IsRequired = false)] 
         public int minimumLauncherVersion=0;
+        object ICloneable.Clone()
+        {
+            return this.clone();
+        }
+        public gameinfo clone()
+        {
+            return (gameinfo)this.MemberwiseClone();
+        }
     }
 }
