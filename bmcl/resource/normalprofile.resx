@@ -119,20 +119,10 @@
   </resheader>
   <data name="NormalProfile" xml:space="preserve">
     <value>{
-	"selectedProfile": "bangbang93",
+	"selectedProfile": "(Default)",
 	"profiles": {
-		"bangbang93": {
-			"authentication": {
-				"username": "bangbang93@163.com",
-				"accessToken": "44b3ebae25234c4ba63038787596fd5a",
-				"uuid": "aeec328024184dbb88da8ea721798ee1",
-				"displayName": "bangbangpal"
-			},
-			"name": "bangbang93",
-			"gameDir": "E:\\offical\\.minecraft"
-		}
 	},
-	"clientToken": "08d038da-c042-4627-b3c6-47a2afe59907"
+	"clientToken": "adfgaasd"
 }</value>
   </data>
 </root>

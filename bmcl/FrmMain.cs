@@ -833,6 +833,7 @@ namespace bmcl
             ForgeIns.Start();
             ForgeIns.WaitForExit();
             refreshLocalVersion();
+            this.panelDownload.Visible = false;
             tabControl1.SelectTab(0);
             try
             {

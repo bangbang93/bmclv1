@@ -62,20 +62,10 @@ namespace bmcl.resource {
         
         /// <summary>
         ///   查找类似 {
-        ///	&quot;selectedProfile&quot;: &quot;bangbang93&quot;,
+        ///	&quot;selectedProfile&quot;: &quot;(Default)&quot;,
         ///	&quot;profiles&quot;: {
-        ///		&quot;bangbang93&quot;: {
-        ///			&quot;authentication&quot;: {
-        ///				&quot;username&quot;: &quot;bangbang93@163.com&quot;,
-        ///				&quot;accessToken&quot;: &quot;44b3ebae25234c4ba63038787596fd5a&quot;,
-        ///				&quot;uuid&quot;: &quot;aeec328024184dbb88da8ea721798ee1&quot;,
-        ///				&quot;displayName&quot;: &quot;bangbangpal&quot;
-        ///			},
-        ///			&quot;name&quot;: &quot;bangbang93&quot;,
-        ///			&quot;gameDir&quot;: &quot;E:\\offical\\.minecraft&quot;
-        ///		}
         ///	},
-        ///	&quot;clientToken&quot;: &quot;08d038da-c042-4627-b3c6-47a2afe59907&quot;
+        ///	&quot;clientToken&quot;: &quot;adfgaasd&quot;
         ///} 的本地化字符串。
         /// </summary>
         internal static string NormalProfile {
