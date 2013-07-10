@@ -71,6 +71,7 @@
             // 
             // listRes
             // 
+            this.listRes.AllowColumnReorder = true;
             this.listRes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnName,
             this.columnLastMod,
@@ -78,6 +79,7 @@
             this.columnStatus,
             this.columnMd5});
             this.listRes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listRes.FullRowSelect = true;
             this.listRes.Location = new System.Drawing.Point(0, 0);
             this.listRes.Name = "listRes";
             this.listRes.Size = new System.Drawing.Size(543, 216);

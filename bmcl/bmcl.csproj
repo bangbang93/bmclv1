@@ -88,6 +88,8 @@
     <Compile Include="libraries\extract.cs" />
     <Compile Include="libraries\libraryies.cs" />
     <Compile Include="libraries\OS.cs" />
+    <Compile Include="libraries\ros.cs" />
+    <Compile Include="libraries\rules.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="resource\normalprofile.Designer.cs">

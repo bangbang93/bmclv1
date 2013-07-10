@@ -7,17 +7,13 @@ using System.Runtime.Serialization;
 namespace bmcl.libraries
 {
     [DataContract]
-    public class libraryies
+    public class rules
     {
         [DataMember(Order = 0, IsRequired = true)]
-        public string name;
+        public string action;
         [DataMember(Order = 1, IsRequired = false)]
-        public OS natives;
+        public ros os;
         [DataMember(Order = 2, IsRequired = false)]
-        public extract extract;
-        [DataMember(IsRequired = false)]
-        public string url;
-        [DataMember(Order = 4, IsRequired = false)]
-        public rules[] rules;
+        public string version;
     }
 }

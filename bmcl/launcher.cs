@@ -99,6 +99,42 @@ namespace bmcl
                 {
                     continue;
                 }
+                if (lib.rules != null)
+                {
+                    bool goflag = false;
+                    foreach (rules rule in lib.rules)
+                    {
+                        if (rule.action == "disallow")
+                        {
+                            if (rule.os == null)
+                            {
+                                goflag = false;
+                                break;
+                            }
+                            if (rule.os.name.ToLower().Trim() == "windows")
+                            {
+                                goflag = false;
+                                break;
+                            }
+                        }
+                        {
+                            if (rule.os == null)
+                            {
+                                goflag = true;
+                                break;
+                            }
+                            if (rule.os.name.ToLower().Trim() == "windows")
+                            {
+                                goflag = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (!goflag)
+                    {
+                        continue;
+                    }
+                }
                 changeEvent("处理依赖" + lib.name);
                 if (!File.Exists(buildLibPath(lib)))
                 {
@@ -204,6 +240,42 @@ namespace bmcl
             {
                 if (lib.natives == null)
                     continue;
+                if (lib.rules != null)
+                {
+                    bool goflag = false;
+                    foreach (rules rule in lib.rules)
+                    {
+                        if (rule.action == "disallow")
+                        {
+                            if (rule.os == null)
+                            {
+                                goflag = false;
+                                break;
+                            }
+                            if (rule.os.name.ToLower().Trim() == "windows")
+                            {
+                                goflag = false;
+                                break;
+                            }
+                        }
+                        {
+                            if (rule.os == null)
+                            {
+                                goflag = true;
+                                break;
+                            }
+                            if (rule.os.name.ToLower().Trim() == "windows")
+                            {
+                                goflag = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (!goflag)
+                    {
+                        continue;
+                    }
+                }
                 changeEvent("解压" + lib.name);
                 string[] split = lib.name.Split(':');//0 包;1 名字；2 版本
                 if (split.Count() != 3)
@@ -370,7 +442,7 @@ namespace bmcl
             libp.Append("\\");
             libp.Append(split[1]).Append("\\");
             libp.Append(split[2]).Append("\\");
-            libp.Append(split[1]).Append("-").Append(split[2]).Append("-natives-windows");
+            libp.Append(split[1]).Append("-").Append(split[2]).Append("-").Append(lib.natives.windows);
             libp.Append(".jar");
             return libp.ToString();
         }

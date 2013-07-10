@@ -461,7 +461,7 @@ namespace bmcl
                 if (cfg.autostart)
                 {
                     icoBmcl.Visible = true;
-                    icoBmcl.ShowBalloonTip(5000, "BMCL", "启动" + cfg.lastPlayVer + "成功", ToolTipIcon.Info);
+                    icoBmcl.ShowBalloonTip(10000, "BMCL", "启动" + cfg.lastPlayVer + "成功", ToolTipIcon.Info);
                 }
                 starter.Close();
             }
@@ -470,7 +470,9 @@ namespace bmcl
         private void launcher_gameexit()
         {
             if (!inscreen)
+            {
                 Application.Exit();
+            }
         }
 
         private void buttonFlush_Click(object sender, EventArgs e)
@@ -849,12 +851,12 @@ namespace bmcl
             {
                 try
                 {
-                    FileStream Isused = File.OpenWrite(".minecraft\\versions\\" + info.id + "\\" + info.id + ".jar");
+                    FileStream Isused = File.OpenWrite(".minecraft\\versions\\" + VerList.Text + "\\" + info.id + ".jar");
                     Isused.Close();
-                    Directory.Delete(".minecraft\\versions\\" + info.id, true);
-                    if (Directory.Exists(".minecraft\\libraries\\"+info.id))
+                    Directory.Delete(".minecraft\\versions\\" + VerList.Text, true);
+                    if (Directory.Exists(".minecraft\\libraries\\" + VerList.Text))
                     {
-                        Directory.Delete(".minecraft\\libraries\\" + info.id, true);
+                        Directory.Delete(".minecraft\\libraries\\" + VerList.Text, true);
                     }
                 }
                 catch (UnauthorizedAccessException)

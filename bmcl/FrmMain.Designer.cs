@@ -34,6 +34,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.VerList = new System.Windows.Forms.ListBox();
+            this.btnChangeName = new System.Windows.Forms.Button();
             this.labType = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.btnPackUp = new System.Windows.Forms.Button();
@@ -88,7 +89,6 @@
             this.labDownInfo = new System.Windows.Forms.Label();
             this.buttonStart = new System.Windows.Forms.Button();
             this.folderImportOldVer = new System.Windows.Forms.FolderBrowserDialog();
-            this.btnChangeName = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -177,6 +177,16 @@
             this.VerList.Size = new System.Drawing.Size(178, 292);
             this.VerList.TabIndex = 1;
             this.VerList.SelectedIndexChanged += new System.EventHandler(this.VerList_SelectedIndexChanged);
+            // 
+            // btnChangeName
+            // 
+            this.btnChangeName.Location = new System.Drawing.Point(431, 129);
+            this.btnChangeName.Name = "btnChangeName";
+            this.btnChangeName.Size = new System.Drawing.Size(110, 36);
+            this.btnChangeName.TabIndex = 12;
+            this.btnChangeName.Text = "重命名";
+            this.btnChangeName.UseVisualStyleBackColor = true;
+            this.btnChangeName.Click += new System.EventHandler(this.btnChangeName_Click);
             // 
             // labType
             // 
@@ -455,11 +465,13 @@
             // 
             // listRemoteVer
             // 
+            this.listRemoteVer.AllowColumnReorder = true;
             this.listRemoteVer.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Id,
             this.RelTime,
             this.Type});
             this.listRemoteVer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listRemoteVer.FullRowSelect = true;
             this.listRemoteVer.Location = new System.Drawing.Point(0, 0);
             this.listRemoteVer.Name = "listRemoteVer";
             this.listRemoteVer.ShowGroups = false;
@@ -695,16 +707,6 @@
             // 
             this.folderImportOldVer.Description = "请选择.minecraft目录";
             this.folderImportOldVer.RootFolder = System.Environment.SpecialFolder.MyComputer;
-            // 
-            // btnChangeName
-            // 
-            this.btnChangeName.Location = new System.Drawing.Point(431, 129);
-            this.btnChangeName.Name = "btnChangeName";
-            this.btnChangeName.Size = new System.Drawing.Size(110, 36);
-            this.btnChangeName.TabIndex = 12;
-            this.btnChangeName.Text = "重命名";
-            this.btnChangeName.UseVisualStyleBackColor = true;
-            this.btnChangeName.Click += new System.EventHandler(this.btnChangeName_Click);
             // 
             // FrmMain
             // 
