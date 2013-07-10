@@ -660,6 +660,8 @@ namespace bmcl
         }
         private void btnReForge_Click(object sender, EventArgs e)
         {
+            DownloadUrl.Clear();
+            treeForgeVer.Nodes.Clear();
             txtInsPath.Text = Environment.CurrentDirectory + "\\.minecraft";
             WebBrowser ForgePageGet = new WebBrowser();
             ForgePageGet.Navigate("http://files.minecraftforge.net/");
@@ -785,6 +787,8 @@ namespace bmcl
 
         private void buttonLastForge_Click(object sender, EventArgs e)
         {
+            DownloadUrl.Clear();
+            treeForgeVer.Nodes.Clear();
             txtInsPath.Text = Environment.CurrentDirectory + "\\.minecraft";
             btnReForge.PerformClick();
             string downurl = DownloadUrl["lastest"].ToString();
