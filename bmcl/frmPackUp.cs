@@ -96,7 +96,7 @@ namespace bmcl
             }
             string time = DateTime.Now.Ticks.ToString();
             Directory.CreateDirectory("packup" + time + @"\.minecraft\versions\" + info.id);
-            dircopy(@".minecraft\versions\" + info.id, "packup" + time + @"\.minecraft\versions\" + info.id);//主程序
+            dircopy(@".minecraft\versions\" + info.id, "packup" + time + @"\.minecraft\versions\" + info.id);//主程序和MOD
             if (checkLibNat.Checked)
             {
                 Directory.CreateDirectory("packup" + time + @"\.minecraft\libraries\");

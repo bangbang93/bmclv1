@@ -89,6 +89,11 @@
             this.labDownInfo = new System.Windows.Forms.Label();
             this.buttonStart = new System.Windows.Forms.Button();
             this.folderImportOldVer = new System.Windows.Forms.FolderBrowserDialog();
+            this.btnMod = new System.Windows.Forms.Button();
+            this.btnModConfig = new System.Windows.Forms.Button();
+            this.btnCoreMod = new System.Windows.Forms.Button();
+            this.btnModDir = new System.Windows.Forms.Button();
+            this.tip = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -149,6 +154,10 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.btnModDir);
+            this.splitContainer1.Panel2.Controls.Add(this.btnCoreMod);
+            this.splitContainer1.Panel2.Controls.Add(this.btnModConfig);
+            this.splitContainer1.Panel2.Controls.Add(this.btnMod);
             this.splitContainer1.Panel2.Controls.Add(this.btnChangeName);
             this.splitContainer1.Panel2.Controls.Add(this.labType);
             this.splitContainer1.Panel2.Controls.Add(this.label7);
@@ -180,7 +189,7 @@
             // 
             // btnChangeName
             // 
-            this.btnChangeName.Location = new System.Drawing.Point(431, 129);
+            this.btnChangeName.Location = new System.Drawing.Point(373, 122);
             this.btnChangeName.Name = "btnChangeName";
             this.btnChangeName.Size = new System.Drawing.Size(110, 36);
             this.btnChangeName.TabIndex = 12;
@@ -207,7 +216,7 @@
             // 
             // btnPackUp
             // 
-            this.btnPackUp.Location = new System.Drawing.Point(546, 84);
+            this.btnPackUp.Location = new System.Drawing.Point(488, 77);
             this.btnPackUp.Name = "btnPackUp";
             this.btnPackUp.Size = new System.Drawing.Size(110, 36);
             this.btnPackUp.TabIndex = 9;
@@ -218,7 +227,7 @@
             // 
             // btmExportOfficial
             // 
-            this.btmExportOfficial.Location = new System.Drawing.Point(546, 42);
+            this.btmExportOfficial.Location = new System.Drawing.Point(488, 35);
             this.btmExportOfficial.Name = "btmExportOfficial";
             this.btmExportOfficial.Size = new System.Drawing.Size(110, 36);
             this.btmExportOfficial.TabIndex = 8;
@@ -228,7 +237,7 @@
             // 
             // btnImportOldVer
             // 
-            this.btnImportOldVer.Location = new System.Drawing.Point(431, 84);
+            this.btnImportOldVer.Location = new System.Drawing.Point(373, 77);
             this.btnImportOldVer.Name = "btnImportOldVer";
             this.btnImportOldVer.Size = new System.Drawing.Size(110, 36);
             this.btnImportOldVer.TabIndex = 7;
@@ -238,7 +247,7 @@
             // 
             // btmDelete
             // 
-            this.btmDelete.Location = new System.Drawing.Point(430, 42);
+            this.btmDelete.Location = new System.Drawing.Point(372, 35);
             this.btmDelete.Name = "btmDelete";
             this.btmDelete.Size = new System.Drawing.Size(110, 36);
             this.btmDelete.TabIndex = 6;
@@ -708,6 +717,48 @@
             this.folderImportOldVer.Description = "请选择.minecraft目录";
             this.folderImportOldVer.RootFolder = System.Environment.SpecialFolder.MyComputer;
             // 
+            // btnMod
+            // 
+            this.btnMod.Location = new System.Drawing.Point(488, 122);
+            this.btnMod.Name = "btnMod";
+            this.btnMod.Size = new System.Drawing.Size(110, 36);
+            this.btnMod.TabIndex = 13;
+            this.btnMod.Text = "MOD管理";
+            this.btnMod.UseVisualStyleBackColor = true;
+            this.btnMod.Click += new System.EventHandler(this.btnMod_Click);
+            // 
+            // btnModConfig
+            // 
+            this.btnModConfig.Location = new System.Drawing.Point(488, 165);
+            this.btnModConfig.Name = "btnModConfig";
+            this.btnModConfig.Size = new System.Drawing.Size(110, 36);
+            this.btnModConfig.TabIndex = 14;
+            this.btnModConfig.Text = "MOD配置管理";
+            this.btnModConfig.UseVisualStyleBackColor = true;
+            this.btnModConfig.Click += new System.EventHandler(this.btnModConfig_Click);
+            // 
+            // btnCoreMod
+            // 
+            this.btnCoreMod.Location = new System.Drawing.Point(605, 122);
+            this.btnCoreMod.Name = "btnCoreMod";
+            this.btnCoreMod.Size = new System.Drawing.Size(110, 36);
+            this.btnCoreMod.TabIndex = 15;
+            this.btnCoreMod.Text = "CoreMOD管理";
+            this.btnCoreMod.UseVisualStyleBackColor = true;
+            this.btnCoreMod.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // btnModDir
+            // 
+            this.btnModDir.Location = new System.Drawing.Point(605, 165);
+            this.btnModDir.Name = "btnModDir";
+            this.btnModDir.Size = new System.Drawing.Size(110, 36);
+            this.btnModDir.TabIndex = 16;
+            this.btnModDir.Text = "MOD独立文件夹";
+            this.btnModDir.UseVisualStyleBackColor = true;
+            this.btnModDir.Click += new System.EventHandler(this.btnModDir_Click);
+            this.btnModDir.MouseEnter += new System.EventHandler(this.btnModDir_MouseEnter);
+            this.btnModDir.MouseLeave += new System.EventHandler(this.btnModDir_MouseLeave);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -811,6 +862,11 @@
         private System.Windows.Forms.Label label7;
         internal System.Windows.Forms.ListBox listAuth;
         private System.Windows.Forms.Button btnChangeName;
+        private System.Windows.Forms.Button btnMod;
+        private System.Windows.Forms.Button btnModConfig;
+        private System.Windows.Forms.Button btnCoreMod;
+        private System.Windows.Forms.Button btnModDir;
+        private System.Windows.Forms.ToolTip tip;
     }
 }
 

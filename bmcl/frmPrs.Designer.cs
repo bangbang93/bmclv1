@@ -1,6 +1,6 @@
 ﻿namespace bmcl
 {
-    partial class startGame
+    partial class frmPrs
     {
         /// <summary>
         /// Required designer variable.

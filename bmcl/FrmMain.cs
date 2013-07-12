@@ -249,7 +249,7 @@ namespace bmcl
                     }
                 }
 
-                startGame starter = new startGame();
+                frmPrs starter = new frmPrs("正在准备游戏环境及启动游戏");
                 starter.Show();
                 if (changeEvent != null)
                     changeEvent("正在登陆");
@@ -375,7 +375,7 @@ namespace bmcl
         private void buttonStart_Click(object sender, EventArgs e)
         {
             
-            startGame starter = new startGame();
+            frmPrs starter = new frmPrs("正在准备游戏环境及启动游戏");
             starter.Show();
             if (changeEvent!=null)
                 changeEvent("正在登陆");
@@ -667,10 +667,32 @@ namespace bmcl
             txtInsPath.Text = Environment.CurrentDirectory + "\\.minecraft";
             WebBrowser ForgePageGet = new WebBrowser();
             ForgePageGet.Navigate("http://files.minecraftforge.net/");
+            TimeSpan start=new TimeSpan(DateTime.Now.Ticks);
             while (ForgePageGet.ReadyState!=WebBrowserReadyState.Complete)
             {
                 Application.DoEvents();
+                if (new TimeSpan(DateTime.Now.Ticks) - start>new TimeSpan(0,0,10))
+                {
+                    if (sender == null)
+                        throw new TimeoutException("访问Forge服务器超时");
+                    else
+                    {
+                        MessageBox.Show("访问Forge服务器超时");
+                        return;
+                    }
+                }
             }
+            if (ForgePageGet.Url.ToString().IndexOf("114so") != -1)
+            {
+                if (sender == null)
+                    throw new TimeoutException("访问Forge服务器失败");
+                else
+                {
+                    MessageBox.Show("访问Forge服务器失败");
+                    return;
+                }
+            }
+
             HtmlDocument ForgePage = ForgePageGet.Document;
             HtmlElement ForgePageBody = ForgePage.Body;
             HtmlElementCollection AllDiv = ForgePageBody.GetElementsByTagName("div");
@@ -792,7 +814,15 @@ namespace bmcl
             DownloadUrl.Clear();
             treeForgeVer.Nodes.Clear();
             txtInsPath.Text = Environment.CurrentDirectory + "\\.minecraft";
-            btnReForge.PerformClick();
+            try
+            {
+                btnReForge_Click(null, null);
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
             string downurl = DownloadUrl["lastest"].ToString();
             WebClient downer = new WebClient();
             downer.DownloadFileCompleted += downer_DownloadFileCompleted;
@@ -900,6 +930,7 @@ namespace bmcl
         #region 导入导出
         private void btnImportOldVer_Click(object sender, EventArgs e)
         {
+            frmPrs prs = new frmPrs("正在导入Minecraft");
             if (folderImportOldVer.ShowDialog() == DialogResult.OK)
             {
                 string ImportFrom = folderImportOldVer.SelectedPath;
@@ -925,8 +956,11 @@ namespace bmcl
                         F2 = true;
 
                 } while (!(F1 && F2));
+                prs.Show();
+                changeEvent("导入主程序");
                 Directory.CreateDirectory(".minecraft\\versions\\" + ImportName);
                 File.Copy(ImportFrom + "\\bin\\minecraft.jar", ".minecraft\\versions\\" + ImportName + "\\" + ImportName + ".jar");
+                changeEvent("创建Json");
                 gameinfo info = new gameinfo();
                 info.id = ImportName;
                 string timezone = DateTimeOffset.Now.Offset.ToString();
@@ -939,6 +973,7 @@ namespace bmcl
                 info.type = portinfo;
                 info.minecraftArguments = "${auth_player_name}";
                 info.mainClass = "net.minecraft.client.Minecraft";
+                changeEvent("处理native");
                 ArrayList libs = new ArrayList();
                 DirectoryInfo bin = new DirectoryInfo(ImportFrom + "\\bin");
                 foreach (FileInfo file in bin.GetFiles("*.jar"))
@@ -968,10 +1003,12 @@ namespace bmcl
                 nativefile.extract = new libraries.extract();
                 libs.Add(nativefile);
                 info.libraries = (libraries.libraryies[])libs.ToArray(typeof(libraries.libraryies));
+                changeEvent("写入Json");
                 FileStream wcfg = new FileStream(".minecraft\\versions\\" + ImportName + "\\" + ImportName + ".json", FileMode.Create);
                 DataContractJsonSerializer infojson = new DataContractJsonSerializer(typeof(gameinfo));
                 infojson.WriteObject(wcfg, info);
                 wcfg.Close();
+                changeEvent("处理lib");
                 if (Directory.Exists(ImportFrom + "\\lib"))
                 {
                     if (!Directory.Exists(".minecraft\\lib"))
@@ -986,6 +1023,21 @@ namespace bmcl
                         }
                     }
                 }
+                changeEvent("处理mods");
+                if (Directory.Exists(ImportFrom + "\\mods"))
+                    dircopy(ImportFrom + "\\mods", ".minecraft\\versions\\" + ImportName + "\\mods");
+                else
+                    Directory.CreateDirectory(".minecraft\\versions\\" + ImportName + "\\mods");
+                if (Directory.Exists(ImportFrom + "\\coremods"))
+                    dircopy(ImportFrom + "\\coremods", ".minecraft\\versions\\" + ImportName + "\\coremods");
+                else
+                    Directory.CreateDirectory(".minecraft\\versions\\" + ImportName + "\\coremods");
+                if (Directory.Exists(ImportFrom + "\\config"))
+                    dircopy(ImportFrom + "\\config", ".minecraft\\versions\\" + ImportName + "\\config");
+                else
+                    Directory.CreateDirectory(".minecraft\\versions\\" + ImportName + "\\configmods");
+                prs.Close();
+                MessageBox.Show("导入成功，如果这个版本的MC还有MOD在.minecraft下创建了文件夹（例如Flan's mod,Custom NPC等），请点击MOD独立文件夹按钮进行管理");
                 refreshLocalVersion();
             }
         }
@@ -1052,6 +1104,153 @@ namespace bmcl
                 refreshLocalVersion();
             }
         }
+
+#region mod管理
+        private void btnMod_Click(object sender, EventArgs e)
+        {
+            StringBuilder modpath = new StringBuilder(@".minecraft\versions\");
+            modpath.Append(VerList.Text).Append("\\");
+            StringBuilder configpath = new StringBuilder(modpath.ToString());
+            StringBuilder coremodpath = new StringBuilder(modpath.ToString());
+            StringBuilder moddirpath = new StringBuilder(modpath.ToString());
+            modpath.Append("mods");
+            configpath.Append("config");
+            coremodpath.Append("coremods");
+            moddirpath.Append("moddir");
+            if (!Directory.Exists(modpath.ToString()))
+            {
+                Directory.CreateDirectory(modpath.ToString());
+            }
+            if (!Directory.Exists(configpath.ToString()))
+            {
+                Directory.CreateDirectory(configpath.ToString());
+            }
+            if (!Directory.Exists(coremodpath.ToString()))
+            {
+                Directory.CreateDirectory(coremodpath.ToString());
+            }
+            if (!Directory.Exists(moddirpath.ToString()))
+            {
+                Directory.CreateDirectory(moddirpath.ToString());
+            }
+            Process explorer = new Process();
+            explorer.StartInfo.FileName = "explorer.exe";
+            explorer.StartInfo.Arguments = modpath.ToString();
+            explorer.Start();
+
+
+
+        }
+
+        private void btnModConfig_Click(object sender, EventArgs e)
+        {
+            StringBuilder modpath = new StringBuilder(@".minecraft\versions\");
+            modpath.Append(VerList.Text).Append("\\");
+            StringBuilder configpath = new StringBuilder(modpath.ToString());
+            StringBuilder coremodpath = new StringBuilder(modpath.ToString());
+            StringBuilder moddirpath = new StringBuilder(modpath.ToString());
+            modpath.Append("mods");
+            configpath.Append("config");
+            coremodpath.Append("coremods");
+            moddirpath.Append("moddir");
+            if (!Directory.Exists(modpath.ToString()))
+            {
+                Directory.CreateDirectory(modpath.ToString());
+            }
+            if (!Directory.Exists(configpath.ToString()))
+            {
+                Directory.CreateDirectory(configpath.ToString());
+            }
+            if (!Directory.Exists(coremodpath.ToString()))
+            {
+                Directory.CreateDirectory(coremodpath.ToString());
+            }
+            if (!Directory.Exists(moddirpath.ToString()))
+            {
+                Directory.CreateDirectory(moddirpath.ToString());
+            }
+            Process explorer = new Process();
+            explorer.StartInfo.FileName = "explorer.exe";
+            explorer.StartInfo.Arguments = configpath.ToString();
+            explorer.Start();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            StringBuilder modpath = new StringBuilder(@".minecraft\versions\");
+            modpath.Append(VerList.Text).Append("\\");
+            StringBuilder configpath = new StringBuilder(modpath.ToString());
+            StringBuilder coremodpath = new StringBuilder(modpath.ToString());
+            StringBuilder moddirpath = new StringBuilder(modpath.ToString());
+            modpath.Append("mods");
+            configpath.Append("config");
+            coremodpath.Append("coremods");
+            moddirpath.Append("moddir");
+            if (!Directory.Exists(modpath.ToString()))
+            {
+                Directory.CreateDirectory(modpath.ToString());
+            }
+            if (!Directory.Exists(configpath.ToString()))
+            {
+                Directory.CreateDirectory(configpath.ToString());
+            }
+            if (!Directory.Exists(coremodpath.ToString()))
+            {
+                Directory.CreateDirectory(coremodpath.ToString());
+            }
+            if (!Directory.Exists(moddirpath.ToString()))
+            {
+                Directory.CreateDirectory(moddirpath.ToString());
+            }
+            Process explorer = new Process();
+            explorer.StartInfo.FileName = "explorer.exe";
+            explorer.StartInfo.Arguments = coremodpath.ToString();
+            explorer.Start();
+        }
+
+        private void btnModDir_Click(object sender, EventArgs e)
+        {
+            StringBuilder modpath = new StringBuilder(@".minecraft\versions\");
+            modpath.Append(VerList.Text).Append("\\");
+            StringBuilder configpath = new StringBuilder(modpath.ToString());
+            StringBuilder coremodpath = new StringBuilder(modpath.ToString());
+            StringBuilder moddirpath = new StringBuilder(modpath.ToString());
+            modpath.Append("mods");
+            configpath.Append("config");
+            coremodpath.Append("coremods");
+            moddirpath.Append("moddir");
+            if (!Directory.Exists(modpath.ToString()))
+            {
+                Directory.CreateDirectory(modpath.ToString());
+            }
+            if (!Directory.Exists(configpath.ToString()))
+            {
+                Directory.CreateDirectory(configpath.ToString());
+            }
+            if (!Directory.Exists(coremodpath.ToString()))
+            {
+                Directory.CreateDirectory(coremodpath.ToString());
+            }
+            if (!Directory.Exists(moddirpath.ToString()))
+            {
+                Directory.CreateDirectory(moddirpath.ToString());
+            }
+            Process explorer = new Process();
+            explorer.StartInfo.FileName = "explorer.exe";
+            explorer.StartInfo.Arguments = moddirpath.ToString();
+            explorer.Start();
+        }
+
+        private void btnModDir_MouseEnter(object sender, EventArgs e)
+        {
+            tip.Show("如果MOD在.minecraft下创建了文件夹（例如Flan's mod,Custom NPC等），请使用这个管理", btnModDir);
+        }
+        private void btnModDir_MouseLeave(object sender, EventArgs e)
+        {
+            tip.Hide(btnModDir);
+        }
+#endregion
+
 
 
     }

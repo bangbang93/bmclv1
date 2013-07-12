@@ -361,6 +361,41 @@ namespace bmcl
 
                 }
             }
+            changeEvent("处理mods");
+            if (Directory.Exists(@".minecraft\versions\" + name + @"\mods"))
+            {
+                if (Directory.Exists(@".minecraft\config"))
+                {
+                    Directory.Move(@".minecraft\config", @".minecraft\config" + timestamp);
+                    FrmMain.dircopy(@".minecraft\versions\" + name + @"\config", @".minecraft\config");
+                }
+                else
+                    FrmMain.dircopy(@".minecraft\versions\" + name + @"\config", @".minecraft\config");
+                if (Directory.Exists(@".minecraft\mods"))
+                {
+                    
+                    Directory.Move(@".minecraft\mods", @".minecraft\mods" + timestamp);
+                    FrmMain.dircopy(@".minecraft\versions\" + name + @"\mods", @".minecraft\mods");
+                }
+                else
+                    FrmMain.dircopy(@".minecraft\versions\" + name + @"\mods", @".minecraft\mods");
+                if (Directory.Exists(@".minecraft\coremods"))
+                {
+                    Directory.Move(@".minecraft\coremods", @".minecraft\coremods" + timestamp);
+                    FrmMain.dircopy(@".minecraft\versions\" + name + @"\coremods", @".minecraft\coremods");
+                }
+                else
+                    FrmMain.dircopy(@".minecraft\versions\" + name + @"\coremods", @".minecraft\coremods");
+                if (Directory.Exists(@".minecraft\versions\" + name + @"\moddir"))
+                {
+                    DirectoryInfo moddirs = new DirectoryInfo(@".minecraft\versions\" + name + @"\moddir");
+                    foreach (DirectoryInfo moddir in moddirs.GetDirectories())
+                    {
+                        FrmMain.dircopy(moddir.FullName, ".minecraft\\" + moddir.Name);
+                    }
+                }
+            }
+
             changeEvent("走你");
             game.StartInfo.UseShellExecute = false;
             //game.StartInfo.WorkingDirectory = Environment.CurrentDirectory + "\\.minecraft\\versions\\" + version;
@@ -402,6 +437,24 @@ namespace bmcl
                         Directory.Delete(dir.FullName, true);
                     }
                     catch { }
+                }
+            }
+            if (Directory.Exists(@".minecraft\versions\" + name + @"\mods"))
+            {
+                Directory.Delete(@".minecraft\mods", true);
+                Directory.Delete(@".minecraft\coremods", true);
+                Directory.Delete(@".minecraft\versions\" + name + @"\config", true);
+                FrmMain.dircopy(@".minecraft\config", @".minecraft\versions\" + name + @"\config");
+                Directory.Delete(@".minecraft\config", true);
+            }
+            if (Directory.Exists(@".minecraft\versions\" + name + @"\moddir"))
+            {
+                DirectoryInfo moddirs = new DirectoryInfo(@".minecraft\versions\" + name + @"\moddir");
+                foreach (DirectoryInfo moddir in moddirs.GetDirectories())
+                {
+                    moddir.Delete(true);
+                    FrmMain.dircopy(@".minecraft\" + moddir.Name, moddir.FullName);
+                    Directory.Delete(@".minecraft\" + moddir.Name, true);
                 }
             }
             gameexit();

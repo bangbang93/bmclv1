@@ -9,11 +9,12 @@ using System.Windows.Forms;
 
 namespace bmcl
 {
-    public partial class startGame : Form
+    public partial class frmPrs : Form
     {
-        public startGame()
+        public frmPrs(string prs)
         {
             InitializeComponent();
+            label1.Text = prs;
         }
 
 
