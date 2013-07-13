@@ -57,6 +57,7 @@ namespace bmcl
             if (cfg.passwd != null)
                 txtPwd.Text = Encoding.UTF8.GetString(cfg.passwd);
             txtJavaXmx.Text = cfg.javaxmx;
+            txtExtJArg.Text = cfg.extraJVMArg;
             #endregion
             #region 加载插件
             listAuth.Items.Add("啥都没有");
@@ -438,6 +439,7 @@ namespace bmcl
                         cfg.login = listAuth.SelectedItem.ToString();
                         cfg.lastPlayVer = info.id.ToString();
                         cfg.autostart = checkAutoStart.Checked;
+                        cfg.extraJVMArg = txtExtJArg.Text;
                         saveconfig();
                         game = new launcher(txtJavaw.Text, txtJavaXmx.Text, txtUserName.Text, VerList.Text.ToString(), info, txtExtJArg.Text);
                     }
