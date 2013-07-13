@@ -48,13 +48,15 @@
             this.checkLibNat = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.labINFO = new System.Windows.Forms.Label();
+            this.txtExtJArg = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnStart
             // 
             this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStart.Location = new System.Drawing.Point(664, 197);
+            this.btnStart.Location = new System.Drawing.Point(664, 249);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(127, 53);
             this.btnStart.TabIndex = 0;
@@ -70,7 +72,7 @@
             // checkAutoStart
             // 
             this.checkAutoStart.AutoSize = true;
-            this.checkAutoStart.Location = new System.Drawing.Point(299, 86);
+            this.checkAutoStart.Location = new System.Drawing.Point(288, 144);
             this.checkAutoStart.Name = "checkAutoStart";
             this.checkAutoStart.Size = new System.Drawing.Size(96, 16);
             this.checkAutoStart.TabIndex = 24;
@@ -199,7 +201,7 @@
             // checkRes
             // 
             this.checkRes.AutoSize = true;
-            this.checkRes.Location = new System.Drawing.Point(299, 109);
+            this.checkRes.Location = new System.Drawing.Point(288, 167);
             this.checkRes.Name = "checkRes";
             this.checkRes.Size = new System.Drawing.Size(96, 16);
             this.checkRes.TabIndex = 26;
@@ -209,7 +211,7 @@
             // checkLibNat
             // 
             this.checkLibNat.AutoSize = true;
-            this.checkLibNat.Location = new System.Drawing.Point(299, 132);
+            this.checkLibNat.Location = new System.Drawing.Point(288, 190);
             this.checkLibNat.Name = "checkLibNat";
             this.checkLibNat.Size = new System.Drawing.Size(96, 16);
             this.checkLibNat.TabIndex = 27;
@@ -219,7 +221,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(299, 155);
+            this.label6.Location = new System.Drawing.Point(288, 213);
             this.label6.MaximumSize = new System.Drawing.Size(150, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(149, 48);
@@ -229,18 +231,37 @@
             // labINFO
             // 
             this.labINFO.AutoSize = true;
-            this.labINFO.Location = new System.Drawing.Point(416, 113);
+            this.labINFO.Location = new System.Drawing.Point(405, 171);
             this.labINFO.Name = "labINFO";
             this.labINFO.Size = new System.Drawing.Size(227, 24);
             this.labINFO.TabIndex = 29;
             this.labINFO.Text = "1.6.1之前的版本必须包含资源和依赖文件\r\n导入的客户端也必须包含资源和依赖文件";
             this.labINFO.Visible = false;
             // 
+            // txtExtJArg
+            // 
+            this.txtExtJArg.Location = new System.Drawing.Point(298, 103);
+            this.txtExtJArg.Name = "txtExtJArg";
+            this.txtExtJArg.Size = new System.Drawing.Size(254, 21);
+            this.txtExtJArg.TabIndex = 31;
+            this.txtExtJArg.TextChanged += new System.EventHandler(this.txtExtJArg_TextChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(297, 78);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(125, 12);
+            this.label8.TabIndex = 30;
+            this.label8.Text = "额外的JVM Arguements";
+            // 
             // frmPackUp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(803, 262);
+            this.ClientSize = new System.Drawing.Size(803, 314);
+            this.Controls.Add(this.txtExtJArg);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.labINFO);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.checkLibNat);
@@ -291,5 +312,7 @@
         private System.Windows.Forms.CheckBox checkLibNat;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label labINFO;
+        private System.Windows.Forms.TextBox txtExtJArg;
+        private System.Windows.Forms.Label label8;
     }
 }

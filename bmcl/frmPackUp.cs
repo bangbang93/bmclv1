@@ -257,10 +257,17 @@ namespace bmcl
         {
             cfg.autostart = checkAutoStart.Checked;
         }
+
+        private void txtExtJArg_TextChanged(object sender, EventArgs e)
+        {
+            cfg.extraJVMArg = txtExtJArg.Text;
+        }
         #endregion 
         private void frmPackUp_Shown(object sender, EventArgs e)
         {
             listAuth.Text = cfg.login;
         }
+
+
     }
 }

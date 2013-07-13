@@ -17,6 +17,7 @@ namespace bmcl
         public string login;
         public bool autostart;
         public string lastPlayVer;
+        public string extraJVMArg;
 
         public config()
         {
@@ -26,6 +27,7 @@ namespace bmcl
             passwd = null;
             login = "啥都没有";
             autostart = false;
+            extraJVMArg = "";
         }
         object ICloneable.Clone()
         {

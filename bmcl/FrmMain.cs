@@ -36,14 +36,15 @@ namespace bmcl
             }
             else
             {
+                StreamReader rCfg = new StreamReader(cfgfile);
                 try
                 {
-                    StreamReader rCfg = new StreamReader(cfgfile);
                     cfg = Cfg.ReadObject(rCfg.BaseStream) as config;
                     rCfg.Close();
                 }
                 catch
                 {
+                    rCfg.Close();
                     MessageBox.Show("配置文件无效，加载默认配置");
                     cfg = new config();
                     StreamWriter wCfg = new StreamWriter(cfgfile);
@@ -278,7 +279,7 @@ namespace bmcl
                             string username = getPname.Invoke(Auth, null).ToString();
                             try
                             {
-                                game = new launcher(cfg.javaw, cfg.javaxmx, username, cfg.lastPlayVer, info, session);
+                                game = new launcher(cfg.javaw, cfg.javaxmx, username, cfg.lastPlayVer, info, cfg.extraJVMArg, session);
                             }
                             catch (Exception ex)
                             {
@@ -295,7 +296,7 @@ namespace bmcl
                     {
                         try
                         {
-                            game = new launcher(cfg.javaw, cfg.javaxmx, cfg.username, cfg.lastPlayVer, info);
+                            game = new launcher(cfg.javaw, cfg.javaxmx, cfg.username, cfg.lastPlayVer, info, cfg.extraJVMArg);
                         }
                         catch (Exception ex)
                         {
@@ -405,6 +406,7 @@ namespace bmcl
                         cfg.login = listAuth.SelectedItem.ToString();
                         cfg.lastPlayVer = info.id;
                         cfg.autostart = checkAutoStart.Checked;
+                        cfg.extraJVMArg = txtExtJArg.Text;
                         MethodInfo getSession = T.GetMethod("getsession");
                         session = getSession.Invoke(Auth, null).ToString();
                         saveconfig();
@@ -412,7 +414,7 @@ namespace bmcl
                         string username = getPname.Invoke(Auth, null).ToString();
                         try
                         {
-                            game = new launcher(txtJavaw.Text, txtJavaXmx.Text, username, VerList.Text, info, session);
+                            game = new launcher(txtJavaw.Text, txtJavaXmx.Text, username, VerList.Text, info, txtExtJArg.Text, session);
                         }
                         catch (Exception ex)
                         {
@@ -437,7 +439,7 @@ namespace bmcl
                         cfg.lastPlayVer = info.id.ToString();
                         cfg.autostart = checkAutoStart.Checked;
                         saveconfig();
-                        game = new launcher(txtJavaw.Text, txtJavaXmx.Text, txtUserName.Text, VerList.Text.ToString(), info);
+                        game = new launcher(txtJavaw.Text, txtJavaXmx.Text, txtUserName.Text, VerList.Text.ToString(), info, txtExtJArg.Text);
                     }
                     catch (Exception ex)
                     {
@@ -1250,6 +1252,8 @@ namespace bmcl
             tip.Hide(btnModDir);
         }
 #endregion
+
+
 
 
 

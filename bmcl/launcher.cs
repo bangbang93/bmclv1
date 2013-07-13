@@ -66,7 +66,7 @@ namespace bmcl
         /// <param name="ver"></param>
         /// <param name="info"></param>
         /// <param name="session"></param>
-        public launcher(string JavaPath, string JavaXmx, string UserName,string name,gameinfo info,string session="no")
+        public launcher(string JavaPath, string JavaXmx, string UserName,string name,gameinfo info,string extarg,string session="no")
         {
             changeEvent("检查Java");
             if (!File.Exists(JavaPath))
@@ -89,6 +89,8 @@ namespace bmcl
             StringBuilder arg = new StringBuilder("-Xincgc -Xmx");
             arg.Append(javaxmx);
             arg.Append("M ");
+            arg.Append(extarg);
+            arg.Append(" ");
             arg.Append("-Djava.library.path=\"");
             arg.Append(Environment.CurrentDirectory).Append(@"\.minecraft\versions\");
             arg.Append(name).Append("\\").Append(version).Append("-natives-").Append(timestamp.ToString());
