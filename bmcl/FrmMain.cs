@@ -57,6 +57,7 @@ namespace bmcl
             if (cfg.passwd != null)
                 txtPwd.Text = Encoding.UTF8.GetString(cfg.passwd);
             txtJavaXmx.Text = cfg.javaxmx;
+            txtExtJArg.Text = cfg.extraJVMArg;
             #endregion
             #region 加载插件
             listAuth.Items.Add("啥都没有");
