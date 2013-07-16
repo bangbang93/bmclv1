@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabGame = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.VerList = new System.Windows.Forms.ListBox();
             this.btnModDir = new System.Windows.Forms.Button();
@@ -51,7 +51,8 @@
             this.llabRelTime = new System.Windows.Forms.Label();
             this.llabTime = new System.Windows.Forms.Label();
             this.llabVer = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabConfig = new System.Windows.Forms.TabPage();
+            this.btnSaveConfig = new System.Windows.Forms.Button();
             this.txtExtJArg = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.checkAutoStart = new System.Windows.Forms.CheckBox();
@@ -67,7 +68,7 @@
             this.listAuth = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabVersion = new System.Windows.Forms.TabPage();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.listRemoteVer = new System.Windows.Forms.ListView();
             this.Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -76,15 +77,28 @@
             this.buttonCheckRes = new System.Windows.Forms.Button();
             this.buttonDownload = new System.Windows.Forms.Button();
             this.buttonFlush = new System.Windows.Forms.Button();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabUpdate = new System.Windows.Forms.TabPage();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tabForge = new System.Windows.Forms.TabPage();
             this.treeForgeVer = new System.Windows.Forms.TreeView();
             this.label6 = new System.Windows.Forms.Label();
             this.btnReForge = new System.Windows.Forms.Button();
             this.buttonCopyInsPath = new System.Windows.Forms.Button();
             this.txtInsPath = new System.Windows.Forms.TextBox();
             this.buttonLastForge = new System.Windows.Forms.Button();
+            this.tabServerList = new System.Windows.Forms.TabPage();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.listServer = new System.Windows.Forms.ListView();
+            this.columnName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHide = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnAddress = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnMotd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnVer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnDelay = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnEditServer = new System.Windows.Forms.Button();
+            this.btnDeleteServer = new System.Windows.Forms.Button();
+            this.btnAddServer = new System.Windows.Forms.Button();
+            this.btnReflushServer = new System.Windows.Forms.Button();
             this.icoBmcl = new System.Windows.Forms.NotifyIcon(this.components);
             this.menuIco = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolShow = new System.Windows.Forms.ToolStripMenuItem();
@@ -96,21 +110,27 @@
             this.buttonStart = new System.Windows.Forms.Button();
             this.folderImportOldVer = new System.Windows.Forms.FolderBrowserDialog();
             this.tip = new System.Windows.Forms.ToolTip(this.components);
+            this.columnOnline = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tabGame.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tabConfig.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.tabPage3.SuspendLayout();
+            this.tabVersion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
-            this.tabPage4.SuspendLayout();
-            this.tabPage5.SuspendLayout();
+            this.tabUpdate.SuspendLayout();
+            this.tabForge.SuspendLayout();
+            this.tabServerList.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
+            this.splitContainer4.Panel1.SuspendLayout();
+            this.splitContainer4.Panel2.SuspendLayout();
+            this.splitContainer4.SuspendLayout();
             this.menuIco.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -121,28 +141,30 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabGame);
+            this.tabControl1.Controls.Add(this.tabConfig);
+            this.tabControl1.Controls.Add(this.tabVersion);
+            this.tabControl1.Controls.Add(this.tabUpdate);
+            this.tabControl1.Controls.Add(this.tabForge);
+            this.tabControl1.Controls.Add(this.tabServerList);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(931, 324);
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
-            // tabPage1
+            // tabGame
             // 
-            this.tabPage1.Controls.Add(this.splitContainer1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(923, 298);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "游戏设置";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabGame.Controls.Add(this.splitContainer1);
+            this.tabGame.Location = new System.Drawing.Point(4, 22);
+            this.tabGame.Name = "tabGame";
+            this.tabGame.Padding = new System.Windows.Forms.Padding(3);
+            this.tabGame.Size = new System.Drawing.Size(923, 298);
+            this.tabGame.TabIndex = 0;
+            this.tabGame.Text = "游戏设置";
+            this.tabGame.UseVisualStyleBackColor = true;
             // 
             // splitContainer1
             // 
@@ -350,29 +372,40 @@
             this.llabVer.TabIndex = 0;
             this.llabVer.Text = "游戏版本";
             // 
-            // tabPage2
+            // tabConfig
             // 
-            this.tabPage2.Controls.Add(this.txtExtJArg);
-            this.tabPage2.Controls.Add(this.label8);
-            this.tabPage2.Controls.Add(this.checkAutoStart);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.txtJavaXmx);
-            this.tabPage2.Controls.Add(this.label4);
-            this.tabPage2.Controls.Add(this.buttonJavaw);
-            this.tabPage2.Controls.Add(this.txtJavaw);
-            this.tabPage2.Controls.Add(this.label3);
-            this.tabPage2.Controls.Add(this.txtPwd);
-            this.tabPage2.Controls.Add(this.txtUserName);
-            this.tabPage2.Controls.Add(this.groupBox1);
-            this.tabPage2.Controls.Add(this.label2);
-            this.tabPage2.Controls.Add(this.label1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(923, 298);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "启动设置";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabConfig.Controls.Add(this.btnSaveConfig);
+            this.tabConfig.Controls.Add(this.txtExtJArg);
+            this.tabConfig.Controls.Add(this.label8);
+            this.tabConfig.Controls.Add(this.checkAutoStart);
+            this.tabConfig.Controls.Add(this.label5);
+            this.tabConfig.Controls.Add(this.txtJavaXmx);
+            this.tabConfig.Controls.Add(this.label4);
+            this.tabConfig.Controls.Add(this.buttonJavaw);
+            this.tabConfig.Controls.Add(this.txtJavaw);
+            this.tabConfig.Controls.Add(this.label3);
+            this.tabConfig.Controls.Add(this.txtPwd);
+            this.tabConfig.Controls.Add(this.txtUserName);
+            this.tabConfig.Controls.Add(this.groupBox1);
+            this.tabConfig.Controls.Add(this.label2);
+            this.tabConfig.Controls.Add(this.label1);
+            this.tabConfig.Location = new System.Drawing.Point(4, 22);
+            this.tabConfig.Name = "tabConfig";
+            this.tabConfig.Padding = new System.Windows.Forms.Padding(3);
+            this.tabConfig.Size = new System.Drawing.Size(923, 298);
+            this.tabConfig.TabIndex = 1;
+            this.tabConfig.Text = "启动设置";
+            this.tabConfig.UseVisualStyleBackColor = true;
+            // 
+            // btnSaveConfig
+            // 
+            this.btnSaveConfig.Location = new System.Drawing.Point(800, 245);
+            this.btnSaveConfig.Name = "btnSaveConfig";
+            this.btnSaveConfig.Size = new System.Drawing.Size(115, 47);
+            this.btnSaveConfig.TabIndex = 15;
+            this.btnSaveConfig.Text = "保存配置";
+            this.btnSaveConfig.UseVisualStyleBackColor = true;
+            this.btnSaveConfig.Click += new System.EventHandler(this.btnSaveConfig_Click);
             // 
             // txtExtJArg
             // 
@@ -504,16 +537,16 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "用户名";
             // 
-            // tabPage3
+            // tabVersion
             // 
-            this.tabPage3.Controls.Add(this.splitContainer3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(923, 298);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "版本管理";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabVersion.Controls.Add(this.splitContainer3);
+            this.tabVersion.Location = new System.Drawing.Point(4, 22);
+            this.tabVersion.Name = "tabVersion";
+            this.tabVersion.Padding = new System.Windows.Forms.Padding(3);
+            this.tabVersion.Size = new System.Drawing.Size(923, 298);
+            this.tabVersion.TabIndex = 2;
+            this.tabVersion.Text = "版本管理";
+            this.tabVersion.UseVisualStyleBackColor = true;
             // 
             // splitContainer3
             // 
@@ -531,7 +564,7 @@
             this.splitContainer3.Panel2.Controls.Add(this.buttonDownload);
             this.splitContainer3.Panel2.Controls.Add(this.buttonFlush);
             this.splitContainer3.Size = new System.Drawing.Size(917, 292);
-            this.splitContainer3.SplitterDistance = 769;
+            this.splitContainer3.SplitterDistance = 770;
             this.splitContainer3.TabIndex = 0;
             // 
             // listRemoteVer
@@ -546,7 +579,7 @@
             this.listRemoteVer.Location = new System.Drawing.Point(0, 0);
             this.listRemoteVer.Name = "listRemoteVer";
             this.listRemoteVer.ShowGroups = false;
-            this.listRemoteVer.Size = new System.Drawing.Size(769, 292);
+            this.listRemoteVer.Size = new System.Drawing.Size(770, 292);
             this.listRemoteVer.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.listRemoteVer.TabIndex = 0;
             this.listRemoteVer.UseCompatibleStateImageBehavior = false;
@@ -595,16 +628,16 @@
             this.buttonFlush.UseVisualStyleBackColor = true;
             this.buttonFlush.Click += new System.EventHandler(this.buttonFlush_Click);
             // 
-            // tabPage4
+            // tabUpdate
             // 
-            this.tabPage4.Controls.Add(this.webBrowser1);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(923, 298);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "更新信息";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.tabUpdate.Controls.Add(this.webBrowser1);
+            this.tabUpdate.Location = new System.Drawing.Point(4, 22);
+            this.tabUpdate.Name = "tabUpdate";
+            this.tabUpdate.Padding = new System.Windows.Forms.Padding(3);
+            this.tabUpdate.Size = new System.Drawing.Size(923, 298);
+            this.tabUpdate.TabIndex = 3;
+            this.tabUpdate.Text = "更新信息";
+            this.tabUpdate.UseVisualStyleBackColor = true;
             // 
             // webBrowser1
             // 
@@ -617,21 +650,21 @@
             this.webBrowser1.TabIndex = 0;
             this.webBrowser1.Url = new System.Uri("http://mcupdate.tumblr.com", System.UriKind.Absolute);
             // 
-            // tabPage5
+            // tabForge
             // 
-            this.tabPage5.Controls.Add(this.treeForgeVer);
-            this.tabPage5.Controls.Add(this.label6);
-            this.tabPage5.Controls.Add(this.btnReForge);
-            this.tabPage5.Controls.Add(this.buttonCopyInsPath);
-            this.tabPage5.Controls.Add(this.txtInsPath);
-            this.tabPage5.Controls.Add(this.buttonLastForge);
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(923, 298);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "安装Forge";
-            this.tabPage5.UseVisualStyleBackColor = true;
+            this.tabForge.Controls.Add(this.treeForgeVer);
+            this.tabForge.Controls.Add(this.label6);
+            this.tabForge.Controls.Add(this.btnReForge);
+            this.tabForge.Controls.Add(this.buttonCopyInsPath);
+            this.tabForge.Controls.Add(this.txtInsPath);
+            this.tabForge.Controls.Add(this.buttonLastForge);
+            this.tabForge.Location = new System.Drawing.Point(4, 22);
+            this.tabForge.Name = "tabForge";
+            this.tabForge.Padding = new System.Windows.Forms.Padding(3);
+            this.tabForge.Size = new System.Drawing.Size(923, 298);
+            this.tabForge.TabIndex = 4;
+            this.tabForge.Text = "安装Forge";
+            this.tabForge.UseVisualStyleBackColor = true;
             // 
             // treeForgeVer
             // 
@@ -689,6 +722,123 @@
             this.buttonLastForge.Text = "一键安装最新版Forge";
             this.buttonLastForge.UseVisualStyleBackColor = true;
             this.buttonLastForge.Click += new System.EventHandler(this.buttonLastForge_Click);
+            // 
+            // tabServerList
+            // 
+            this.tabServerList.Controls.Add(this.splitContainer4);
+            this.tabServerList.Location = new System.Drawing.Point(4, 22);
+            this.tabServerList.Name = "tabServerList";
+            this.tabServerList.Padding = new System.Windows.Forms.Padding(3);
+            this.tabServerList.Size = new System.Drawing.Size(923, 298);
+            this.tabServerList.TabIndex = 5;
+            this.tabServerList.Text = "服务器列表";
+            this.tabServerList.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer4
+            // 
+            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer4.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer4.Name = "splitContainer4";
+            // 
+            // splitContainer4.Panel1
+            // 
+            this.splitContainer4.Panel1.Controls.Add(this.listServer);
+            // 
+            // splitContainer4.Panel2
+            // 
+            this.splitContainer4.Panel2.Controls.Add(this.btnEditServer);
+            this.splitContainer4.Panel2.Controls.Add(this.btnDeleteServer);
+            this.splitContainer4.Panel2.Controls.Add(this.btnAddServer);
+            this.splitContainer4.Panel2.Controls.Add(this.btnReflushServer);
+            this.splitContainer4.Size = new System.Drawing.Size(917, 292);
+            this.splitContainer4.SplitterDistance = 770;
+            this.splitContainer4.TabIndex = 0;
+            // 
+            // listServer
+            // 
+            this.listServer.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnName,
+            this.columnHide,
+            this.columnAddress,
+            this.columnMotd,
+            this.columnVer,
+            this.columnOnline,
+            this.columnDelay});
+            this.listServer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listServer.FullRowSelect = true;
+            this.listServer.Location = new System.Drawing.Point(0, 0);
+            this.listServer.Name = "listServer";
+            this.listServer.Size = new System.Drawing.Size(770, 292);
+            this.listServer.TabIndex = 0;
+            this.listServer.UseCompatibleStateImageBehavior = false;
+            this.listServer.View = System.Windows.Forms.View.Details;
+            // 
+            // columnName
+            // 
+            this.columnName.Text = "服务器名";
+            this.columnName.Width = 120;
+            // 
+            // columnHide
+            // 
+            this.columnHide.Text = "隐藏地址";
+            // 
+            // columnAddress
+            // 
+            this.columnAddress.Text = "地址";
+            this.columnAddress.Width = 200;
+            // 
+            // columnMotd
+            // 
+            this.columnMotd.Text = "服务器介绍";
+            this.columnMotd.Width = 200;
+            // 
+            // columnVer
+            // 
+            this.columnVer.Text = "版本";
+            // 
+            // columnDelay
+            // 
+            this.columnDelay.Text = "延迟";
+            // 
+            // btnEditServer
+            // 
+            this.btnEditServer.Location = new System.Drawing.Point(23, 211);
+            this.btnEditServer.Name = "btnEditServer";
+            this.btnEditServer.Size = new System.Drawing.Size(101, 37);
+            this.btnEditServer.TabIndex = 4;
+            this.btnEditServer.Text = "编辑服务器";
+            this.btnEditServer.UseVisualStyleBackColor = true;
+            this.btnEditServer.Click += new System.EventHandler(this.btnEditServer_Click);
+            // 
+            // btnDeleteServer
+            // 
+            this.btnDeleteServer.Location = new System.Drawing.Point(23, 149);
+            this.btnDeleteServer.Name = "btnDeleteServer";
+            this.btnDeleteServer.Size = new System.Drawing.Size(101, 37);
+            this.btnDeleteServer.TabIndex = 3;
+            this.btnDeleteServer.Text = "删除服务器";
+            this.btnDeleteServer.UseVisualStyleBackColor = true;
+            this.btnDeleteServer.Click += new System.EventHandler(this.btnDeleteServer_Click);
+            // 
+            // btnAddServer
+            // 
+            this.btnAddServer.Location = new System.Drawing.Point(23, 87);
+            this.btnAddServer.Name = "btnAddServer";
+            this.btnAddServer.Size = new System.Drawing.Size(101, 37);
+            this.btnAddServer.TabIndex = 2;
+            this.btnAddServer.Text = "添加服务器";
+            this.btnAddServer.UseVisualStyleBackColor = true;
+            this.btnAddServer.Click += new System.EventHandler(this.btnAddServer_Click);
+            // 
+            // btnReflushServer
+            // 
+            this.btnReflushServer.Location = new System.Drawing.Point(23, 24);
+            this.btnReflushServer.Name = "btnReflushServer";
+            this.btnReflushServer.Size = new System.Drawing.Size(101, 37);
+            this.btnReflushServer.TabIndex = 1;
+            this.btnReflushServer.Text = "刷新服务器";
+            this.btnReflushServer.UseVisualStyleBackColor = true;
+            this.btnReflushServer.Click += new System.EventHandler(this.btnReflushServer_Click);
             // 
             // icoBmcl
             // 
@@ -779,6 +929,10 @@
             this.folderImportOldVer.Description = "请选择.minecraft目录";
             this.folderImportOldVer.RootFolder = System.Environment.SpecialFolder.MyComputer;
             // 
+            // columnOnline
+            // 
+            this.columnOnline.Text = "在线人数";
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -793,23 +947,28 @@
             this.Shown += new System.EventHandler(this.FrmMain_Shown);
             this.VisibleChanged += new System.EventHandler(this.FrmMain_VisibleChanged);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.tabGame.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.tabConfig.ResumeLayout(false);
+            this.tabConfig.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
+            this.tabVersion.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage5.ResumeLayout(false);
-            this.tabPage5.PerformLayout();
+            this.tabUpdate.ResumeLayout(false);
+            this.tabForge.ResumeLayout(false);
+            this.tabForge.PerformLayout();
+            this.tabServerList.ResumeLayout(false);
+            this.splitContainer4.Panel1.ResumeLayout(false);
+            this.splitContainer4.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
+            this.splitContainer4.ResumeLayout(false);
             this.menuIco.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
@@ -824,8 +983,8 @@
         #endregion
 
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabGame;
+        private System.Windows.Forms.TabPage tabConfig;
         private System.Windows.Forms.NotifyIcon icoBmcl;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ListBox VerList;
@@ -850,7 +1009,7 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.CheckBox checkAutoStart;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabVersion;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.ListView listRemoteVer;
         private System.Windows.Forms.ColumnHeader Id;
@@ -859,11 +1018,11 @@
         private System.Windows.Forms.Button buttonFlush;
         private System.Windows.Forms.ContextMenuStrip menuIco;
         private System.Windows.Forms.ToolStripMenuItem toolShow;
-        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabUpdate;
         private System.Windows.Forms.WebBrowser webBrowser1;
         private System.Windows.Forms.Button buttonDownload;
         private System.Windows.Forms.Button buttonCheckRes;
-        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabPage tabForge;
         private System.Windows.Forms.Button buttonLastForge;
         private System.Windows.Forms.Button buttonCopyInsPath;
         private System.Windows.Forms.TextBox txtInsPath;
@@ -889,6 +1048,21 @@
         private System.Windows.Forms.ToolTip tip;
         private System.Windows.Forms.TextBox txtExtJArg;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btnSaveConfig;
+        private System.Windows.Forms.TabPage tabServerList;
+        private System.Windows.Forms.SplitContainer splitContainer4;
+        private System.Windows.Forms.ListView listServer;
+        private System.Windows.Forms.ColumnHeader columnName;
+        private System.Windows.Forms.ColumnHeader columnHide;
+        private System.Windows.Forms.ColumnHeader columnAddress;
+        private System.Windows.Forms.ColumnHeader columnDelay;
+        private System.Windows.Forms.Button btnReflushServer;
+        private System.Windows.Forms.ColumnHeader columnMotd;
+        private System.Windows.Forms.ColumnHeader columnVer;
+        private System.Windows.Forms.Button btnAddServer;
+        private System.Windows.Forms.Button btnDeleteServer;
+        private System.Windows.Forms.Button btnEditServer;
+        private System.Windows.Forms.ColumnHeader columnOnline;
     }
 }
 

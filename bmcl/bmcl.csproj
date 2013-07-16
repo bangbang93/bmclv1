@@ -97,6 +97,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>normalprofile.resx</DependentUpon>
     </Compile>
+    <Compile Include="resource\ServerDat.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServerDat.resx</DependentUpon>
+    </Compile>
     <Compile Include="ResSer\FileInfo.cs" />
     <Compile Include="ResSer\ResFile.cs" />
     <Compile Include="ResSer\root.cs" />
@@ -106,6 +111,15 @@
     <Compile Include="frmPrs.Designer.cs">
       <DependentUpon>frmPrs.cs</DependentUpon>
     </Compile>
+    <Compile Include="serverlist\AddServer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="serverlist\AddServer.Designer.cs">
+      <DependentUpon>AddServer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="serverlist\serverinfo.cs" />
+    <Compile Include="serverlist\serverlist.cs" />
+    <Compile Include="util\MathHelper.cs" />
     <Compile Include="versions\RawVersionList.cs" />
     <Compile Include="versions\RemoteVer.cs" />
     <Compile Include="zip\Checksums\Adler32.cs" />
@@ -174,6 +188,13 @@
     <EmbeddedResource Include="frmPrs.resx">
       <DependentUpon>frmPrs.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="resource\ServerDat.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ServerDat.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="serverlist\AddServer.resx">
+      <DependentUpon>AddServer.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -188,6 +209,7 @@
     <Content Include="resource\bmcl.ico" />
     <Content Include="tofu.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>F:\Code\VS\IncBuildNo.exe "$(PROJECTDIR)\Properties\AssemblyInfo.cs" "\[assembly: AssemblyVersion\(\"\d+\.\d+\.\d+\.(\d+)" 1

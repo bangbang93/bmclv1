@@ -16,8 +16,10 @@ using System.Collections;
 using System.Net;
 using System.Diagnostics;
 //using Microsoft.WindowsAPICodePack.Taskbar;
+using System.Net.Sockets;
 
 using bmcl.versions;
+using bmcl.util;
 
 namespace bmcl
 {
@@ -176,6 +178,7 @@ namespace bmcl
                     MessageBox.Show("无法找到版本文件夹，本启动器只支持1.6以后的目录结构");
                     buttonStart.Enabled = false;
                     btmDelete.Enabled = false;
+                    btmExportOfficial.Enabled = false;
                     return;
                 }
                 else
@@ -183,6 +186,7 @@ namespace bmcl
                     MessageBox.Show("无法找到游戏文件夹");
                     buttonStart.Enabled = false;
                     btmDelete.Enabled = false;
+                    btmExportOfficial.Enabled = false;
                     return;
                 }
             }
@@ -202,6 +206,7 @@ namespace bmcl
             {
                 buttonStart.Enabled = false;
                 btmDelete.Enabled = false;
+                btmExportOfficial.Enabled = false;
             }
             checkAutoStart.Checked = cfg.autostart;
             listAuth.SelectedIndex = 0;
@@ -395,7 +400,12 @@ namespace bmcl
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        Exception exc = ex;
+                        while (exc.InnerException != null)
+                        {
+                            exc = exc.InnerException;
+                        }
+                        MessageBox.Show(exc.Message);
                         return;
                     }
                     if (loginans == "True")
@@ -405,7 +415,7 @@ namespace bmcl
                         cfg.javaxmx = txtJavaXmx.Text;
                         cfg.javaw = txtJavaw.Text;
                         cfg.login = listAuth.SelectedItem.ToString();
-                        cfg.lastPlayVer = info.id;
+                        cfg.lastPlayVer = VerList.Text;
                         cfg.autostart = checkAutoStart.Checked;
                         cfg.extraJVMArg = txtExtJArg.Text;
                         MethodInfo getSession = T.GetMethod("getsession");
@@ -424,7 +434,7 @@ namespace bmcl
                     }
                     else
                     {
-                        MessageBox.Show("登录失败");
+                        MessageBox.Show("登录失败，用户名或密码错误");
                         return;
                     }
                 }
@@ -437,7 +447,7 @@ namespace bmcl
                         cfg.javaxmx = txtJavaXmx.Text;
                         cfg.javaw = txtJavaw.Text;
                         cfg.login = listAuth.SelectedItem.ToString();
-                        cfg.lastPlayVer = info.id.ToString();
+                        cfg.lastPlayVer = VerList.Text;
                         cfg.autostart = checkAutoStart.Checked;
                         cfg.extraJVMArg = txtExtJArg.Text;
                         saveconfig();
@@ -612,6 +622,7 @@ namespace bmcl
                     MessageBox.Show("无法找到版本文件夹，本启动器只支持1.6以后的目录结构");
                     buttonStart.Enabled = false;
                     btmDelete.Enabled = false;
+                    btmExportOfficial.Enabled = false;
                     return;
                 }
                 else
@@ -619,6 +630,7 @@ namespace bmcl
                     MessageBox.Show("无法找到游戏文件夹");
                     buttonStart.Enabled = false;
                     btmDelete.Enabled = false;
+                    btmExportOfficial.Enabled = false;
                     return;
                 }
             }
@@ -634,11 +646,13 @@ namespace bmcl
                 VerList.SelectedIndex = 0;
                 buttonStart.Enabled = true;
                 btmDelete.Enabled = true;
+                btmExportOfficial.Enabled = true;
             }
             else
             {
                 buttonStart.Enabled = false;
                 btmDelete.Enabled = false;
+                btmExportOfficial.Enabled = false;
             }
             listAuth.SelectedIndex = 0;
         }
@@ -1254,6 +1268,204 @@ namespace bmcl
             tip.Hide(btnModDir);
         }
 #endregion
+
+        private void btnSaveConfig_Click(object sender, EventArgs e)
+        {
+            cfg.autostart = checkAutoStart.Checked;
+            cfg.extraJVMArg = txtExtJArg.Text;
+            cfg.javaw = txtJavaw.Text;
+            cfg.javaxmx = txtJavaXmx.Text;
+            cfg.lastPlayVer = cfg.lastPlayVer;
+            cfg.login = listAuth.Text;
+            cfg.passwd = Encoding.UTF8.GetBytes(txtPwd.Text);
+            cfg.username = txtUserName.Text;
+            saveconfig();
+        }
+
+        #region 服务器列表
+        private serverlist.serverlist sl = new serverlist.serverlist();
+        private void btnReflushServer_Click(object sender, EventArgs e)
+        {
+            listServer.Items.Clear();
+            if (File.Exists(@".minecraft\servers.dat"))
+            {
+                foreach (serverlist.serverinfo info in sl.info)
+                {
+                    DateTime start = DateTime.Now;
+                    ListViewItem server = listServer.Items.Add(info.Name);
+                    server.SubItems.Add(info.IsHide ? "是" : "否");
+                    if (info.IsHide)
+                        server.SubItems.Add(string.Empty);
+                    else
+                        server.SubItems.Add(info.Address);
+                    try
+                    {
+                        Socket con = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                        con.ReceiveTimeout = 3000;
+                        con.SendTimeout = 3000;
+                        if (info.Address.Split(':').Length == 1)
+                            con.Connect(Dns.GetHostAddresses(info.Address.Split(':')[0]), 25565);
+                        else
+                            con.Connect(Dns.GetHostAddresses(info.Address.Split(':')[0]), int.Parse(info.Address.Split(':')[1]));
+                        con.Send(new byte[1] { 254 });
+                        con.Send(new byte[1] { 1 });
+                        byte[] recive = new byte[512];
+                        int bytes = con.Receive(recive);
+                        if (recive[0] != 255)
+                        {
+                            throw new Exception("服务器回复无效");
+                        }
+                        string message = Encoding.UTF8.GetString(recive, 4, bytes - 4);
+                        StringBuilder remessage = new StringBuilder(30);
+                        for (int i = 0; i <= message.Length; i += 2)
+                        {
+                            remessage.Append(message[i]);
+                        }
+                        message = remessage.ToString();
+                        con.Shutdown(SocketShutdown.Both);
+                        con.Close();
+                        DateTime end = DateTime.Now;
+                        char[] achar = message.ToCharArray();
+
+                        for (int i = 0; i < achar.Length; ++i)
+                        {
+                            if (achar[i] != 167 && achar[i] != 0 && char.IsControl(achar[i]))
+                            {
+                                achar[i] = (char)63;
+                            }
+                        }
+                        message = new String(achar);
+                        if (message[0] == (char)253 || message[0] == (char)65533)
+                        {
+                            message = (char)167 + message.Substring(1);
+                        }
+                        string[] astring;
+                        if (message.StartsWith("\u00a7") && message.Length > 1)
+                        {
+                            astring = message.Substring(1).Split('\0');
+                            if (MathHelper.parseIntWithDefault(astring[0], 0) == 1)
+                            {
+                                server.SubItems.Add(astring[3]);
+                                server.SubItems.Add(astring[2]);
+                                int online = MathHelper.parseIntWithDefault(astring[4], 0);
+                                int maxplayer = MathHelper.parseIntWithDefault(astring[5], 0);
+                                server.SubItems.Add(online + "/" + maxplayer);
+                            }
+                        }
+                        else
+                        {
+                            server.SubItems.AddRange(new string[] { " ", " " });
+                        }
+                        server.SubItems.Add((end - start).Milliseconds + " ms");
+                        if (((end - start).Milliseconds < 200))
+                        {
+                            server.SubItems[0].ForeColor = Color.Green;
+                        }else
+                        if (((end - start).Milliseconds < 500))
+                        {
+                            server.SubItems[0].ForeColor = Color.Blue;
+                        }else
+                        if (((end - start).Milliseconds < 1000))
+                        {
+                            server.SubItems[0].ForeColor = Color.Yellow;
+                        }else
+                        if (((end - start).Milliseconds < 3000))
+                        {
+                            server.SubItems[0].ForeColor = Color.Orange;
+                        }else
+                        if (((end - start).Milliseconds > 3000))
+                        {
+                            server.SubItems[0].ForeColor = Color.OrangeRed;
+                        }
+                    }
+                    catch (SocketException ex)
+                    {
+                        server.SubItems.AddRange(new string[] { " ", " ", " "});
+                        server.SubItems.Add("连接失败" + ex.Message);
+                        server.SubItems[0].ForeColor = Color.Red;
+                    }
+                    catch (Exception ex)
+                    {
+                        server.SubItems.AddRange(new string[] { " ", " ", " "});
+                        server.SubItems.Add("无法识别的服务器" + ex.Message);
+                        server.SubItems[0].ForeColor = Color.Red;
+                    }
+                }
+            }
+            else
+            {
+                if (MessageBox.Show("服务器列表找不到，是否创建？","找不到文件",MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    FileStream serverdat = new FileStream(@".minecraft\servers.dat", FileMode.Create);
+                    serverdat.Write(Convert.FromBase64String(resource.ServerDat.Header),0,Convert.FromBase64String(resource.ServerDat.Header).Length);
+                    serverdat.WriteByte(0);
+                    serverdat.Close();
+                }
+            }
+        }
+
+        private void btnEditServer_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                serverlist.AddServer FrmEdit = new serverlist.AddServer(ref sl, this.listServer.SelectedIndices[0]);
+                if (FrmEdit.ShowDialog() == DialogResult.OK)
+                {
+                    sl.Write();
+                    btnReflushServer.PerformClick();
+                }
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                MessageBox.Show("请先选择一个服务器");
+            }
+        }
+
+        private void btnAddServer_Click(object sender, EventArgs e)
+        {
+            serverlist.AddServer FrmAdd = new serverlist.AddServer(ref sl);
+            if (FrmAdd.ShowDialog() == DialogResult.OK)
+            {
+                sl.Write();
+                btnReflushServer.PerformClick();
+            }
+
+        }
+
+        private void btnDeleteServer_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                sl.Delete(listServer.SelectedIndices[0]);
+                sl.Write();
+                btnReflushServer.PerformClick();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("请先选择一个服务器");
+            }
+        }
+        #endregion
+
+
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.tabControl1.SelectedTab == this.tabControl1.TabPages["tabServerList"]) 
+            {
+                btnReflushServer.PerformClick();
+            }
+            if (this.tabControl1.SelectedTab == this.tabControl1.TabPages["tabForge"])
+            {
+                btnReForge.PerformClick();
+            }
+            if (this.tabControl1.SelectedTab==this.tabControl1.TabPages["tabVersion"])
+            {
+                buttonFlush.PerformClick();
+            }
+        }
+
+
 
 
 
