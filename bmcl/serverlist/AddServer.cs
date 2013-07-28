@@ -47,9 +47,12 @@ namespace bmcl.serverlist
                     MessageBox.Show("输入有误，请检查");
                     return;
                 }
-                serverinfo aserver = new serverinfo(txtServerName.Text, checkIsHide.Checked, txtAddress.Text);
-                list.info[num] = aserver;
+                list.info[num] = new serverinfo(txtServerName.Text, checkIsHide.Checked, txtAddress.Text);
             }
+        }
+        public serverinfo getEdit()
+        {
+            return new serverinfo(txtServerName.Text, checkIsHide.Checked, txtAddress.Text);
         }
     }
 }

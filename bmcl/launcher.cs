@@ -37,6 +37,10 @@ namespace bmcl
         private string urlLib = FrmMain.URL_DOWNLOAD_BASE + "libraries/";
         public int downloading = 0;
         WebClient downer = new WebClient();
+        StreamReader gameoutput;
+        StreamReader gameerror;
+        StreamWriter bmclgamelog;
+        Thread logthread;
         #endregion 
 
         #region 委托
@@ -84,6 +88,14 @@ namespace bmcl
             version = info.id;
             this.name = name;
             game.StartInfo.FileName = java;
+            if (FrmMain.debug)
+            {
+                game.StartInfo.CreateNoWindow = true;
+                game.StartInfo.RedirectStandardOutput = true;
+                game.StartInfo.RedirectStandardError = true;
+                bmclgamelog = new StreamWriter("bmclgame.log");
+            }
+            game.StartInfo.UseShellExecute = false;
             Info = info;
             changeEvent("设置环境变量");
             StringBuilder arg = new StringBuilder("-Xincgc -Xmx");
@@ -399,7 +411,6 @@ namespace bmcl
             }
 
             changeEvent("走你");
-            game.StartInfo.UseShellExecute = false;
             //game.StartInfo.WorkingDirectory = Environment.CurrentDirectory + "\\.minecraft\\versions\\" + version;
             Environment.SetEnvironmentVariable("APPDATA", Environment.CurrentDirectory);
             game.EnableRaisingEvents = true;
@@ -411,7 +422,12 @@ namespace bmcl
             }
             try
             {
-                return game.Start();
+                bool fin = game.Start();
+                gameoutput = game.StandardOutput;
+                gameerror = game.StandardError;
+                logthread = new Thread(new ThreadStart(logger));
+                logthread.Start();
+                return fin;
             }
             catch
             {
@@ -443,7 +459,11 @@ namespace bmcl
             }
             if (Directory.Exists(@".minecraft\versions\" + name + @"\mods"))
             {
+                Directory.Delete(@".minecraft\versions\" + name + @"\mods", true);
+                FrmMain.dircopy(@".minecraft\mods", @".minecraft\versions\" + name + @"\mods");
                 Directory.Delete(@".minecraft\mods", true);
+                Directory.Delete(@".minecraft\versions\" + name + @"\coremods", true);
+                FrmMain.dircopy(@".minecraft\coremods", @".minecraft\versions\" + name + @"\coremods");
                 Directory.Delete(@".minecraft\coremods", true);
                 Directory.Delete(@".minecraft\versions\" + name + @"\config", true);
                 FrmMain.dircopy(@".minecraft\config", @".minecraft\versions\" + name + @"\config");
@@ -458,6 +478,12 @@ namespace bmcl
                     FrmMain.dircopy(@".minecraft\" + moddir.Name, moddir.FullName);
                     Directory.Delete(@".minecraft\" + moddir.Name, true);
                 }
+            }
+            if (FrmMain.debug)
+            {
+                bmclgamelog.Close();
+                gameerror.Close();
+                gameoutput.Close();
             }
             gameexit();
         }
@@ -520,6 +546,26 @@ namespace bmcl
             {
                 return false;
             }
+        }
+
+        private void logger()
+        {
+            while(gameoutput.EndOfStream && gameerror.EndOfStream)
+            {
+                if (!gameoutput.EndOfStream)
+                {
+                    string line = gameoutput.ReadLine();
+                    bmclgamelog.WriteLine(DateTime.Now.ToShortTimeString() + line);
+                }
+                if (!gameerror.EndOfStream)
+                {
+                    string line = gameerror.ReadLine();
+                    bmclgamelog.WriteLine(DateTime.Now.ToShortTimeString() + line);
+                }
+            }
+            bmclgamelog.Close();
+            gameerror.Close();
+            gameoutput.Close();
         }
         #endregion
         

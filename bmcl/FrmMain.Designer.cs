@@ -40,7 +40,7 @@
             this.btnMod = new System.Windows.Forms.Button();
             this.btnChangeName = new System.Windows.Forms.Button();
             this.labType = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.llabType = new System.Windows.Forms.Label();
             this.btnPackUp = new System.Windows.Forms.Button();
             this.btmExportOfficial = new System.Windows.Forms.Button();
             this.btnImportOldVer = new System.Windows.Forms.Button();
@@ -52,22 +52,23 @@
             this.llabTime = new System.Windows.Forms.Label();
             this.llabVer = new System.Windows.Forms.Label();
             this.tabConfig = new System.Windows.Forms.TabPage();
+            this.checkDebug = new System.Windows.Forms.CheckBox();
             this.btnSaveConfig = new System.Windows.Forms.Button();
             this.txtExtJArg = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.labJvmArg = new System.Windows.Forms.Label();
             this.checkAutoStart = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtJavaXmx = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.labJavaXmx = new System.Windows.Forms.Label();
             this.buttonJavaw = new System.Windows.Forms.Button();
             this.txtJavaw = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.labJavaw = new System.Windows.Forms.Label();
             this.txtPwd = new System.Windows.Forms.TextBox();
             this.txtUserName = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupAuth = new System.Windows.Forms.GroupBox();
             this.listAuth = new System.Windows.Forms.ListBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labPwd = new System.Windows.Forms.Label();
+            this.labUsername = new System.Windows.Forms.Label();
             this.tabVersion = new System.Windows.Forms.TabPage();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.listRemoteVer = new System.Windows.Forms.ListView();
@@ -81,7 +82,7 @@
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.tabForge = new System.Windows.Forms.TabPage();
             this.treeForgeVer = new System.Windows.Forms.TreeView();
-            this.label6 = new System.Windows.Forms.Label();
+            this.labForgeTip = new System.Windows.Forms.Label();
             this.btnReForge = new System.Windows.Forms.Button();
             this.buttonCopyInsPath = new System.Windows.Forms.Button();
             this.txtInsPath = new System.Windows.Forms.TextBox();
@@ -94,6 +95,7 @@
             this.columnAddress = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnMotd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnVer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnOnline = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnDelay = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnEditServer = new System.Windows.Forms.Button();
             this.btnDeleteServer = new System.Windows.Forms.Button();
@@ -104,13 +106,13 @@
             this.toolShow = new System.Windows.Forms.ToolStripMenuItem();
             this.ofdlgJavaw = new System.Windows.Forms.OpenFileDialog();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.btnLanguage = new System.Windows.Forms.Button();
             this.panelDownload = new System.Windows.Forms.Panel();
             this.prsDown = new System.Windows.Forms.ProgressBar();
             this.labDownInfo = new System.Windows.Forms.Label();
             this.buttonStart = new System.Windows.Forms.Button();
             this.folderImportOldVer = new System.Windows.Forms.FolderBrowserDialog();
             this.tip = new System.Windows.Forms.ToolTip(this.components);
-            this.columnOnline = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControl1.SuspendLayout();
             this.tabGame.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -118,7 +120,7 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tabConfig.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.groupAuth.SuspendLayout();
             this.tabVersion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
@@ -147,29 +149,21 @@
             this.tabControl1.Controls.Add(this.tabUpdate);
             this.tabControl1.Controls.Add(this.tabForge);
             this.tabControl1.Controls.Add(this.tabServerList);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(931, 324);
-            this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabGame
             // 
             this.tabGame.Controls.Add(this.splitContainer1);
-            this.tabGame.Location = new System.Drawing.Point(4, 22);
+            resources.ApplyResources(this.tabGame, "tabGame");
             this.tabGame.Name = "tabGame";
-            this.tabGame.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGame.Size = new System.Drawing.Size(923, 298);
-            this.tabGame.TabIndex = 0;
-            this.tabGame.Text = "游戏设置";
             this.tabGame.UseVisualStyleBackColor = true;
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(3, 3);
+            resources.ApplyResources(this.splitContainer1, "splitContainer1");
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -184,7 +178,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnMod);
             this.splitContainer1.Panel2.Controls.Add(this.btnChangeName);
             this.splitContainer1.Panel2.Controls.Add(this.labType);
-            this.splitContainer1.Panel2.Controls.Add(this.label7);
+            this.splitContainer1.Panel2.Controls.Add(this.llabType);
             this.splitContainer1.Panel2.Controls.Add(this.btnPackUp);
             this.splitContainer1.Panel2.Controls.Add(this.btmExportOfficial);
             this.splitContainer1.Panel2.Controls.Add(this.btnImportOldVer);
@@ -196,28 +190,18 @@
             this.splitContainer1.Panel2.Controls.Add(this.llabTime);
             this.splitContainer1.Panel2.Controls.Add(this.llabVer);
             this.splitContainer1.Panel2.Tag = "";
-            this.splitContainer1.Size = new System.Drawing.Size(917, 292);
-            this.splitContainer1.SplitterDistance = 178;
-            this.splitContainer1.TabIndex = 0;
             // 
             // VerList
             // 
-            this.VerList.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.VerList, "VerList");
             this.VerList.FormattingEnabled = true;
-            this.VerList.ItemHeight = 12;
-            this.VerList.Location = new System.Drawing.Point(0, 0);
             this.VerList.Name = "VerList";
-            this.VerList.Size = new System.Drawing.Size(178, 292);
-            this.VerList.TabIndex = 1;
             this.VerList.SelectedIndexChanged += new System.EventHandler(this.VerList_SelectedIndexChanged);
             // 
             // btnModDir
             // 
-            this.btnModDir.Location = new System.Drawing.Point(605, 165);
+            resources.ApplyResources(this.btnModDir, "btnModDir");
             this.btnModDir.Name = "btnModDir";
-            this.btnModDir.Size = new System.Drawing.Size(110, 36);
-            this.btnModDir.TabIndex = 16;
-            this.btnModDir.Text = "MOD独立文件夹";
             this.btnModDir.UseVisualStyleBackColor = true;
             this.btnModDir.Click += new System.EventHandler(this.btnModDir_Click);
             this.btnModDir.MouseEnter += new System.EventHandler(this.btnModDir_MouseEnter);
@@ -225,333 +209,228 @@
             // 
             // btnCoreMod
             // 
-            this.btnCoreMod.Location = new System.Drawing.Point(605, 122);
+            resources.ApplyResources(this.btnCoreMod, "btnCoreMod");
             this.btnCoreMod.Name = "btnCoreMod";
-            this.btnCoreMod.Size = new System.Drawing.Size(110, 36);
-            this.btnCoreMod.TabIndex = 15;
-            this.btnCoreMod.Text = "CoreMOD管理";
             this.btnCoreMod.UseVisualStyleBackColor = true;
             this.btnCoreMod.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // btnModConfig
             // 
-            this.btnModConfig.Location = new System.Drawing.Point(488, 165);
+            resources.ApplyResources(this.btnModConfig, "btnModConfig");
             this.btnModConfig.Name = "btnModConfig";
-            this.btnModConfig.Size = new System.Drawing.Size(110, 36);
-            this.btnModConfig.TabIndex = 14;
-            this.btnModConfig.Text = "MOD配置管理";
             this.btnModConfig.UseVisualStyleBackColor = true;
             this.btnModConfig.Click += new System.EventHandler(this.btnModConfig_Click);
             // 
             // btnMod
             // 
-            this.btnMod.Location = new System.Drawing.Point(488, 122);
+            resources.ApplyResources(this.btnMod, "btnMod");
             this.btnMod.Name = "btnMod";
-            this.btnMod.Size = new System.Drawing.Size(110, 36);
-            this.btnMod.TabIndex = 13;
-            this.btnMod.Text = "MOD管理";
             this.btnMod.UseVisualStyleBackColor = true;
             this.btnMod.Click += new System.EventHandler(this.btnMod_Click);
             // 
             // btnChangeName
             // 
-            this.btnChangeName.Location = new System.Drawing.Point(373, 122);
+            resources.ApplyResources(this.btnChangeName, "btnChangeName");
             this.btnChangeName.Name = "btnChangeName";
-            this.btnChangeName.Size = new System.Drawing.Size(110, 36);
-            this.btnChangeName.TabIndex = 12;
-            this.btnChangeName.Text = "重命名";
             this.btnChangeName.UseVisualStyleBackColor = true;
             this.btnChangeName.Click += new System.EventHandler(this.btnChangeName_Click);
             // 
             // labType
             // 
-            this.labType.AutoSize = true;
-            this.labType.Location = new System.Drawing.Point(203, 136);
+            resources.ApplyResources(this.labType, "labType");
             this.labType.Name = "labType";
-            this.labType.Size = new System.Drawing.Size(0, 12);
-            this.labType.TabIndex = 11;
             // 
-            // label7
+            // llabType
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(100, 136);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(53, 12);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "发布类型";
+            resources.ApplyResources(this.llabType, "llabType");
+            this.llabType.Name = "llabType";
             // 
             // btnPackUp
             // 
-            this.btnPackUp.Location = new System.Drawing.Point(488, 77);
+            resources.ApplyResources(this.btnPackUp, "btnPackUp");
             this.btnPackUp.Name = "btnPackUp";
-            this.btnPackUp.Size = new System.Drawing.Size(110, 36);
-            this.btnPackUp.TabIndex = 9;
             this.btnPackUp.Tag = ".";
-            this.btnPackUp.Text = "打包当前版本";
             this.btnPackUp.UseVisualStyleBackColor = true;
             this.btnPackUp.Click += new System.EventHandler(this.btnPackUp_Click);
             // 
             // btmExportOfficial
             // 
-            this.btmExportOfficial.Location = new System.Drawing.Point(488, 35);
+            resources.ApplyResources(this.btmExportOfficial, "btmExportOfficial");
             this.btmExportOfficial.Name = "btmExportOfficial";
-            this.btmExportOfficial.Size = new System.Drawing.Size(110, 36);
-            this.btmExportOfficial.TabIndex = 8;
-            this.btmExportOfficial.Text = "导出到正版启动器";
             this.btmExportOfficial.UseVisualStyleBackColor = true;
             this.btmExportOfficial.Click += new System.EventHandler(this.btmExportOfficial_Click);
             // 
             // btnImportOldVer
             // 
-            this.btnImportOldVer.Location = new System.Drawing.Point(373, 77);
+            resources.ApplyResources(this.btnImportOldVer, "btnImportOldVer");
             this.btnImportOldVer.Name = "btnImportOldVer";
-            this.btnImportOldVer.Size = new System.Drawing.Size(110, 36);
-            this.btnImportOldVer.TabIndex = 7;
-            this.btnImportOldVer.Text = "导入旧版MC";
             this.btnImportOldVer.UseVisualStyleBackColor = true;
             this.btnImportOldVer.Click += new System.EventHandler(this.btnImportOldVer_Click);
             // 
             // btmDelete
             // 
-            this.btmDelete.Location = new System.Drawing.Point(372, 35);
+            resources.ApplyResources(this.btmDelete, "btmDelete");
             this.btmDelete.Name = "btmDelete";
-            this.btmDelete.Size = new System.Drawing.Size(110, 36);
-            this.btmDelete.TabIndex = 6;
-            this.btmDelete.Text = "删除(&D)";
             this.btmDelete.UseVisualStyleBackColor = true;
             this.btmDelete.Click += new System.EventHandler(this.btmDelete_Click);
             // 
             // labReltime
             // 
-            this.labReltime.AutoSize = true;
-            this.labReltime.Location = new System.Drawing.Point(203, 108);
+            resources.ApplyResources(this.labReltime, "labReltime");
             this.labReltime.Name = "labReltime";
-            this.labReltime.Size = new System.Drawing.Size(0, 12);
-            this.labReltime.TabIndex = 5;
             // 
             // labTime
             // 
-            this.labTime.AutoSize = true;
-            this.labTime.Location = new System.Drawing.Point(203, 77);
+            resources.ApplyResources(this.labTime, "labTime");
             this.labTime.Name = "labTime";
-            this.labTime.Size = new System.Drawing.Size(0, 12);
-            this.labTime.TabIndex = 4;
             // 
             // labVer
             // 
-            this.labVer.AutoSize = true;
-            this.labVer.Location = new System.Drawing.Point(203, 46);
+            resources.ApplyResources(this.labVer, "labVer");
             this.labVer.Name = "labVer";
-            this.labVer.Size = new System.Drawing.Size(0, 12);
-            this.labVer.TabIndex = 3;
             // 
             // llabRelTime
             // 
-            this.llabRelTime.AutoSize = true;
-            this.llabRelTime.Location = new System.Drawing.Point(100, 108);
+            resources.ApplyResources(this.llabRelTime, "llabRelTime");
             this.llabRelTime.Name = "llabRelTime";
-            this.llabRelTime.Size = new System.Drawing.Size(53, 12);
-            this.llabRelTime.TabIndex = 2;
-            this.llabRelTime.Text = "发布时间";
             // 
             // llabTime
             // 
-            this.llabTime.AutoSize = true;
-            this.llabTime.Location = new System.Drawing.Point(100, 77);
+            resources.ApplyResources(this.llabTime, "llabTime");
             this.llabTime.Name = "llabTime";
-            this.llabTime.Size = new System.Drawing.Size(77, 12);
-            this.llabTime.TabIndex = 1;
-            this.llabTime.Text = "上次打开时间";
             // 
             // llabVer
             // 
-            this.llabVer.AutoSize = true;
-            this.llabVer.Location = new System.Drawing.Point(100, 46);
+            resources.ApplyResources(this.llabVer, "llabVer");
             this.llabVer.Name = "llabVer";
-            this.llabVer.Size = new System.Drawing.Size(53, 12);
-            this.llabVer.TabIndex = 0;
-            this.llabVer.Text = "游戏版本";
             // 
             // tabConfig
             // 
+            this.tabConfig.Controls.Add(this.checkDebug);
             this.tabConfig.Controls.Add(this.btnSaveConfig);
             this.tabConfig.Controls.Add(this.txtExtJArg);
-            this.tabConfig.Controls.Add(this.label8);
+            this.tabConfig.Controls.Add(this.labJvmArg);
             this.tabConfig.Controls.Add(this.checkAutoStart);
             this.tabConfig.Controls.Add(this.label5);
             this.tabConfig.Controls.Add(this.txtJavaXmx);
-            this.tabConfig.Controls.Add(this.label4);
+            this.tabConfig.Controls.Add(this.labJavaXmx);
             this.tabConfig.Controls.Add(this.buttonJavaw);
             this.tabConfig.Controls.Add(this.txtJavaw);
-            this.tabConfig.Controls.Add(this.label3);
+            this.tabConfig.Controls.Add(this.labJavaw);
             this.tabConfig.Controls.Add(this.txtPwd);
             this.tabConfig.Controls.Add(this.txtUserName);
-            this.tabConfig.Controls.Add(this.groupBox1);
-            this.tabConfig.Controls.Add(this.label2);
-            this.tabConfig.Controls.Add(this.label1);
-            this.tabConfig.Location = new System.Drawing.Point(4, 22);
+            this.tabConfig.Controls.Add(this.groupAuth);
+            this.tabConfig.Controls.Add(this.labPwd);
+            this.tabConfig.Controls.Add(this.labUsername);
+            resources.ApplyResources(this.tabConfig, "tabConfig");
             this.tabConfig.Name = "tabConfig";
-            this.tabConfig.Padding = new System.Windows.Forms.Padding(3);
-            this.tabConfig.Size = new System.Drawing.Size(923, 298);
-            this.tabConfig.TabIndex = 1;
-            this.tabConfig.Text = "启动设置";
             this.tabConfig.UseVisualStyleBackColor = true;
+            // 
+            // checkDebug
+            // 
+            resources.ApplyResources(this.checkDebug, "checkDebug");
+            this.checkDebug.Name = "checkDebug";
+            this.checkDebug.UseVisualStyleBackColor = true;
+            this.checkDebug.CheckedChanged += new System.EventHandler(this.checkDebug_CheckedChanged);
             // 
             // btnSaveConfig
             // 
-            this.btnSaveConfig.Location = new System.Drawing.Point(800, 245);
+            resources.ApplyResources(this.btnSaveConfig, "btnSaveConfig");
             this.btnSaveConfig.Name = "btnSaveConfig";
-            this.btnSaveConfig.Size = new System.Drawing.Size(115, 47);
-            this.btnSaveConfig.TabIndex = 15;
-            this.btnSaveConfig.Text = "保存配置";
             this.btnSaveConfig.UseVisualStyleBackColor = true;
             this.btnSaveConfig.Click += new System.EventHandler(this.btnSaveConfig_Click);
             // 
             // txtExtJArg
             // 
-            this.txtExtJArg.Location = new System.Drawing.Point(340, 191);
+            resources.ApplyResources(this.txtExtJArg, "txtExtJArg");
             this.txtExtJArg.Name = "txtExtJArg";
-            this.txtExtJArg.Size = new System.Drawing.Size(254, 21);
-            this.txtExtJArg.TabIndex = 14;
             // 
-            // label8
+            // labJvmArg
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(339, 162);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(125, 12);
-            this.label8.TabIndex = 13;
-            this.label8.Text = "额外的JVM Arguements";
+            resources.ApplyResources(this.labJvmArg, "labJvmArg");
+            this.labJvmArg.Name = "labJvmArg";
             // 
             // checkAutoStart
             // 
-            this.checkAutoStart.AutoSize = true;
-            this.checkAutoStart.Location = new System.Drawing.Point(341, 131);
+            resources.ApplyResources(this.checkAutoStart, "checkAutoStart");
             this.checkAutoStart.Name = "checkAutoStart";
-            this.checkAutoStart.Size = new System.Drawing.Size(120, 16);
-            this.checkAutoStart.TabIndex = 12;
-            this.checkAutoStart.Text = "下次直接开始游戏";
             this.checkAutoStart.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(601, 92);
+            resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(17, 12);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "MB";
             // 
             // txtJavaXmx
             // 
-            this.txtJavaXmx.Location = new System.Drawing.Point(449, 89);
+            resources.ApplyResources(this.txtJavaXmx, "txtJavaXmx");
             this.txtJavaXmx.Name = "txtJavaXmx";
-            this.txtJavaXmx.Size = new System.Drawing.Size(145, 21);
-            this.txtJavaXmx.TabIndex = 10;
             // 
-            // label4
+            // labJavaXmx
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(339, 92);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(101, 12);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Java运行内存大小";
+            resources.ApplyResources(this.labJavaXmx, "labJavaXmx");
+            this.labJavaXmx.Name = "labJavaXmx";
             // 
             // buttonJavaw
             // 
-            this.buttonJavaw.Location = new System.Drawing.Point(609, 50);
+            resources.ApplyResources(this.buttonJavaw, "buttonJavaw");
             this.buttonJavaw.Name = "buttonJavaw";
-            this.buttonJavaw.Size = new System.Drawing.Size(28, 21);
-            this.buttonJavaw.TabIndex = 8;
-            this.buttonJavaw.Text = "…";
             this.buttonJavaw.UseVisualStyleBackColor = true;
             this.buttonJavaw.Click += new System.EventHandler(this.button1_Click);
             // 
             // txtJavaw
             // 
-            this.txtJavaw.Location = new System.Drawing.Point(428, 51);
+            resources.ApplyResources(this.txtJavaw, "txtJavaw");
             this.txtJavaw.Name = "txtJavaw";
-            this.txtJavaw.Size = new System.Drawing.Size(166, 21);
-            this.txtJavaw.TabIndex = 7;
             // 
-            // label3
+            // labJavaw
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(339, 54);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(83, 12);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "javaw.exe路径";
+            resources.ApplyResources(this.labJavaw, "labJavaw");
+            this.labJavaw.Name = "labJavaw";
             // 
             // txtPwd
             // 
-            this.txtPwd.Location = new System.Drawing.Point(99, 89);
+            resources.ApplyResources(this.txtPwd, "txtPwd");
             this.txtPwd.Name = "txtPwd";
-            this.txtPwd.PasswordChar = '*';
-            this.txtPwd.Size = new System.Drawing.Size(155, 21);
-            this.txtPwd.TabIndex = 5;
             // 
             // txtUserName
             // 
-            this.txtUserName.Location = new System.Drawing.Point(99, 51);
+            resources.ApplyResources(this.txtUserName, "txtUserName");
             this.txtUserName.Name = "txtUserName";
-            this.txtUserName.Size = new System.Drawing.Size(155, 21);
-            this.txtUserName.TabIndex = 4;
             // 
-            // groupBox1
+            // groupAuth
             // 
-            this.groupBox1.Controls.Add(this.listAuth);
-            this.groupBox1.Location = new System.Drawing.Point(54, 131);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 164);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "登录方式";
+            this.groupAuth.Controls.Add(this.listAuth);
+            resources.ApplyResources(this.groupAuth, "groupAuth");
+            this.groupAuth.Name = "groupAuth";
+            this.groupAuth.TabStop = false;
             // 
             // listAuth
             // 
-            this.listAuth.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.listAuth, "listAuth");
             this.listAuth.FormattingEnabled = true;
-            this.listAuth.ItemHeight = 12;
-            this.listAuth.Location = new System.Drawing.Point(3, 17);
             this.listAuth.Name = "listAuth";
-            this.listAuth.Size = new System.Drawing.Size(194, 144);
-            this.listAuth.TabIndex = 0;
             // 
-            // label2
+            // labPwd
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(52, 92);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 12);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "密  码";
+            resources.ApplyResources(this.labPwd, "labPwd");
+            this.labPwd.Name = "labPwd";
             // 
-            // label1
+            // labUsername
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(52, 54);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "用户名";
+            resources.ApplyResources(this.labUsername, "labUsername");
+            this.labUsername.Name = "labUsername";
             // 
             // tabVersion
             // 
             this.tabVersion.Controls.Add(this.splitContainer3);
-            this.tabVersion.Location = new System.Drawing.Point(4, 22);
+            resources.ApplyResources(this.tabVersion, "tabVersion");
             this.tabVersion.Name = "tabVersion";
-            this.tabVersion.Padding = new System.Windows.Forms.Padding(3);
-            this.tabVersion.Size = new System.Drawing.Size(923, 298);
-            this.tabVersion.TabIndex = 2;
-            this.tabVersion.Text = "版本管理";
             this.tabVersion.UseVisualStyleBackColor = true;
             // 
             // splitContainer3
             // 
-            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer3.Location = new System.Drawing.Point(3, 3);
+            resources.ApplyResources(this.splitContainer3, "splitContainer3");
             this.splitContainer3.Name = "splitContainer3";
             // 
             // splitContainer3.Panel1
@@ -563,9 +442,6 @@
             this.splitContainer3.Panel2.Controls.Add(this.buttonCheckRes);
             this.splitContainer3.Panel2.Controls.Add(this.buttonDownload);
             this.splitContainer3.Panel2.Controls.Add(this.buttonFlush);
-            this.splitContainer3.Size = new System.Drawing.Size(917, 292);
-            this.splitContainer3.SplitterDistance = 770;
-            this.splitContainer3.TabIndex = 0;
             // 
             // listRemoteVer
             // 
@@ -574,170 +450,121 @@
             this.Id,
             this.RelTime,
             this.Type});
-            this.listRemoteVer.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.listRemoteVer, "listRemoteVer");
             this.listRemoteVer.FullRowSelect = true;
-            this.listRemoteVer.Location = new System.Drawing.Point(0, 0);
             this.listRemoteVer.Name = "listRemoteVer";
             this.listRemoteVer.ShowGroups = false;
-            this.listRemoteVer.Size = new System.Drawing.Size(770, 292);
             this.listRemoteVer.Sorting = System.Windows.Forms.SortOrder.Ascending;
-            this.listRemoteVer.TabIndex = 0;
             this.listRemoteVer.UseCompatibleStateImageBehavior = false;
             this.listRemoteVer.View = System.Windows.Forms.View.Details;
             // 
             // Id
             // 
-            this.Id.Text = "版本";
+            resources.ApplyResources(this.Id, "Id");
             // 
             // RelTime
             // 
-            this.RelTime.Text = "发布时间";
-            this.RelTime.Width = 232;
+            resources.ApplyResources(this.RelTime, "RelTime");
             // 
             // Type
             // 
-            this.Type.Text = "发布类型";
+            resources.ApplyResources(this.Type, "Type");
             // 
             // buttonCheckRes
             // 
-            this.buttonCheckRes.Location = new System.Drawing.Point(24, 133);
+            resources.ApplyResources(this.buttonCheckRes, "buttonCheckRes");
             this.buttonCheckRes.Name = "buttonCheckRes";
-            this.buttonCheckRes.Size = new System.Drawing.Size(101, 37);
-            this.buttonCheckRes.TabIndex = 2;
-            this.buttonCheckRes.Text = "检查资源文件";
             this.buttonCheckRes.UseVisualStyleBackColor = true;
             this.buttonCheckRes.Click += new System.EventHandler(this.buttonCheckRes_Click);
             // 
             // buttonDownload
             // 
-            this.buttonDownload.Location = new System.Drawing.Point(24, 75);
+            resources.ApplyResources(this.buttonDownload, "buttonDownload");
             this.buttonDownload.Name = "buttonDownload";
-            this.buttonDownload.Size = new System.Drawing.Size(101, 37);
-            this.buttonDownload.TabIndex = 1;
-            this.buttonDownload.Text = "下载";
             this.buttonDownload.UseVisualStyleBackColor = true;
             this.buttonDownload.Click += new System.EventHandler(this.buttonDownload_Click);
             // 
             // buttonFlush
             // 
-            this.buttonFlush.Location = new System.Drawing.Point(24, 18);
+            resources.ApplyResources(this.buttonFlush, "buttonFlush");
             this.buttonFlush.Name = "buttonFlush";
-            this.buttonFlush.Size = new System.Drawing.Size(101, 37);
-            this.buttonFlush.TabIndex = 0;
-            this.buttonFlush.Text = "刷新版本(&R)";
             this.buttonFlush.UseVisualStyleBackColor = true;
             this.buttonFlush.Click += new System.EventHandler(this.buttonFlush_Click);
             // 
             // tabUpdate
             // 
             this.tabUpdate.Controls.Add(this.webBrowser1);
-            this.tabUpdate.Location = new System.Drawing.Point(4, 22);
+            resources.ApplyResources(this.tabUpdate, "tabUpdate");
             this.tabUpdate.Name = "tabUpdate";
-            this.tabUpdate.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUpdate.Size = new System.Drawing.Size(923, 298);
-            this.tabUpdate.TabIndex = 3;
-            this.tabUpdate.Text = "更新信息";
             this.tabUpdate.UseVisualStyleBackColor = true;
             // 
             // webBrowser1
             // 
-            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser1.Location = new System.Drawing.Point(3, 3);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            resources.ApplyResources(this.webBrowser1, "webBrowser1");
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.ScriptErrorsSuppressed = true;
-            this.webBrowser1.Size = new System.Drawing.Size(917, 292);
-            this.webBrowser1.TabIndex = 0;
             this.webBrowser1.Url = new System.Uri("http://mcupdate.tumblr.com", System.UriKind.Absolute);
             // 
             // tabForge
             // 
             this.tabForge.Controls.Add(this.treeForgeVer);
-            this.tabForge.Controls.Add(this.label6);
+            this.tabForge.Controls.Add(this.labForgeTip);
             this.tabForge.Controls.Add(this.btnReForge);
             this.tabForge.Controls.Add(this.buttonCopyInsPath);
             this.tabForge.Controls.Add(this.txtInsPath);
             this.tabForge.Controls.Add(this.buttonLastForge);
-            this.tabForge.Location = new System.Drawing.Point(4, 22);
+            resources.ApplyResources(this.tabForge, "tabForge");
             this.tabForge.Name = "tabForge";
-            this.tabForge.Padding = new System.Windows.Forms.Padding(3);
-            this.tabForge.Size = new System.Drawing.Size(923, 298);
-            this.tabForge.TabIndex = 4;
-            this.tabForge.Text = "安装Forge";
             this.tabForge.UseVisualStyleBackColor = true;
             // 
             // treeForgeVer
             // 
-            this.treeForgeVer.Location = new System.Drawing.Point(280, 6);
+            resources.ApplyResources(this.treeForgeVer, "treeForgeVer");
             this.treeForgeVer.Name = "treeForgeVer";
-            this.treeForgeVer.Size = new System.Drawing.Size(204, 286);
-            this.treeForgeVer.TabIndex = 6;
             this.treeForgeVer.DoubleClick += new System.EventHandler(this.treeForgeVer_DoubleClick);
             // 
-            // label6
+            // labForgeTip
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(9, 173);
-            this.label6.MaximumSize = new System.Drawing.Size(200, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(197, 60);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Forge的服务器经常抽风，所以如果获取失败就过一段时间重试\r\n获取后右边会出现所有Forge的版本，选择一个下载就行，暂不支持早于1.6.1的Forge自动下载" +
-    "";
+            resources.ApplyResources(this.labForgeTip, "labForgeTip");
+            this.labForgeTip.Name = "labForgeTip";
             // 
             // btnReForge
             // 
-            this.btnReForge.Location = new System.Drawing.Point(9, 136);
+            resources.ApplyResources(this.btnReForge, "btnReForge");
             this.btnReForge.Name = "btnReForge";
-            this.btnReForge.Size = new System.Drawing.Size(120, 30);
-            this.btnReForge.TabIndex = 4;
-            this.btnReForge.Text = "获取Forge版本列表";
             this.btnReForge.UseVisualStyleBackColor = true;
             this.btnReForge.Click += new System.EventHandler(this.btnReForge_Click);
             // 
             // buttonCopyInsPath
             // 
-            this.buttonCopyInsPath.Location = new System.Drawing.Point(9, 92);
+            resources.ApplyResources(this.buttonCopyInsPath, "buttonCopyInsPath");
             this.buttonCopyInsPath.Name = "buttonCopyInsPath";
-            this.buttonCopyInsPath.Size = new System.Drawing.Size(120, 28);
-            this.buttonCopyInsPath.TabIndex = 2;
-            this.buttonCopyInsPath.Text = "复制安装路径";
             this.buttonCopyInsPath.UseVisualStyleBackColor = true;
             this.buttonCopyInsPath.Click += new System.EventHandler(this.buttonCopyInsPath_Click);
             // 
             // txtInsPath
             // 
-            this.txtInsPath.Location = new System.Drawing.Point(8, 64);
+            resources.ApplyResources(this.txtInsPath, "txtInsPath");
             this.txtInsPath.Name = "txtInsPath";
             this.txtInsPath.ReadOnly = true;
-            this.txtInsPath.Size = new System.Drawing.Size(266, 21);
-            this.txtInsPath.TabIndex = 1;
             // 
             // buttonLastForge
             // 
-            this.buttonLastForge.Location = new System.Drawing.Point(8, 6);
+            resources.ApplyResources(this.buttonLastForge, "buttonLastForge");
             this.buttonLastForge.Name = "buttonLastForge";
-            this.buttonLastForge.Size = new System.Drawing.Size(108, 52);
-            this.buttonLastForge.TabIndex = 0;
-            this.buttonLastForge.Text = "一键安装最新版Forge";
             this.buttonLastForge.UseVisualStyleBackColor = true;
             this.buttonLastForge.Click += new System.EventHandler(this.buttonLastForge_Click);
             // 
             // tabServerList
             // 
             this.tabServerList.Controls.Add(this.splitContainer4);
-            this.tabServerList.Location = new System.Drawing.Point(4, 22);
+            resources.ApplyResources(this.tabServerList, "tabServerList");
             this.tabServerList.Name = "tabServerList";
-            this.tabServerList.Padding = new System.Windows.Forms.Padding(3);
-            this.tabServerList.Size = new System.Drawing.Size(923, 298);
-            this.tabServerList.TabIndex = 5;
-            this.tabServerList.Text = "服务器列表";
             this.tabServerList.UseVisualStyleBackColor = true;
             // 
             // splitContainer4
             // 
-            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer4.Location = new System.Drawing.Point(3, 3);
+            resources.ApplyResources(this.splitContainer4, "splitContainer4");
             this.splitContainer4.Name = "splitContainer4";
             // 
             // splitContainer4.Panel1
@@ -750,9 +577,6 @@
             this.splitContainer4.Panel2.Controls.Add(this.btnDeleteServer);
             this.splitContainer4.Panel2.Controls.Add(this.btnAddServer);
             this.splitContainer4.Panel2.Controls.Add(this.btnReflushServer);
-            this.splitContainer4.Size = new System.Drawing.Size(917, 292);
-            this.splitContainer4.SplitterDistance = 770;
-            this.splitContainer4.TabIndex = 0;
             // 
             // listServer
             // 
@@ -764,88 +588,72 @@
             this.columnVer,
             this.columnOnline,
             this.columnDelay});
-            this.listServer.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.listServer, "listServer");
             this.listServer.FullRowSelect = true;
-            this.listServer.Location = new System.Drawing.Point(0, 0);
             this.listServer.Name = "listServer";
-            this.listServer.Size = new System.Drawing.Size(770, 292);
-            this.listServer.TabIndex = 0;
             this.listServer.UseCompatibleStateImageBehavior = false;
             this.listServer.View = System.Windows.Forms.View.Details;
             // 
             // columnName
             // 
-            this.columnName.Text = "服务器名";
-            this.columnName.Width = 120;
+            resources.ApplyResources(this.columnName, "columnName");
             // 
             // columnHide
             // 
-            this.columnHide.Text = "隐藏地址";
+            resources.ApplyResources(this.columnHide, "columnHide");
             // 
             // columnAddress
             // 
-            this.columnAddress.Text = "地址";
-            this.columnAddress.Width = 200;
+            resources.ApplyResources(this.columnAddress, "columnAddress");
             // 
             // columnMotd
             // 
-            this.columnMotd.Text = "服务器介绍";
-            this.columnMotd.Width = 200;
+            resources.ApplyResources(this.columnMotd, "columnMotd");
             // 
             // columnVer
             // 
-            this.columnVer.Text = "版本";
+            resources.ApplyResources(this.columnVer, "columnVer");
+            // 
+            // columnOnline
+            // 
+            resources.ApplyResources(this.columnOnline, "columnOnline");
             // 
             // columnDelay
             // 
-            this.columnDelay.Text = "延迟";
+            resources.ApplyResources(this.columnDelay, "columnDelay");
             // 
             // btnEditServer
             // 
-            this.btnEditServer.Location = new System.Drawing.Point(23, 211);
+            resources.ApplyResources(this.btnEditServer, "btnEditServer");
             this.btnEditServer.Name = "btnEditServer";
-            this.btnEditServer.Size = new System.Drawing.Size(101, 37);
-            this.btnEditServer.TabIndex = 4;
-            this.btnEditServer.Text = "编辑服务器";
             this.btnEditServer.UseVisualStyleBackColor = true;
             this.btnEditServer.Click += new System.EventHandler(this.btnEditServer_Click);
             // 
             // btnDeleteServer
             // 
-            this.btnDeleteServer.Location = new System.Drawing.Point(23, 149);
+            resources.ApplyResources(this.btnDeleteServer, "btnDeleteServer");
             this.btnDeleteServer.Name = "btnDeleteServer";
-            this.btnDeleteServer.Size = new System.Drawing.Size(101, 37);
-            this.btnDeleteServer.TabIndex = 3;
-            this.btnDeleteServer.Text = "删除服务器";
             this.btnDeleteServer.UseVisualStyleBackColor = true;
             this.btnDeleteServer.Click += new System.EventHandler(this.btnDeleteServer_Click);
             // 
             // btnAddServer
             // 
-            this.btnAddServer.Location = new System.Drawing.Point(23, 87);
+            resources.ApplyResources(this.btnAddServer, "btnAddServer");
             this.btnAddServer.Name = "btnAddServer";
-            this.btnAddServer.Size = new System.Drawing.Size(101, 37);
-            this.btnAddServer.TabIndex = 2;
-            this.btnAddServer.Text = "添加服务器";
             this.btnAddServer.UseVisualStyleBackColor = true;
             this.btnAddServer.Click += new System.EventHandler(this.btnAddServer_Click);
             // 
             // btnReflushServer
             // 
-            this.btnReflushServer.Location = new System.Drawing.Point(23, 24);
+            resources.ApplyResources(this.btnReflushServer, "btnReflushServer");
             this.btnReflushServer.Name = "btnReflushServer";
-            this.btnReflushServer.Size = new System.Drawing.Size(101, 37);
-            this.btnReflushServer.TabIndex = 1;
-            this.btnReflushServer.Text = "刷新服务器";
             this.btnReflushServer.UseVisualStyleBackColor = true;
             this.btnReflushServer.Click += new System.EventHandler(this.btnReflushServer_Click);
             // 
             // icoBmcl
             // 
             this.icoBmcl.ContextMenuStrip = this.menuIco;
-            this.icoBmcl.Icon = ((System.Drawing.Icon)(resources.GetObject("icoBmcl.Icon")));
-            this.icoBmcl.Text = "BMCL";
-            this.icoBmcl.Visible = true;
+            resources.ApplyResources(this.icoBmcl, "icoBmcl");
             this.icoBmcl.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.icoBmcl_MouseDoubleClick);
             // 
             // menuIco
@@ -853,26 +661,23 @@
             this.menuIco.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolShow});
             this.menuIco.Name = "menuIco";
-            this.menuIco.Size = new System.Drawing.Size(125, 26);
+            resources.ApplyResources(this.menuIco, "menuIco");
             // 
             // toolShow
             // 
             this.toolShow.Name = "toolShow";
-            this.toolShow.Size = new System.Drawing.Size(124, 22);
-            this.toolShow.Text = "显示窗口";
+            resources.ApplyResources(this.toolShow, "toolShow");
             this.toolShow.Click += new System.EventHandler(this.toolShow_Click);
             // 
             // ofdlgJavaw
             // 
             this.ofdlgJavaw.FileName = "javaw.exe";
-            this.ofdlgJavaw.Filter = "javaw.exe|javaw.exe";
+            resources.ApplyResources(this.ofdlgJavaw, "ofdlgJavaw");
             // 
             // splitContainer2
             // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.splitContainer2, "splitContainer2");
             this.splitContainer2.Name = "splitContainer2";
-            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer2.Panel1
             // 
@@ -880,69 +685,52 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.btnLanguage);
             this.splitContainer2.Panel2.Controls.Add(this.panelDownload);
             this.splitContainer2.Panel2.Controls.Add(this.buttonStart);
-            this.splitContainer2.Size = new System.Drawing.Size(931, 394);
-            this.splitContainer2.SplitterDistance = 324;
-            this.splitContainer2.TabIndex = 1;
+            // 
+            // btnLanguage
+            // 
+            resources.ApplyResources(this.btnLanguage, "btnLanguage");
+            this.btnLanguage.Name = "btnLanguage";
+            this.btnLanguage.UseVisualStyleBackColor = true;
             // 
             // panelDownload
             // 
             this.panelDownload.Controls.Add(this.prsDown);
             this.panelDownload.Controls.Add(this.labDownInfo);
-            this.panelDownload.Location = new System.Drawing.Point(15, 2);
+            resources.ApplyResources(this.panelDownload, "panelDownload");
             this.panelDownload.Name = "panelDownload";
-            this.panelDownload.Size = new System.Drawing.Size(237, 63);
-            this.panelDownload.TabIndex = 7;
-            this.panelDownload.Visible = false;
             // 
             // prsDown
             // 
-            this.prsDown.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.prsDown.Location = new System.Drawing.Point(0, 40);
+            resources.ApplyResources(this.prsDown, "prsDown");
             this.prsDown.Name = "prsDown";
-            this.prsDown.Size = new System.Drawing.Size(237, 23);
-            this.prsDown.TabIndex = 1;
             // 
             // labDownInfo
             // 
-            this.labDownInfo.AutoSize = true;
-            this.labDownInfo.Location = new System.Drawing.Point(3, 9);
+            resources.ApplyResources(this.labDownInfo, "labDownInfo");
             this.labDownInfo.Name = "labDownInfo";
-            this.labDownInfo.Size = new System.Drawing.Size(29, 12);
-            this.labDownInfo.TabIndex = 0;
-            this.labDownInfo.Text = "    ";
             // 
             // buttonStart
             // 
-            this.buttonStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonStart.Location = new System.Drawing.Point(804, 7);
+            resources.ApplyResources(this.buttonStart, "buttonStart");
             this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(115, 47);
-            this.buttonStart.TabIndex = 0;
-            this.buttonStart.Text = "开始游戏！(&S)";
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
             // folderImportOldVer
             // 
-            this.folderImportOldVer.Description = "请选择.minecraft目录";
+            resources.ApplyResources(this.folderImportOldVer, "folderImportOldVer");
             this.folderImportOldVer.RootFolder = System.Environment.SpecialFolder.MyComputer;
-            // 
-            // columnOnline
-            // 
-            this.columnOnline.Text = "在线人数";
             // 
             // FrmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(931, 394);
             this.Controls.Add(this.splitContainer2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmMain";
-            this.Text = "bangbang93\'s Minecraft Launcher";
             this.Load += new System.EventHandler(this.FrmMain_Load);
             this.Shown += new System.EventHandler(this.FrmMain_Shown);
             this.VisibleChanged += new System.EventHandler(this.FrmMain_VisibleChanged);
@@ -955,7 +743,7 @@
             this.splitContainer1.ResumeLayout(false);
             this.tabConfig.ResumeLayout(false);
             this.tabConfig.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
+            this.groupAuth.ResumeLayout(false);
             this.tabVersion.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
@@ -994,18 +782,18 @@
         private System.Windows.Forms.Label llabRelTime;
         private System.Windows.Forms.Label llabTime;
         private System.Windows.Forms.Label llabVer;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labPwd;
+        private System.Windows.Forms.Label labUsername;
         private System.Windows.Forms.TextBox txtPwd;
         private System.Windows.Forms.TextBox txtUserName;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupAuth;
         private System.Windows.Forms.Button buttonJavaw;
         private System.Windows.Forms.TextBox txtJavaw;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labJavaw;
         private System.Windows.Forms.OpenFileDialog ofdlgJavaw;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtJavaXmx;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labJavaXmx;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.CheckBox checkAutoStart;
@@ -1026,7 +814,7 @@
         private System.Windows.Forms.Button buttonLastForge;
         private System.Windows.Forms.Button buttonCopyInsPath;
         private System.Windows.Forms.TextBox txtInsPath;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label labForgeTip;
         private System.Windows.Forms.Button btnReForge;
         private System.Windows.Forms.TreeView treeForgeVer;
         private System.Windows.Forms.Panel panelDownload;
@@ -1038,7 +826,7 @@
         private System.Windows.Forms.Button btnPackUp;
         private System.Windows.Forms.Button btmExportOfficial;
         private System.Windows.Forms.Label labType;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label llabType;
         internal System.Windows.Forms.ListBox listAuth;
         private System.Windows.Forms.Button btnChangeName;
         private System.Windows.Forms.Button btnMod;
@@ -1047,7 +835,7 @@
         private System.Windows.Forms.Button btnModDir;
         private System.Windows.Forms.ToolTip tip;
         private System.Windows.Forms.TextBox txtExtJArg;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label labJvmArg;
         private System.Windows.Forms.Button btnSaveConfig;
         private System.Windows.Forms.TabPage tabServerList;
         private System.Windows.Forms.SplitContainer splitContainer4;
@@ -1063,6 +851,8 @@
         private System.Windows.Forms.Button btnDeleteServer;
         private System.Windows.Forms.Button btnEditServer;
         private System.Windows.Forms.ColumnHeader columnOnline;
+        private System.Windows.Forms.CheckBox checkDebug;
+        private System.Windows.Forms.Button btnLanguage;
     }
 }
 

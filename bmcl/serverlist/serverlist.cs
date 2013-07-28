@@ -10,50 +10,84 @@ namespace bmcl.serverlist
     public class serverlist
     {
         public int count = 0;
-        private byte[] header = new byte[0x13];
         private ArrayList list = new ArrayList(5);
         public serverinfo[] info;
         public serverlist()
         {
             FileStream server = new FileStream(@".minecraft\servers.dat", FileMode.Open);
-            server.Read(header, 0, header.Length);
-            if (server.Length-server.Position < 5)
+            try
             {
-                server.Close();
+                byte[] header = new byte[0x13];
+                server.Read(header, 0, header.Length);
+                if (server.Length - server.Position < 5)
+                {
+                    server.Close();
+                    info = (serverinfo[])list.ToArray(typeof(serverinfo));
+                    return;
+                }
+                while (server.Position != server.Length)
+                {
+                    byte[] HideAddress = new byte[13];
+                    if (server.Position == server.Length)
+                    {
+                        throw new EndOfStreamException("读取到文件结尾");
+                    }
+                    server.Read(HideAddress, 0, HideAddress.Length);
+                    bool IsHide = (server.ReadByte()) == 1 ? true : false;
+                    byte[] name = new byte[9];
+                    if (server.Position == server.Length)
+                    {
+                        throw new EndOfStreamException("读取到文件结尾");
+                    }
+                    server.Read(name, 0, name.Length);
+                    ArrayList NameString = new ArrayList(20);
+                    byte ch = (byte)server.ReadByte();
+                    while (ch != 0)
+                    {
+                        NameString.Add(ch);
+                        if (server.Position == server.Length)
+                        {
+                            throw new EndOfStreamException("读取到文件结尾");
+                        }
+                        ch = (byte)server.ReadByte();
+                    }
+                    string Name = Encoding.UTF8.GetString((byte[])NameString.ToArray(typeof(byte)), 0, NameString.Count - 1);
+                    byte[] address = new byte[5];
+                    if (server.Position == server.Length)
+                    {
+                        throw new EndOfStreamException("读取到文件结尾");
+                    }
+                    server.Read(address, 0, address.Length);
+                    ArrayList AddRess = new ArrayList(20);
+                    ch = (byte)server.ReadByte();
+                    while (ch != 0)
+                    {
+                        AddRess.Add(ch);
+                        if (server.Position == server.Length)
+                        {
+                            throw new EndOfStreamException("读取到文件结尾");
+                        }
+                        ch = (byte)server.ReadByte();
+                    }
+                    string Address = Encoding.UTF8.GetString((byte[])AddRess.ToArray(typeof(byte)), 0, AddRess.Count);
+                    list.Add(new serverinfo(Name, IsHide, Address));
+                    if (server.Position == server.Length)
+                    {
+                        throw new EndOfStreamException("读取到文件结尾");
+                    }
+                    if (server.ReadByte() == 0)
+                        break;
+                }
+            }
+            catch (EndOfStreamException ex)
+            {
+                System.Windows.Forms.MessageBox.Show("尝试读取文件列表:" + ex.Message);
+            }
+            finally
+            {
                 info = (serverinfo[])list.ToArray(typeof(serverinfo));
-                return;
+                server.Close();
             }
-            while (server.Position != server.Length)
-            {
-                byte[] HideAddress = new byte[13];
-                server.Read(HideAddress, 0, HideAddress.Length);
-                bool IsHide = (server.ReadByte())==1?true:false;
-                byte[] name = new byte[9];
-                server.Read(name, 0, name.Length);
-                ArrayList NameString=new ArrayList(20);
-                byte ch = (byte)server.ReadByte();
-                while (ch != 0)
-                {
-                    NameString.Add(ch);
-                    ch = (byte)server.ReadByte();
-                }
-                string Name = Encoding.UTF8.GetString((byte[])NameString.ToArray(typeof(byte)), 0, NameString.Count - 1);
-                byte[] address = new byte[5];
-                server.Read(address, 0, address.Length);
-                ArrayList AddRess = new ArrayList(20);
-                ch = (byte)server.ReadByte();
-                while (ch != 0)
-                {
-                    AddRess.Add(ch);
-                    ch = (byte)server.ReadByte();
-                }
-                string Address = Encoding.UTF8.GetString((byte[])AddRess.ToArray(typeof(byte)), 0, AddRess.Count);
-                list.Add(new serverinfo(Name, IsHide, Address));
-                if (server.ReadByte() == 0)
-                    break;
-            }
-            info = (serverinfo[])list.ToArray(typeof(serverinfo));
-            server.Close();
         }
         public void Add(string name,string ip,bool ishide)
         {

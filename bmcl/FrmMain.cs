@@ -115,7 +115,8 @@ namespace bmcl
         bool inscreen;
         static public ListBox AuthList;
         static public string portinfo = "Port By BMCL";
-
+        static public int langVer=1;
+        private lang.lang language;
         #endregion 
 
 
@@ -170,6 +171,46 @@ namespace bmcl
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
+            this.Text = "BMCL Version." + Application.ProductVersion;
+            #region 多语言
+            if (Directory.Exists(Environment.CurrentDirectory + "\\lang") && language != null && cfg.langfile != string.Empty)
+            {
+                DataContractSerializer langser = new DataContractSerializer(typeof(lang.lang));
+                FileStream langfile=new FileStream("\\lang\\"+cfg.langfile,FileMode.Open);
+                language = langser.ReadObject(langfile) as lang.lang;
+                this.llabRelTime.Text = language.tabgamesetting.llabReltime;
+                this.llabTime.Text = language.tabgamesetting.llabTime;
+                this.llabType.Text = language.tabgamesetting.llabType;
+                this.llabVer.Text = language.tabgamesetting.llabver;
+                this.labForgeTip.Text = language.tabforge.labForgeTip;
+                this.labJavaw.Text = language.tablaunchersetting.labJavaw;
+                this.labJavaXmx.Text = language.tablaunchersetting.labJavaXmx;
+                this.labJvmArg.Text = language.tablaunchersetting.labJavaArg;
+                this.labPwd.Text = language.tablaunchersetting.labPwd;
+                this.labUsername.Text = language.tablaunchersetting.labUsername;
+                this.buttonCheckRes.Text = language.tabvermanage.buttonCheckRes;
+                this.buttonCopyInsPath.Text = language.tabforge.buttonCopyInsPath;
+                this.buttonDownload.Text = language.tabvermanage.buttonDownload;
+                this.buttonFlush.Text = language.tabvermanage.buttonFlush;
+                this.buttonLastForge.Text = language.tabforge.buttonLastForge;
+                this.buttonStart.Text = language.buttonStart;
+                this.btnAddServer.Text = language.tabserverlist.btnAddServer;
+                this.btnChangeName.Text = language.tabgamesetting.btnChangeName;
+                this.btnCoreMod.Text = language.tabgamesetting.btnCoreMod;
+                this.btnDeleteServer.Text = language.tabserverlist.btnDeleteServer;
+                this.btnEditServer.Text = language.tabserverlist.btnEditServer;
+                this.btnImportOldVer.Text = language.tabgamesetting.btnImportOldVer;
+                this.btnLanguage.Text = language.btnlanguage;
+                this.btnMod.Text = language.tabgamesetting.btnMod;
+                this.btnModConfig.Text = language.tabgamesetting.btnModConfig;
+                this.btnModDir.Text = language.tabgamesetting.btnModDir;
+                this.btnPackUp.Text = language.tabgamesetting.btnPackUp;
+                this.btnReflushServer.Text = language.tabserverlist.btnReflushServer;
+                this.btnReForge.Text = language.tabforge.btnReForge;
+                this.btnSaveConfig.Text = language.tablaunchersetting.btnSaveConfig;
+                
+            }
+            #endregion
             #region 列出版本
             if (!Directory.Exists(".minecraft"))
             {
@@ -496,6 +537,8 @@ namespace bmcl
             {
                 DataContractJsonSerializer RawJson = new System.Runtime.Serialization.Json.DataContractJsonSerializer(typeof(versions.RawVersionList));
                 HttpWebRequest GetJson = (HttpWebRequest)WebRequest.Create("https://s3.amazonaws.com/Minecraft.Download/versions/versions.json");
+                GetJson.Timeout = 10000;
+                GetJson.ReadWriteTimeout = 10000;
                 HttpWebResponse GetJsonAns = (HttpWebResponse)GetJson.GetResponse();
                 RawVersionList RemoteVersion = RawJson.ReadObject(GetJsonAns.GetResponseStream()) as RawVersionList;
                 foreach (RemoteVer RV in RemoteVersion.getVersions())
@@ -506,6 +549,10 @@ namespace bmcl
                 }
             }
             catch (WebException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (TimeoutException ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -1283,12 +1330,13 @@ namespace bmcl
         }
 
         #region 服务器列表
-        private serverlist.serverlist sl = new serverlist.serverlist();
+        private serverlist.serverlist sl;
         private void btnReflushServer_Click(object sender, EventArgs e)
         {
             listServer.Items.Clear();
             if (File.Exists(@".minecraft\servers.dat"))
             {
+                sl = new serverlist.serverlist();
                 foreach (serverlist.serverinfo info in sl.info)
                 {
                     DateTime start = DateTime.Now;
@@ -1298,6 +1346,7 @@ namespace bmcl
                         server.SubItems.Add(string.Empty);
                     else
                         server.SubItems.Add(info.Address);
+                    listServer.Refresh();
                     try
                     {
                         Socket con = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -1367,7 +1416,7 @@ namespace bmcl
                         }else
                         if (((end - start).Milliseconds < 1000))
                         {
-                            server.SubItems[0].ForeColor = Color.Yellow;
+                            server.SubItems[0].ForeColor = Color.YellowGreen;
                         }else
                         if (((end - start).Milliseconds < 3000))
                         {
@@ -1394,12 +1443,28 @@ namespace bmcl
             }
             else
             {
-                if (MessageBox.Show("服务器列表找不到，是否创建？","找不到文件",MessageBoxButtons.OKCancel) == DialogResult.OK)
+                if (MessageBox.Show("服务器列表找不到，是否创建？", "找不到文件", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
+                    if (!Directory.Exists(".minecraft"))
+                    {
+                        Directory.CreateDirectory(".minecraft");
+                    }
                     FileStream serverdat = new FileStream(@".minecraft\servers.dat", FileMode.Create);
-                    serverdat.Write(Convert.FromBase64String(resource.ServerDat.Header),0,Convert.FromBase64String(resource.ServerDat.Header).Length);
+                    serverdat.Write(Convert.FromBase64String(resource.ServerDat.Header), 0, Convert.FromBase64String(resource.ServerDat.Header).Length);
                     serverdat.WriteByte(0);
                     serverdat.Close();
+                    sl = new serverlist.serverlist();
+                    btnAddServer.Enabled = true;
+                    btnDeleteServer.Enabled = true;
+                    btnEditServer.Enabled = true;
+                    btnReflushServer.Enabled = true;
+                }
+                else
+                {
+                    btnAddServer.Enabled = false;
+                    btnDeleteServer.Enabled = false;
+                    btnEditServer.Enabled = false;
+                    btnReflushServer.Enabled = false;
                 }
             }
         }
@@ -1411,6 +1476,7 @@ namespace bmcl
                 serverlist.AddServer FrmEdit = new serverlist.AddServer(ref sl, this.listServer.SelectedIndices[0]);
                 if (FrmEdit.ShowDialog() == DialogResult.OK)
                 {
+                    sl.info[this.listServer.SelectedIndices[0]] = FrmEdit.getEdit();
                     sl.Write();
                     btnReflushServer.PerformClick();
                 }
@@ -1463,6 +1529,11 @@ namespace bmcl
             {
                 buttonFlush.PerformClick();
             }
+        }
+        public static bool debug { get; private set; }
+        private void checkDebug_CheckedChanged(object sender, EventArgs e)
+        {
+            debug = this.checkDebug.Enabled;
         }
 
 

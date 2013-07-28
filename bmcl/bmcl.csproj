@@ -84,6 +84,13 @@
     </Compile>
     <Compile Include="gameinfo.cs" />
     <Compile Include="auth.cs" />
+    <Compile Include="lang\frmCheckRes.cs" />
+    <Compile Include="lang\lang.cs" />
+    <Compile Include="lang\tabForge.cs" />
+    <Compile Include="lang\tabGameSetting.cs" />
+    <Compile Include="lang\tabLauncherSetting.cs" />
+    <Compile Include="lang\tabServerList.cs" />
+    <Compile Include="lang\tabVerManage.cs" />
     <Compile Include="launcher.cs" />
     <Compile Include="libraries\extract.cs" />
     <Compile Include="libraries\libraryies.cs" />

@@ -34,7 +34,7 @@
             this.txtServerName = new System.Windows.Forms.TextBox();
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.btnOK = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnCancal = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -90,22 +90,23 @@
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
-            // button1
+            // btnCancal
             // 
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button1.Location = new System.Drawing.Point(153, 181);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(99, 42);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "取消";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnCancal.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancal.Location = new System.Drawing.Point(153, 181);
+            this.btnCancal.Name = "btnCancal";
+            this.btnCancal.Size = new System.Drawing.Size(99, 42);
+            this.btnCancal.TabIndex = 6;
+            this.btnCancal.Text = "取消";
+            this.btnCancal.UseVisualStyleBackColor = true;
             // 
             // AddServer
             // 
+            this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(269, 244);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnCancal);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.txtAddress);
             this.Controls.Add(this.txtServerName);
@@ -127,6 +128,6 @@
         private System.Windows.Forms.TextBox txtServerName;
         private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnCancal;
     }
 }
