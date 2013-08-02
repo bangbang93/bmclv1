@@ -69,7 +69,7 @@ namespace bmcl
         /// 获取系统物理内存大小
         /// </summary>
         /// <returns>系统物理内存大小，支持64bit,单位MB</returns>
-        private ulong getmem()
+        public static ulong getmem()
         {
             double capacity = 0.0;
             ManagementClass cimobject1 = new ManagementClass("Win32_PhysicalMemory");

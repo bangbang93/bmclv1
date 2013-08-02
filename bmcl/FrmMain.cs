@@ -54,11 +54,17 @@ namespace bmcl
                     wCfg.Close();
                 }
             }
-            txtJavaw.Text = cfg.javaw;
+            if (cfg.javaw == "autosearch")
+                txtJavaw.Text = config.getjavadir();
+            else
+                txtJavaw.Text = cfg.javaw;
+            if (cfg.javaxmx == "autosearch")
+                txtJavaXmx.Text = (config.getmem()/4).ToString();
+            else
+                txtJavaXmx.Text = cfg.javaxmx;
             txtUserName.Text = cfg.username;
             if (cfg.passwd != null)
                 txtPwd.Text = Encoding.UTF8.GetString(cfg.passwd);
-            txtJavaXmx.Text = cfg.javaxmx;
             txtExtJArg.Text = cfg.extraJVMArg;
             #endregion
             #region 加载插件
