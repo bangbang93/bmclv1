@@ -114,7 +114,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "AddServer";
-            this.Text = "AddServer";
+            this.Text = "服务器";
             this.ResumeLayout(false);
             this.PerformLayout();
 

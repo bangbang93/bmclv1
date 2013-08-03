@@ -397,6 +397,7 @@
             // 
             resources.ApplyResources(this.txtUserName, "txtUserName");
             this.txtUserName.Name = "txtUserName";
+            this.txtUserName.TextChanged += new System.EventHandler(this.txtUserName_TextChanged);
             // 
             // groupAuth
             // 
@@ -593,6 +594,7 @@
             this.listServer.Name = "listServer";
             this.listServer.UseCompatibleStateImageBehavior = false;
             this.listServer.View = System.Windows.Forms.View.Details;
+            this.listServer.DoubleClick += new System.EventHandler(this.listServer_DoubleClick);
             // 
             // columnName
             // 

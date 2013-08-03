@@ -428,7 +428,13 @@ namespace bmcl
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            
+            if (txtUserName.Text == "!!!")
+            {
+                MessageBox.Show("请先修改用户名");
+                tabControl1.SelectedIndex = 1;
+                txtUserName.Focus();
+                return;
+            }
             frmPrs starter = new frmPrs("正在准备游戏环境及启动游戏");
             starter.Show();
             if (changeEvent!=null)
@@ -582,6 +588,11 @@ namespace bmcl
             {
                 startup = false;
                 this.Hide();
+            }
+            if (txtUserName.Text == "!!!")
+            {
+                tabControl1.SelectedIndex = 1;
+                tip.Show("请修改用户名", txtUserName);
             }
         }
 
@@ -1479,10 +1490,12 @@ namespace bmcl
         {
             try
             {
-                serverlist.AddServer FrmEdit = new serverlist.AddServer(ref sl, this.listServer.SelectedIndices[0]);
+                int selected = this.listServer.SelectedIndices[0];
+                serverlist.AddServer FrmEdit = new serverlist.AddServer(ref sl, selected);
                 if (FrmEdit.ShowDialog() == DialogResult.OK)
                 {
-                    sl.info[this.listServer.SelectedIndices[0]] = FrmEdit.getEdit();
+                    serverlist.serverinfo info = FrmEdit.getEdit();
+                    sl.Edit(selected, info.Name, info.Address, info.IsHide);
                     sl.Write();
                     btnReflushServer.PerformClick();
                 }
@@ -1540,6 +1553,16 @@ namespace bmcl
         private void checkDebug_CheckedChanged(object sender, EventArgs e)
         {
             debug = this.checkDebug.Enabled;
+        }
+
+        private void listServer_DoubleClick(object sender, EventArgs e)
+        {
+            btnEditServer.PerformClick();
+        }
+
+        private void txtUserName_TextChanged(object sender, EventArgs e)
+        {
+            tip.Hide(txtUserName);
         }
 
 

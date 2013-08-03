@@ -159,6 +159,24 @@
   <data name="&gt;&gt;tabGame.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="checkDebug.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkDebug.Location" type="System.Drawing.Point, System.Drawing">
+    <value>644, 51</value>
+  </data>
+  <data name="checkDebug.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 16</value>
+  </data>
+  <data name="checkDebug.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="checkDebug.Text" xml:space="preserve">
+    <value>DebugMode</value>
+  </data>
+  <data name="checkDebug.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;checkDebug.Name" xml:space="preserve">
     <value>checkDebug</value>
   </data>
@@ -170,6 +188,18 @@
   </data>
   <data name="&gt;&gt;checkDebug.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="btnSaveConfig.Location" type="System.Drawing.Point, System.Drawing">
+    <value>800, 245</value>
+  </data>
+  <data name="btnSaveConfig.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 47</value>
+  </data>
+  <data name="btnSaveConfig.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="btnSaveConfig.Text" xml:space="preserve">
+    <value>保存配置</value>
   </data>
   <data name="&gt;&gt;btnSaveConfig.Name" xml:space="preserve">
     <value>btnSaveConfig</value>
@@ -183,6 +213,15 @@
   <data name="&gt;&gt;btnSaveConfig.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="txtExtJArg.Location" type="System.Drawing.Point, System.Drawing">
+    <value>340, 191</value>
+  </data>
+  <data name="txtExtJArg.Size" type="System.Drawing.Size, System.Drawing">
+    <value>254, 21</value>
+  </data>
+  <data name="txtExtJArg.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
   <data name="&gt;&gt;txtExtJArg.Name" xml:space="preserve">
     <value>txtExtJArg</value>
   </data>
@@ -194,6 +233,21 @@
   </data>
   <data name="&gt;&gt;txtExtJArg.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="labJvmArg.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labJvmArg.Location" type="System.Drawing.Point, System.Drawing">
+    <value>339, 162</value>
+  </data>
+  <data name="labJvmArg.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 12</value>
+  </data>
+  <data name="labJvmArg.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="labJvmArg.Text" xml:space="preserve">
+    <value>额外的JVM Arguements</value>
   </data>
   <data name="&gt;&gt;labJvmArg.Name" xml:space="preserve">
     <value>labJvmArg</value>
@@ -207,6 +261,21 @@
   <data name="&gt;&gt;labJvmArg.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="checkAutoStart.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkAutoStart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>341, 131</value>
+  </data>
+  <data name="checkAutoStart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 16</value>
+  </data>
+  <data name="checkAutoStart.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="checkAutoStart.Text" xml:space="preserve">
+    <value>下次直接开始游戏</value>
+  </data>
   <data name="&gt;&gt;checkAutoStart.Name" xml:space="preserve">
     <value>checkAutoStart</value>
   </data>
@@ -218,6 +287,21 @@
   </data>
   <data name="&gt;&gt;checkAutoStart.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>601, 92</value>
+  </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 12</value>
+  </data>
+  <data name="label5.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>MB</value>
   </data>
   <data name="&gt;&gt;label5.Name" xml:space="preserve">
     <value>label5</value>
@@ -231,6 +315,15 @@
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="txtJavaXmx.Location" type="System.Drawing.Point, System.Drawing">
+    <value>449, 89</value>
+  </data>
+  <data name="txtJavaXmx.Size" type="System.Drawing.Size, System.Drawing">
+    <value>145, 21</value>
+  </data>
+  <data name="txtJavaXmx.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
   <data name="&gt;&gt;txtJavaXmx.Name" xml:space="preserve">
     <value>txtJavaXmx</value>
   </data>
@@ -242,6 +335,21 @@
   </data>
   <data name="&gt;&gt;txtJavaXmx.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="labJavaXmx.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labJavaXmx.Location" type="System.Drawing.Point, System.Drawing">
+    <value>339, 92</value>
+  </data>
+  <data name="labJavaXmx.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 12</value>
+  </data>
+  <data name="labJavaXmx.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="labJavaXmx.Text" xml:space="preserve">
+    <value>Java运行内存大小</value>
   </data>
   <data name="&gt;&gt;labJavaXmx.Name" xml:space="preserve">
     <value>labJavaXmx</value>
@@ -255,6 +363,18 @@
   <data name="&gt;&gt;labJavaXmx.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="buttonJavaw.Location" type="System.Drawing.Point, System.Drawing">
+    <value>609, 50</value>
+  </data>
+  <data name="buttonJavaw.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 21</value>
+  </data>
+  <data name="buttonJavaw.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="buttonJavaw.Text" xml:space="preserve">
+    <value>…</value>
+  </data>
   <data name="&gt;&gt;buttonJavaw.Name" xml:space="preserve">
     <value>buttonJavaw</value>
   </data>
@@ -266,6 +386,15 @@
   </data>
   <data name="&gt;&gt;buttonJavaw.ZOrder" xml:space="preserve">
     <value>8</value>
+  </data>
+  <data name="txtJavaw.Location" type="System.Drawing.Point, System.Drawing">
+    <value>428, 51</value>
+  </data>
+  <data name="txtJavaw.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 21</value>
+  </data>
+  <data name="txtJavaw.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
   <data name="&gt;&gt;txtJavaw.Name" xml:space="preserve">
     <value>txtJavaw</value>
@@ -279,6 +408,21 @@
   <data name="&gt;&gt;txtJavaw.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="labJavaw.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labJavaw.Location" type="System.Drawing.Point, System.Drawing">
+    <value>339, 54</value>
+  </data>
+  <data name="labJavaw.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 12</value>
+  </data>
+  <data name="labJavaw.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="labJavaw.Text" xml:space="preserve">
+    <value>javaw.exe路径</value>
+  </data>
   <data name="&gt;&gt;labJavaw.Name" xml:space="preserve">
     <value>labJavaw</value>
   </data>
@@ -290,6 +434,18 @@
   </data>
   <data name="&gt;&gt;labJavaw.ZOrder" xml:space="preserve">
     <value>10</value>
+  </data>
+  <data name="txtPwd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>99, 89</value>
+  </data>
+  <data name="txtPwd.PasswordChar" type="System.Char, mscorlib" xml:space="preserve">
+    <value>*</value>
+  </data>
+  <data name="txtPwd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 21</value>
+  </data>
+  <data name="txtPwd.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="&gt;&gt;txtPwd.Name" xml:space="preserve">
     <value>txtPwd</value>
@@ -303,6 +459,15 @@
   <data name="&gt;&gt;txtPwd.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
+  <data name="txtUserName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>99, 51</value>
+  </data>
+  <data name="txtUserName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 21</value>
+  </data>
+  <data name="txtUserName.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
   <data name="&gt;&gt;txtUserName.Name" xml:space="preserve">
     <value>txtUserName</value>
   </data>
@@ -314,6 +479,30 @@
   </data>
   <data name="&gt;&gt;txtUserName.ZOrder" xml:space="preserve">
     <value>12</value>
+  </data>
+  <data name="&gt;&gt;listAuth.Name" xml:space="preserve">
+    <value>listAuth</value>
+  </data>
+  <data name="&gt;&gt;listAuth.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;listAuth.Parent" xml:space="preserve">
+    <value>groupAuth</value>
+  </data>
+  <data name="&gt;&gt;listAuth.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="groupAuth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>54, 131</value>
+  </data>
+  <data name="groupAuth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 164</value>
+  </data>
+  <data name="groupAuth.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="groupAuth.Text" xml:space="preserve">
+    <value>登录方式</value>
   </data>
   <data name="&gt;&gt;groupAuth.Name" xml:space="preserve">
     <value>groupAuth</value>
@@ -327,6 +516,21 @@
   <data name="&gt;&gt;groupAuth.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
+  <data name="labPwd.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labPwd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>52, 92</value>
+  </data>
+  <data name="labPwd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 12</value>
+  </data>
+  <data name="labPwd.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="labPwd.Text" xml:space="preserve">
+    <value>密  码</value>
+  </data>
   <data name="&gt;&gt;labPwd.Name" xml:space="preserve">
     <value>labPwd</value>
   </data>
@@ -338,6 +542,21 @@
   </data>
   <data name="&gt;&gt;labPwd.ZOrder" xml:space="preserve">
     <value>14</value>
+  </data>
+  <data name="labUsername.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labUsername.Location" type="System.Drawing.Point, System.Drawing">
+    <value>52, 54</value>
+  </data>
+  <data name="labUsername.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 12</value>
+  </data>
+  <data name="labUsername.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labUsername.Text" xml:space="preserve">
+    <value>用户名</value>
   </data>
   <data name="&gt;&gt;labUsername.Name" xml:space="preserve">
     <value>labUsername</value>
@@ -456,15 +675,6 @@
   <data name="&gt;&gt;tabUpdate.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="treeForgeVer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>280, 6</value>
-  </data>
-  <data name="treeForgeVer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 286</value>
-  </data>
-  <data name="treeForgeVer.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
   <data name="&gt;&gt;treeForgeVer.Name" xml:space="preserve">
     <value>treeForgeVer</value>
   </data>
@@ -476,25 +686,6 @@
   </data>
   <data name="&gt;&gt;treeForgeVer.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="labForgeTip.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labForgeTip.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 173</value>
-  </data>
-  <data name="labForgeTip.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>200, 0</value>
-  </data>
-  <data name="labForgeTip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 60</value>
-  </data>
-  <data name="labForgeTip.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="labForgeTip.Text" xml:space="preserve">
-    <value>Forge的服务器经常抽风，所以如果获取失败就过一段时间重试
-获取后右边会出现所有Forge的版本，选择一个下载就行，暂不支持早于1.6.1的Forge自动下载</value>
   </data>
   <data name="&gt;&gt;labForgeTip.Name" xml:space="preserve">
     <value>labForgeTip</value>
@@ -508,18 +699,6 @@
   <data name="&gt;&gt;labForgeTip.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="btnReForge.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 136</value>
-  </data>
-  <data name="btnReForge.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 30</value>
-  </data>
-  <data name="btnReForge.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="btnReForge.Text" xml:space="preserve">
-    <value>获取Forge版本列表</value>
-  </data>
   <data name="&gt;&gt;btnReForge.Name" xml:space="preserve">
     <value>btnReForge</value>
   </data>
@@ -531,18 +710,6 @@
   </data>
   <data name="&gt;&gt;btnReForge.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="buttonCopyInsPath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 92</value>
-  </data>
-  <data name="buttonCopyInsPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 28</value>
-  </data>
-  <data name="buttonCopyInsPath.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="buttonCopyInsPath.Text" xml:space="preserve">
-    <value>复制安装路径</value>
   </data>
   <data name="&gt;&gt;buttonCopyInsPath.Name" xml:space="preserve">
     <value>buttonCopyInsPath</value>
@@ -556,15 +723,6 @@
   <data name="&gt;&gt;buttonCopyInsPath.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="txtInsPath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 64</value>
-  </data>
-  <data name="txtInsPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 21</value>
-  </data>
-  <data name="txtInsPath.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
   <data name="&gt;&gt;txtInsPath.Name" xml:space="preserve">
     <value>txtInsPath</value>
   </data>
@@ -576,18 +734,6 @@
   </data>
   <data name="&gt;&gt;txtInsPath.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="buttonLastForge.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 6</value>
-  </data>
-  <data name="buttonLastForge.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 52</value>
-  </data>
-  <data name="buttonLastForge.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="buttonLastForge.Text" xml:space="preserve">
-    <value>一键安装最新版Forge</value>
   </data>
   <data name="&gt;&gt;buttonLastForge.Name" xml:space="preserve">
     <value>buttonLastForge</value>
@@ -1189,363 +1335,6 @@
   <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="checkDebug.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="checkDebug.Location" type="System.Drawing.Point, System.Drawing">
-    <value>644, 51</value>
-  </data>
-  <data name="checkDebug.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 16</value>
-  </data>
-  <data name="checkDebug.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="checkDebug.Text" xml:space="preserve">
-    <value>DebugMode</value>
-  </data>
-  <data name="checkDebug.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;checkDebug.Name" xml:space="preserve">
-    <value>checkDebug</value>
-  </data>
-  <data name="&gt;&gt;checkDebug.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkDebug.Parent" xml:space="preserve">
-    <value>tabConfig</value>
-  </data>
-  <data name="&gt;&gt;checkDebug.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="btnSaveConfig.Location" type="System.Drawing.Point, System.Drawing">
-    <value>800, 245</value>
-  </data>
-  <data name="btnSaveConfig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 47</value>
-  </data>
-  <data name="btnSaveConfig.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="btnSaveConfig.Text" xml:space="preserve">
-    <value>保存配置</value>
-  </data>
-  <data name="&gt;&gt;btnSaveConfig.Name" xml:space="preserve">
-    <value>btnSaveConfig</value>
-  </data>
-  <data name="&gt;&gt;btnSaveConfig.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnSaveConfig.Parent" xml:space="preserve">
-    <value>tabConfig</value>
-  </data>
-  <data name="&gt;&gt;btnSaveConfig.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="txtExtJArg.Location" type="System.Drawing.Point, System.Drawing">
-    <value>340, 191</value>
-  </data>
-  <data name="txtExtJArg.Size" type="System.Drawing.Size, System.Drawing">
-    <value>254, 21</value>
-  </data>
-  <data name="txtExtJArg.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;txtExtJArg.Name" xml:space="preserve">
-    <value>txtExtJArg</value>
-  </data>
-  <data name="&gt;&gt;txtExtJArg.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtExtJArg.Parent" xml:space="preserve">
-    <value>tabConfig</value>
-  </data>
-  <data name="&gt;&gt;txtExtJArg.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="labJvmArg.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labJvmArg.Location" type="System.Drawing.Point, System.Drawing">
-    <value>339, 162</value>
-  </data>
-  <data name="labJvmArg.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 12</value>
-  </data>
-  <data name="labJvmArg.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="labJvmArg.Text" xml:space="preserve">
-    <value>额外的JVM Arguements</value>
-  </data>
-  <data name="&gt;&gt;labJvmArg.Name" xml:space="preserve">
-    <value>labJvmArg</value>
-  </data>
-  <data name="&gt;&gt;labJvmArg.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labJvmArg.Parent" xml:space="preserve">
-    <value>tabConfig</value>
-  </data>
-  <data name="&gt;&gt;labJvmArg.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="checkAutoStart.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="checkAutoStart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>341, 131</value>
-  </data>
-  <data name="checkAutoStart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 16</value>
-  </data>
-  <data name="checkAutoStart.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="checkAutoStart.Text" xml:space="preserve">
-    <value>下次直接开始游戏</value>
-  </data>
-  <data name="&gt;&gt;checkAutoStart.Name" xml:space="preserve">
-    <value>checkAutoStart</value>
-  </data>
-  <data name="&gt;&gt;checkAutoStart.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkAutoStart.Parent" xml:space="preserve">
-    <value>tabConfig</value>
-  </data>
-  <data name="&gt;&gt;checkAutoStart.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>601, 92</value>
-  </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>17, 12</value>
-  </data>
-  <data name="label5.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="label5.Text" xml:space="preserve">
-    <value>MB</value>
-  </data>
-  <data name="&gt;&gt;label5.Name" xml:space="preserve">
-    <value>label5</value>
-  </data>
-  <data name="&gt;&gt;label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
-    <value>tabConfig</value>
-  </data>
-  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="txtJavaXmx.Location" type="System.Drawing.Point, System.Drawing">
-    <value>449, 89</value>
-  </data>
-  <data name="txtJavaXmx.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 21</value>
-  </data>
-  <data name="txtJavaXmx.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;txtJavaXmx.Name" xml:space="preserve">
-    <value>txtJavaXmx</value>
-  </data>
-  <data name="&gt;&gt;txtJavaXmx.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtJavaXmx.Parent" xml:space="preserve">
-    <value>tabConfig</value>
-  </data>
-  <data name="&gt;&gt;txtJavaXmx.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="labJavaXmx.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labJavaXmx.Location" type="System.Drawing.Point, System.Drawing">
-    <value>339, 92</value>
-  </data>
-  <data name="labJavaXmx.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 12</value>
-  </data>
-  <data name="labJavaXmx.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="labJavaXmx.Text" xml:space="preserve">
-    <value>Java运行内存大小</value>
-  </data>
-  <data name="&gt;&gt;labJavaXmx.Name" xml:space="preserve">
-    <value>labJavaXmx</value>
-  </data>
-  <data name="&gt;&gt;labJavaXmx.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labJavaXmx.Parent" xml:space="preserve">
-    <value>tabConfig</value>
-  </data>
-  <data name="&gt;&gt;labJavaXmx.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="buttonJavaw.Location" type="System.Drawing.Point, System.Drawing">
-    <value>609, 50</value>
-  </data>
-  <data name="buttonJavaw.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 21</value>
-  </data>
-  <data name="buttonJavaw.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="buttonJavaw.Text" xml:space="preserve">
-    <value>…</value>
-  </data>
-  <data name="&gt;&gt;buttonJavaw.Name" xml:space="preserve">
-    <value>buttonJavaw</value>
-  </data>
-  <data name="&gt;&gt;buttonJavaw.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonJavaw.Parent" xml:space="preserve">
-    <value>tabConfig</value>
-  </data>
-  <data name="&gt;&gt;buttonJavaw.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="txtJavaw.Location" type="System.Drawing.Point, System.Drawing">
-    <value>428, 51</value>
-  </data>
-  <data name="txtJavaw.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 21</value>
-  </data>
-  <data name="txtJavaw.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;txtJavaw.Name" xml:space="preserve">
-    <value>txtJavaw</value>
-  </data>
-  <data name="&gt;&gt;txtJavaw.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtJavaw.Parent" xml:space="preserve">
-    <value>tabConfig</value>
-  </data>
-  <data name="&gt;&gt;txtJavaw.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="labJavaw.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labJavaw.Location" type="System.Drawing.Point, System.Drawing">
-    <value>339, 54</value>
-  </data>
-  <data name="labJavaw.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 12</value>
-  </data>
-  <data name="labJavaw.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="labJavaw.Text" xml:space="preserve">
-    <value>javaw.exe路径</value>
-  </data>
-  <data name="&gt;&gt;labJavaw.Name" xml:space="preserve">
-    <value>labJavaw</value>
-  </data>
-  <data name="&gt;&gt;labJavaw.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labJavaw.Parent" xml:space="preserve">
-    <value>tabConfig</value>
-  </data>
-  <data name="&gt;&gt;labJavaw.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="txtPwd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>99, 89</value>
-  </data>
-  <data name="txtPwd.PasswordChar" type="System.Char, mscorlib" xml:space="preserve">
-    <value>*</value>
-  </data>
-  <data name="txtPwd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 21</value>
-  </data>
-  <data name="txtPwd.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;txtPwd.Name" xml:space="preserve">
-    <value>txtPwd</value>
-  </data>
-  <data name="&gt;&gt;txtPwd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtPwd.Parent" xml:space="preserve">
-    <value>tabConfig</value>
-  </data>
-  <data name="&gt;&gt;txtPwd.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="txtUserName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>99, 51</value>
-  </data>
-  <data name="txtUserName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 21</value>
-  </data>
-  <data name="txtUserName.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;txtUserName.Name" xml:space="preserve">
-    <value>txtUserName</value>
-  </data>
-  <data name="&gt;&gt;txtUserName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtUserName.Parent" xml:space="preserve">
-    <value>tabConfig</value>
-  </data>
-  <data name="&gt;&gt;txtUserName.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;listAuth.Name" xml:space="preserve">
-    <value>listAuth</value>
-  </data>
-  <data name="&gt;&gt;listAuth.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;listAuth.Parent" xml:space="preserve">
-    <value>groupAuth</value>
-  </data>
-  <data name="&gt;&gt;listAuth.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="groupAuth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>54, 131</value>
-  </data>
-  <data name="groupAuth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 164</value>
-  </data>
-  <data name="groupAuth.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="groupAuth.Text" xml:space="preserve">
-    <value>登录方式</value>
-  </data>
-  <data name="&gt;&gt;groupAuth.Name" xml:space="preserve">
-    <value>groupAuth</value>
-  </data>
-  <data name="&gt;&gt;groupAuth.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupAuth.Parent" xml:space="preserve">
-    <value>tabConfig</value>
-  </data>
-  <data name="&gt;&gt;groupAuth.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
   <data name="listAuth.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -1572,60 +1361,6 @@
   </data>
   <data name="&gt;&gt;listAuth.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="labPwd.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labPwd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>52, 92</value>
-  </data>
-  <data name="labPwd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 12</value>
-  </data>
-  <data name="labPwd.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="labPwd.Text" xml:space="preserve">
-    <value>密  码</value>
-  </data>
-  <data name="&gt;&gt;labPwd.Name" xml:space="preserve">
-    <value>labPwd</value>
-  </data>
-  <data name="&gt;&gt;labPwd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labPwd.Parent" xml:space="preserve">
-    <value>tabConfig</value>
-  </data>
-  <data name="&gt;&gt;labPwd.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="labUsername.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labUsername.Location" type="System.Drawing.Point, System.Drawing">
-    <value>52, 54</value>
-  </data>
-  <data name="labUsername.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 12</value>
-  </data>
-  <data name="labUsername.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="labUsername.Text" xml:space="preserve">
-    <value>用户名</value>
-  </data>
-  <data name="&gt;&gt;labUsername.Name" xml:space="preserve">
-    <value>labUsername</value>
-  </data>
-  <data name="&gt;&gt;labUsername.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labUsername.Parent" xml:space="preserve">
-    <value>tabConfig</value>
-  </data>
-  <data name="&gt;&gt;labUsername.ZOrder" xml:space="preserve">
-    <value>15</value>
   </data>
   <data name="splitContainer3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1812,6 +1547,151 @@
   </data>
   <data name="&gt;&gt;webBrowser1.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="treeForgeVer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>280, 6</value>
+  </data>
+  <data name="treeForgeVer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>204, 286</value>
+  </data>
+  <data name="treeForgeVer.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;treeForgeVer.Name" xml:space="preserve">
+    <value>treeForgeVer</value>
+  </data>
+  <data name="&gt;&gt;treeForgeVer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;treeForgeVer.Parent" xml:space="preserve">
+    <value>tabForge</value>
+  </data>
+  <data name="&gt;&gt;treeForgeVer.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="labForgeTip.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labForgeTip.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 173</value>
+  </data>
+  <data name="labForgeTip.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>200, 0</value>
+  </data>
+  <data name="labForgeTip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>197, 60</value>
+  </data>
+  <data name="labForgeTip.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="labForgeTip.Text" xml:space="preserve">
+    <value>Forge的服务器经常抽风，所以如果获取失败就过一段时间重试
+获取后右边会出现所有Forge的版本，选择一个下载就行，暂不支持早于1.6.1的Forge自动下载</value>
+  </data>
+  <data name="&gt;&gt;labForgeTip.Name" xml:space="preserve">
+    <value>labForgeTip</value>
+  </data>
+  <data name="&gt;&gt;labForgeTip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labForgeTip.Parent" xml:space="preserve">
+    <value>tabForge</value>
+  </data>
+  <data name="&gt;&gt;labForgeTip.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnReForge.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 136</value>
+  </data>
+  <data name="btnReForge.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 30</value>
+  </data>
+  <data name="btnReForge.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="btnReForge.Text" xml:space="preserve">
+    <value>获取Forge版本列表</value>
+  </data>
+  <data name="&gt;&gt;btnReForge.Name" xml:space="preserve">
+    <value>btnReForge</value>
+  </data>
+  <data name="&gt;&gt;btnReForge.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnReForge.Parent" xml:space="preserve">
+    <value>tabForge</value>
+  </data>
+  <data name="&gt;&gt;btnReForge.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="buttonCopyInsPath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 92</value>
+  </data>
+  <data name="buttonCopyInsPath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 28</value>
+  </data>
+  <data name="buttonCopyInsPath.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="buttonCopyInsPath.Text" xml:space="preserve">
+    <value>复制安装路径</value>
+  </data>
+  <data name="&gt;&gt;buttonCopyInsPath.Name" xml:space="preserve">
+    <value>buttonCopyInsPath</value>
+  </data>
+  <data name="&gt;&gt;buttonCopyInsPath.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonCopyInsPath.Parent" xml:space="preserve">
+    <value>tabForge</value>
+  </data>
+  <data name="&gt;&gt;buttonCopyInsPath.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="txtInsPath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 64</value>
+  </data>
+  <data name="txtInsPath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>266, 21</value>
+  </data>
+  <data name="txtInsPath.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;txtInsPath.Name" xml:space="preserve">
+    <value>txtInsPath</value>
+  </data>
+  <data name="&gt;&gt;txtInsPath.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtInsPath.Parent" xml:space="preserve">
+    <value>tabForge</value>
+  </data>
+  <data name="&gt;&gt;txtInsPath.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="buttonLastForge.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 6</value>
+  </data>
+  <data name="buttonLastForge.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 52</value>
+  </data>
+  <data name="buttonLastForge.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="buttonLastForge.Text" xml:space="preserve">
+    <value>一键安装最新版Forge</value>
+  </data>
+  <data name="&gt;&gt;buttonLastForge.Name" xml:space="preserve">
+    <value>buttonLastForge</value>
+  </data>
+  <data name="&gt;&gt;buttonLastForge.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonLastForge.Parent" xml:space="preserve">
+    <value>tabForge</value>
+  </data>
+  <data name="&gt;&gt;buttonLastForge.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="splitContainer4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>

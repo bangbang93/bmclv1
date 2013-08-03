@@ -12,6 +12,7 @@ namespace bmcl.serverlist
     public partial class AddServer : Form
     {
         serverlist list;
+        serverinfo ServerInfo;
         int num = -1;
         public AddServer(ref serverlist list)
         {
@@ -49,10 +50,11 @@ namespace bmcl.serverlist
                 }
                 list.info[num] = new serverinfo(txtServerName.Text, checkIsHide.Checked, txtAddress.Text);
             }
+            ServerInfo = new serverinfo(txtServerName.Text, checkIsHide.Checked, txtAddress.Text);
         }
         public serverinfo getEdit()
         {
-            return new serverinfo(txtServerName.Text, checkIsHide.Checked, txtAddress.Text);
+            return ServerInfo;
         }
     }
 }
